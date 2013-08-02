@@ -442,7 +442,6 @@ input[type=text].w40{
 }
 #container{
 	width:32rem;
-	margin:0 auto;
 	height:56.9rem;
 	overflow:hidden;
 }
@@ -658,3 +657,43 @@ header>h1{
     opacity: 1;
     z-index: 99;
 }
+
+/* Alex's CSS */
+.box-shadow-menu {
+  position: relative;
+  padding-left: 1.25em;
+}
+.box-shadow-menu:before {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  left: .25em;
+  top: 0.25em;
+  width: 1em;
+  height: 0.15em;
+  margin: 1em;
+  background: white;
+  box-shadow: 
+    0 0.25em 0 0 white,
+    0 0.5em 0 0 white;
+}
+.border-menu {
+  position: relative;
+  padding-left: 1.25em;
+}
+.border-menu:before {
+  content: "";
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  width: 2em;
+  height: 0.250em;
+  border-top: 0.750em double white;
+  border-bottom: 0.250em solid white;
+}
+
+
+
+
+
+

@@ -7,29 +7,67 @@
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jqueryui.min.js"></script>
 <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
-<script type="text/javascript" src="phonegap.js"></script>
-<script src="PushNotification.js"></script>
-<script type="text/javascript" src="childbrowser.js"></script>
+
+
+
+
+<!-- <script type="text/javascript" src="phonegap.js"></script> -->
+<!-- <script src="PushNotification.js"></script> -->
+<!-- <script type="text/javascript" src="childbrowser.js"></script> -->
 <script type="text/javascript" src="js/speedslice.js"></script> 
 <script type="text/javascript">
 document.getElementsByTagName("html").item(0).style.fontSize=(window.innerWidth/5.12)+"%";
 document.ontouchmove = function(e){ 
-//	if(e.target.tagName!="A" && e.target.tagName!="INPUT"){
+	if(e.target.tagName!="A" && e.target.tagName!="INPUT"){
     	e.preventDefault(); 
-	//}
+	}
 }
 </script>
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/style.css">
 <link href="css/jqueryui.css" rel="stylesheet" />
+
+
+<link type="text/css" rel="stylesheet" media="all" href="css/mmenu.css" />
+
+
+<script type="text/javascript" src="js/jquery.mmenu.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('nav#my-menu').mmenu();
+    });
+</script>
+
 </head>
 <body onLoad="onLoad()">
 	<div id="container">
     	<section id="createPizza">
         	<header>
+                <a href="#my-menu" class="vBottom fL "><span class="border-menu"></span></a>
                 <img class="vBottom fR" src="images/redGear.svg">
             	<h1>SpeedSlice</h1>
             </header>
+            <nav id="my-menu">
+                <ul>
+                    <li class="Label">Settings</li>
+                    <li><a href="">Order a Pizza</a></li>
+                    <li><a id="accountOptions" href="#">Account Info</a></li>
+                    <li><a href="/contact/">Payment Info</a></li>
+                    <li><a href="/contact/">Addresses</a></li>
+                </ul>
+                <hr>
+                <ul>
+                    <li><a href="/">About SpeedSlice</a></li>
+                    <li><a href="#faq">Support</a></li>
+                    <li><a href="/contact/">Terms of Use</a></li>
+                    <li><a href="/contact/">Addresses</a></li>
+                </ul>
+                <ul>
+                    <li>fb</li>
+                    <li>twit</li>
+                </ul>
+                <button>Sign Out</button>
+            </nav>
             <div>
             	<div class="transBkgd clearFix">                	
                     <div class="fR pizzArrow" id="pRight">&gt;</div>
@@ -483,17 +521,17 @@ SpeedSlice reserves the right, in its sole discretion, to revise and amend the A
                 <h1>Support Information</h1>
             </footer>
         </section>
+         <ul id='menuOptions'>
+                <li>Order a Pizza</li>
+             <li>Account Information</li>
+             <li>About SpeedSlice</li>
+             <li>Terms and Conditions</li>
+         </ul>
+         <select class="nD" id="pizzaID">
+            <option value="2" data-toppings="Cheese">Cheese</option>
+             <option value="9" data-toppings="Cheese,Pepperoni">Pepperoni</option>
+             <option selected></option>
+         </select>
     </div>
-    <ul id='menuOptions'>
-   		<li>Order a Pizza</li>
-        <li>Account Information</li>
-        <li>About SpeedSlice</li>
-        <li>Terms and Conditions</li>
-    </ul>
-    <select class="nD" id="pizzaID">
-    	<option value="2" data-toppings="Cheese">Cheese</option>
-        <option value="9" data-toppings="Cheese,Pepperoni">Pepperoni</option>
-        <option selected></option>
-    </select>   
 </body>
 </html>
