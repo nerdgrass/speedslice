@@ -1,0 +1,27 @@
+#map-canvas, #map_canvas {
+  height: 35vh;
+  width: 100%;
+}
+
+@media print {
+  html, body {
+    height: auto;
+    width: auto;
+  }
+
+  #map-canvas, #map_canvas {
+    height: 30vh;
+    width: 100%;
+  }
+}
+ul.locList {
+	list-style: none;
+	list-style-position: inside;
+	padding-left: 0 !important;
+	overflow: scroll;
+	max-height: 30vh;
+}
+ul.locList > li {
+	font-size: 1.4rem;
+	line-height: 1.7rem;
+}

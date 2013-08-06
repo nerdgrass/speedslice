@@ -81,19 +81,71 @@ function loadInfo(){
 	$("section").on("blur","input",function(){
 		window.scrollTo(0,0);
 	});
-	$("[src='images/redGear.svg']").on("touchstart",function(e){
+
+	// mMenu Navigation, note: currently wired to avoid logging in.
+	$("#orderPizza").on("touchstart",function(e){ //Home Slide/Pizza Builder
+		var sctnInd=$(this).parentsUntil("section").parent("section").index();
+			if(sctnInd!=0){
+				switchSlides(sctnInd,0);
+			}
+	});
+	$("#accountInfo").on("touchstart",function(e){ //Account Information
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 		if(loggedIn){
 			if(sctnInd!=7){
 				switchSlides(sctnInd,7);
 			}
-		}
-		else{
-			if(sctnInd!=4){
-				switchSlides(sctnInd,4);
+		}else{
+			if(sctnInd!=7){
+				switchSlides(sctnInd,7);
 			}
 		}
 	});
+	$("#paymentInfo").on("touchstart",function(e){ //Payment Information
+		var sctnInd=$(this).parentsUntil("section").parent("section").index();
+		if(loggedIn){
+			if(sctnInd!=5){
+				switchSlides(sctnInd,5);
+			}
+		}else{
+			if(sctnInd!=5){
+				switchSlides(sctnInd,5);
+			}
+		}
+	});
+	$("#addresses").on("touchstart",function(e){ //Addresses and/or locations
+		var sctnInd=$(this).parentsUntil("section").parent("section").index();
+		if(loggedIn){
+			if(sctnInd!=2){
+				switchSlides(sctnInd,2);
+			}
+		}
+		else{
+			if(sctnInd!=2){
+				switchSlides(sctnInd,2);
+			}
+		}
+	});
+	$("#about").on("touchstart",function(e){ //About SpeedSlice
+		var sctnInd=$(this).parentsUntil("section").parent("section").index();
+			if(sctnInd!=10){
+				switchSlides(sctnInd,10);
+			}
+	});
+	$("#support").on("touchstart",function(e){ //Support & FAQ
+		var sctnInd=$(this).parentsUntil("section").parent("section").index();
+		if(sctnInd!=12){
+			switchSlides(sctnInd,12);
+		}
+	});
+	$("#terms").on("touchstart",function(e){ //Terms & privacy policy
+		var sctnInd=$(this).parentsUntil("section").parent("section").index();
+		if(sctnInd!=9){
+			switchSlides(sctnInd,9);
+		}
+	});
+
+
 	$("#menuOptions").on("touchstart","li",function(e){
 		e.stopPropagation();
 		e.preventDefault();
@@ -147,7 +199,7 @@ function loadInfo(){
 			'No,Yes'
 		);
 	});
-	$("#addPizza.ribbon").on("touchstart",function(){
+	$("#addPizza.ribbon").on("touchstart",function(){ 
 		//fix bug where pizza can have same name and different toppings
 		thePiz=$("#pizzaName");
 		//ie

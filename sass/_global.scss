@@ -1,0 +1,121 @@
+//Slide Styles
+section{
+	background: $beige;
+	width:100%;
+	min-height:56.9rem;
+	height:56.9rem;
+	position:relative;
+	clear:both;
+}
+
+//Header Styles 
+header{
+	position:relative;
+	z-index:100;
+	background:$red;
+	margin-bottom: 1em;
+}
+header>h1{
+	line-height:2.1;
+	margin:0 33px 0 0;
+}
+.settingsHeader {
+	color: $red;
+}
+
+//Heading Styles
+h1,h2,h3,h4,h5,h6,.h1Style,.center{
+	margin:0;
+}
+h1,h2,.h1Style{
+	text-align:center;
+}
+h1,.h1Style{
+	font-family:Lobster,Helvetica,sans-serif;
+	font-size:2.4rem;
+	color:#FFF;
+}
+h4 {
+	font-size: 1.4rem;
+	text-align: center;
+}
+h5{
+	color:#FFF;
+	font-size:2.4rem;
+	font-family:Lobster;
+	cursor:pointer;
+}
+
+//Paragraph Styles
+p {
+	font-size: 1.4rem;
+}
+// Card Styles, cards being anything with forms/text/features in them.
+.card {
+	background: $white;
+	padding: 2em;
+	-webkit-border-radius: 1rem;
+	-moz-border-radius: 1rem;
+	border-radius: 1rem;
+	border: 1px solid darken($beige, 10%);
+}
+label.cardLabel {
+	text-transform: uppercase;
+	font-size: emCalc(20px);
+	color: $red;
+	margin-bottom: .5em;
+}
+input.cardInput {
+	font-size:emCalc(22px);
+	letter-spacing: emCalc(.5px);
+}
+
+//Icons
+.icon {
+	display: block;
+	background: red;
+	width: 4rem;
+	height: 4rem;
+	cursor: pointer;
+}
+.icon label {
+	text-align: center;
+}
+
+//Location
+div.location {
+	background: url('../img/location@2x.png');
+	background-size:cover;
+}
+
+//Utility Classes
+.nD { //no display
+	display:none !important;
+}
+
+//Footer
+footer{
+	border-top:1rem solid $gold;
+	background:$red;
+	text-align:center;
+	padding:.5rem 0 1rem 0;
+	position:absolute;
+	width:100%;
+	left:0;
+	bottom:0;
+	z-index:98;
+}
+
+//Unsorted Styles & Style.css
+.userOpt{
+	font-size: 1.6rem;
+	font-weight: 600;
+	font-style:italic;
+	text-align:center;
+	margin-top:3rem;
+	color:$red;	
+}.userOpt a {
+	color: $dGold;
+}.userOpt a:hover {
+	color: $darkRed;
+}

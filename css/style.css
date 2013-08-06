@@ -1,14 +1,9 @@
 @charset "utf-8";
-@font-face{
-	font-family:Lobster;
-	src:url("../font/Lobster.otf");
-	font-stretch:normal;
-	font-weight:normal;
-}
+
 *{
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);  
 }
-::-webkit-input-placeholder {
+/*::-webkit-input-placeholder {
     color:rgba(96,71,60,0.8);
 }
 :-moz-placeholder {
@@ -31,7 +26,7 @@
 }
 #pizzaName:-ms-input-placeholder {
     color:rgb(252,176,60);
-}
+}*/
 html{
 	font-size:62.5%;
 	-webkit-font-smoothing: antialiased;
@@ -43,10 +38,10 @@ a:hover,a:active{
 	color:#FFF;
 }
 body{
-	font-size:1.6rem;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;;
+	/*font-size:1.6rem;*/
+	/*font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;;*/
 }
-h1,h2,h3,h4,h5,h6,.h1Style,.center{
+/*h1,h2,h3,h4,h5,h6,.h1Style,.center{
 	margin:0;
 }
 h1,h2,.h1Style{
@@ -56,20 +51,20 @@ h1,.h1Style{
 	font-family:Lobster,Helvetica,sans-serif;
 	font-size:2.4rem;
 	color:#FFF;
-}
-h2{
+}*/
+/*h2{
 	color:#FFF;
 	font-size:2rem;
 	font-family:Helvetica, sans-serif;
 	margin:2rem 0;
-}
-h4{
+}*/
+/*h4{
 	width: 44%;
 	margin-right:2%;
 	font-size: 1.4rem;
-}
-section{
-	background: url('../images/PizzaBackgroundSmall.jpg') no-repeat;
+}*/
+/*section{
+	background: url('../img/PizzaBackgroundSmall.jpg') no-repeat;
 	background-position: 0px 0px;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -80,14 +75,14 @@ section{
 	height:56.9rem;
 	position:relative;
 	clear:both;
-}
+}*/
 section:not(:first-child){
 	display:none;
 }
 section>header+div{
 	overflow:hidden;
 }
-footer{
+/*footer{
 	border-top:1rem solid rgb(252,176,60);
 	background:rgb(195,40,46);
 	text-align:center;
@@ -97,29 +92,23 @@ footer{
 	left:0;
 	bottom:0;
 	z-index:98;
-}
-header{
+}*/
+/*header{
 	position:relative;
 	z-index:100;
 	background:rgba(0,0,0,0.3);
-}
-header>h1{
+}*/
+/*header>h1{
 	line-height:2.1;
 	margin-right:5rem;
-}
-h5{
+}*/
+/*h5{
 	color:#FFF;
 	font-size:2.4rem;
 	font-family:Lobster;
 	cursor:pointer;
-}
-[src='images/redGear.svg']{
-	cursor:pointer;
-	width:3.5rem;
-	height:3.5rem;
-	margin:0.75rem;
-}
-[src='images/Bike.png']{
+}*/
+[src='img/Bike.png']{
 	width:4rem;
 	height:4rem;
 }
@@ -156,7 +145,7 @@ h5{
 	font-weight: normal;
 	line-height: 0.5;
 	margin-left: 1rem;
-	font-family:Arial, Helvetica, sans-serif;
+/*	font-family:Arial, Helvetica, sans-serif;*/
 }
 h4.orderOpt,#orderOptions > div:first-child{
 	width:100%;
@@ -252,15 +241,15 @@ h4.orderOpt{
 	float:left;
 	background-size:30.7rem 8.4rem !important;
 }
-.userOpt{
+/*.userOpt{
 	font-style:italic;
 	text-align:center;
 	margin-top:5rem;
 	color:white;	
-}
-.nD{
-	display:none;
-}
+}*/
+/*.nD{
+	display:none !important;
+}*/
 .cRed,.cRed>.ui-button-text{
 	color:rgb(195,40,46);
 }
@@ -445,16 +434,7 @@ input[type=text].w40{
 	height:56.9rem;
 	overflow:hidden;
 }
-#pizzaCircle{
-	width:16rem;
-	margin-left:25%;
-	height:16rem;
-	border-radius:16rem;
-	box-shadow:0 0 2.5rem -.5rem black inset;
-	border:1rem solid #FFF;
-	margin:0 auto;
-	color:white;
-}
+
 #orderOptions,.w94{
 	width:94%;
 }
@@ -466,7 +446,7 @@ input[type=text].w40{
 	margin:1.5rem 0 0 1.5rem;
 }
 #cheeseTopping{
-	background: url('../images/Toppings.png') 0 0;
+	background: url('../img/Toppings.png') 0 0;
 	height:3rem;
 	width:5rem;
 }
@@ -474,49 +454,67 @@ input[type=text].w40{
 	background-position:0 3rem !important;
 }
 #pepperoniTopping{
-	background: url('../images/Toppings.png') 24.5rem 0;
-	height:3rem;
-	width:4rem;
+	background: red url('../img/Toppings.png') 24.5rem 0;
+	height:7rem;
+	width:7rem;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
 }
 .peSelect{
 	background-position: 24.5rem 3rem !important;
 }
 #sausageTopping{
-	background: url('../images/Toppings.png') 19.5rem 0;
-	height:3rem;
-	width:4rem;
+	background: red url('../img/Toppings.png') 19.5rem 0;
+	height:7rem;
+	width:7rem;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
 }
 .saSelect{
 	background-position: 19.5rem 3rem !important;
 }
 #p3ppersTopping{
-	background: url('../images/Toppings.png') 14.5rem 0;
-	height:3rem;
+	background: red url('../img/Toppings.png') 14.5rem 0;
+	height:4rem;
 	width:4rem;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
 }
 .p3Select{
 	background-position: 14.5rem 3rem !important;
 }
 #olivesTopping{
-	background: url('../images/Toppings.png') 11rem 0;
-	height:3rem;
+	background: red url('../img/Toppings.png') 11rem 0;
+	height:4rem;
 	width:4rem;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
 }
 .olSelect{
 	background-position: 11rem 3rem !important;
 }
 #onionsTopping{
-	background: url('../images/Toppings.png') 7rem 0;
-	height:3rem;
-	width:3.5rem;
+	background: red url('../img/Toppings.png') 7rem 0;
+	height:4rem;
+	width:4rem;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
 }
 .onSelect{
 	background-position: 7rem 3rem !important;
 }
 #mushroomsTopping{
-	background: url('../images/Toppings.png') 3rem 0;
-	height:3rem;
-	width:3rem;
+	background: red url('../img/Toppings.png') 3rem 0;
+	height:4rem;
+	width:4rem;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
 }
 .muSelect{
 	background-position: 3rem 3rem !important;
@@ -533,7 +531,7 @@ input[type=text].w40{
 	text-transform:uppercase;
 	color:rgb(252,176,60);
 }
-#h3Ord{
+/*#h3Ord{
 	width:100%;
 	text-align:center;
 	line-height:0;
@@ -541,7 +539,7 @@ input[type=text].w40{
 }
 #h3Ord + div{
 	width:15%;
-}
+}*/
 #expMo{
 	width:15%;
 }
@@ -616,13 +614,10 @@ input[type=text].w40{
 	font-size:1.8rem;
 	text-align:center;
 }
-.pizzaCircleContent{
-	font-family: Lobster;
-	font-size: 3rem;
-	letter-spacing: 0.2rem;
+/*.pizzaCircleContent{
 	color: rgb(252,176,60);
 	margin-top: 30%;
-}
+}*/
 h4.downArrow:after{
 	content:"";
 	border:1rem solid transparent;

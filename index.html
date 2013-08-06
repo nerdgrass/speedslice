@@ -1,121 +1,184 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="initial-scale=1.0,width=device-width,user-scalable=0" />
-<title>SpeedSlice: The fastest way to order pizza</title>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jqueryui.min.js"></script>
-<script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0,width=device-width,height=device-height,user-scalable=0" />
+    <title>SpeedSlice: The fastest way to order local pizza</title>
 
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
 
+    <!-- Libraries -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jqueryui.min.js"></script>
+    
+    <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
 
+    <!-- Commented out for testing -->
+    <!-- <script type="text/javascript" src="phonegap.js"></script> -->
+    <!-- <script src="PushNotification.js"></script> -->
+    <!-- <script type="text/javascript" src="childbrowser.js"></script> -->
 
-<!-- <script type="text/javascript" src="phonegap.js"></script> -->
-<!-- <script src="PushNotification.js"></script> -->
-<!-- <script type="text/javascript" src="childbrowser.js"></script> -->
-<script type="text/javascript" src="js/speedslice.js"></script> 
-<script type="text/javascript">
-document.getElementsByTagName("html").item(0).style.fontSize=(window.innerWidth/5.12)+"%";
-document.ontouchmove = function(e){ 
-	if(e.target.tagName!="A" && e.target.tagName!="INPUT"){
-    	e.preventDefault(); 
-	}
-}
-</script>
-<link rel="stylesheet" href="css/normalize.css">
-<link rel="stylesheet" href="css/style.css">
-<link href="css/jqueryui.css" rel="stylesheet" />
+    <!--  Google Maps Stuff -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true"></script>
+    <script src="js/maps.js"></script>
 
+    <!-- Custom JS -->
+    <script type="text/javascript" src="js/speedslice.js"></script> 
+    <script type="text/javascript">
+        document.getElementsByTagName("html").item(0).style.fontSize=(window.innerWidth/5.12)+"%";
+        document.ontouchmove = function(e){ 
+        	if(e.target.tagName!="A" && e.target.tagName!="INPUT"){
+            	e.preventDefault(); 
+        	}
+        }
+    </script>
 
-<link type="text/css" rel="stylesheet" media="all" href="css/mmenu.css" />
+    <!-- mMenu -->
+    <script type="text/javascript" src="js/jquery.mmenu.js"></script>
+    <!-- <link type="text/css" rel="stylesheet" media="all" href="css/mmenu.css" /> -->
+    <script type="text/javascript">
+        $(function() {
+            $('nav#my-menu').mmenu();
+        });
+    </script>
 
+    <link rel="stylesheet" href="css/normalize.css"> <!-- Normalize (required) -->
+    <link href="css/jqueryui.css" rel="stylesheet" /><!-- jQueryUI CSS -->
+    <link rel="stylesheet" href="css/style.css"> <!-- old CSS -->
 
-<script type="text/javascript" src="js/jquery.mmenu.js"></script>
-<script type="text/javascript">
-    $(function() {
-        $('nav#my-menu').mmenu();
-    });
-</script>
+    <!-- Foundation compiled CSS -->
+    <link href="css/app.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
+    
 
 </head>
 <body onLoad="onLoad()">
+    <nav id="my-menu">
+            <ul>
+                <li class="Label">Settings</li>
+                <li><a id="orderPizza" href="#">Order a Pizza</a></li><!--  Section 0 -->
+                <li><a id="accountInfo" href="#">Account Info</a></li><!--  Section 7 -->
+                <li><a id="paymentInfo" href="#">Payment Info</a></li><!--  Section 5 -->
+                <li><a id="addresses" href="#">Addresses</a></li><!--  Section 2 -->
+            </ul>
+            <hr>
+            <ul>
+                <li><a id="about" href="#">About SpeedSlice</a></li><!--  Section X -->
+                <li><a id="support" href="#">Support</a></li><!--  Section X -->
+                <li><a id="terms" href="#">Terms of Use</a></li><!--  Section X -->
+            </ul>
+            <ul class="inline-list">
+                <li>fb</li>
+                <li>twit</li>
+            </ul>
+            <button>Sign Out</button><!--  Section X -->
+        </nav>
 	<div id="container">
-    	<section id="createPizza">
+        
+    	<section id="createPizza"><!-- Section 0, Pizza Builder -->
         	<header>
-                <a href="#my-menu" class="vBottom fL "><span class="border-menu"></span></a>
-                <img class="vBottom fR" src="images/redGear.svg">
+                <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
             	<h1>SpeedSlice</h1>
             </header>
-            <nav id="my-menu">
-                <ul>
-                    <li class="Label">Settings</li>
-                    <li><a href="">Order a Pizza</a></li>
-                    <li><a id="accountOptions" href="#">Account Info</a></li>
-                    <li><a href="/contact/">Payment Info</a></li>
-                    <li><a href="/contact/">Addresses</a></li>
-                </ul>
-                <hr>
-                <ul>
-                    <li><a href="/">About SpeedSlice</a></li>
-                    <li><a href="#faq">Support</a></li>
-                    <li><a href="/contact/">Terms of Use</a></li>
-                    <li><a href="/contact/">Addresses</a></li>
-                </ul>
-                <ul>
-                    <li>fb</li>
-                    <li>twit</li>
-                </ul>
-                <button>Sign Out</button>
-            </nav>
-            <div>
-            	<div class="transBkgd clearFix">                	
-                    <div class="fR pizzArrow" id="pRight">&gt;</div>
-                    <div class="pizzArrow fL" id="pLeft">&lt;</div>
-                    <div id="pizzaCircle">
-                        <input class="pizzaCircleContent" type="text" id="pizzaName" placeholder="Custom Pizza">
-                        <div class="tapAddTxt">Tap to Name Your Pizza</div>
-                        <div id="savedPizzaName" class="pizzaCircleContent"></div>
-                    </div>
-                    <div id="pizzaToppings">
-                    	<div id="cheeseTopping" class="topping chSelect"></div>
-                        <div id="pepperoniTopping" class="topping"></div>
-                        <div id="sausageTopping" class="topping"></div>
-                        <div id="p3ppersTopping" class="topping"></div>
-                        <div id="olivesTopping" class="topping"></div>
-                        <div id="onionsTopping" class="topping"></div>
-                        <div id="mushroomsTopping" class="topping"></div>
-                    </div>
-                    <div class="ribbon-wrapper">
-                        <div class="ribbon" id="addPizza">
-                            <div class="ribbon-content">Add Pizza to Order</div>
+            <div class="row">
+            	<div class="small-12 columns">
+                    <div class="row">
+                        <div class="small-3 columns">
+                            <div class="toppingToggle pepperoni toppingToggleLarge">
+                                <input type="checkbox" id="pepperoniToggle" class="toppingToggle toppingToggleLarge" name="">
+                                <label for="pepperoniToggle"></label>
+                            </div>
+                        </div>          
+                        <div class="small-2 columns">
+                            <div class="toppingToggle mushrooms">
+                                <input type="checkbox" id="mushroomsToggle" class="toppingToggle">
+                                <label for="mushroomsToggle"></label>
+                            </div>
+                        </div>
+                        <div class="small-2 small-offset-2 columns">
+                            <div class="toppingToggle onions">
+                                <input type="checkbox" id="onionsToggle" class="toppingToggle">
+                                <label for="onionsToggle"></label>
+                            </div>
+                        </div>
+                        <div class="small-3 columns">
+                            <div class="toppingToggle pepperoni toppingToggleLarge">
+                                <input type="checkbox" id="sausageToggle" class="toppingToggle toppingToggleLarge">
+                                <label for="sausageToggle"></label>
+                            </div>
                         </div>
                     </div>
+                    <div class="row pizzaBuilder">
+                        <div class="small-2 columns">
+                            <div class="toppingToggle olives">
+                                <input type="checkbox" id="olivesToggle" class="toppingToggle">
+                                <label for="olivesToggle"></label>
+                            </div>
+                        </div>
+                        <div class="small-8 columns"><!--  Pizza Circle -->
+                            <div id="addPizza" class="pizzaCircle">
+                                <p class="pizzaCircleContent" type="text" id="pizzaName" value="">
+                                    Tap to<br /><span id="pizzaCircleOrder">Order</span>
+                                </p>
+                            </div><!-- End Pizza Circle -->
+                            <div id="toppingPepperoni" class="nD"></div>
+                            <div id="toppingSausage" class="nD"></div>
+                            <div id="toppingPeppers" class="nD"></div>
+                            <div id="toppingOnions" class="nD"></div>
+                            <div id="toppingMushrooms" class="nD"></div>
+                            <div id="toppingOlives" class="nD"></div>
+                            <div id="pizzaBG"></div>
+                        </div>
+                        <div class="small-2 columns">
+                            <div class="toppingToggle peppers">
+                                <input type="checkbox" id="peppersToggle" class="toppingToggle">
+                                <label for="peppersToggle"></label>
+                            </div>
+                        </div class="">
+                    </div>
+                	<!-- <div id="cheeseTopping" class="topping chSelect"></div> -->
                 </div>
-                <div id="orderSummary">
-                	<div class="tapAddTxt">Tap toppings to add</div>
-                    <div class="infoWrapper">
-                        <ul id="someToppings">	
-                            <li id="ch" data-topping="1">Cheese</li>
-                        </ul>
-                        <div>
-                            <h3 id="h3Ord">Order Summary</h3>
+            </div>
+            <div id="orderSummary" class="row">
+                <div class="small-10 small-centered columns card">
+                    <div class="row">
+                        <div id="orderSummary" class="small-11 small-centered columns">
+                            <h3>Order Summary</h3>
+                            <hr>
+                            <p>1x Pizza with:</p>
+                            <ul class="inline-list toppingsList">
+                                <li>Pepperoni</li>
+                                <li class="nD">Sausage</li>
+                                <li class="nD">Peppers</li>
+                                <li class="nD">Onions</li>
+                                <li class="nD">Olives</li>
+                                <li class="nD">Mushrooms</li>
+                            </ul>
+                            <hr>
                         </div>
-                        <div><div class="tinytxt nD" id="delTxt" style="line-height:0; float:right; margin:-1.6rem 1.5rem 0 0;">Swipe pizza to delete</div>
-                        	<h4 class='downArrow'>DELIVER TO:</h4><input type="text" id="addressTo" placeholder="ADDRESS">
+                        <div id="orderSummary" class="small-11 small-centered columns">
+                            <h3>Deliver To</h3>
+                            <hr>
+                            <div id="pickLocation" class="small-6 small-centered columns">
+                                <div id="addresses" class="location icon"></div>
+                                <label>Pick Location</label>
+                            </div>
+                            <div id="addressTo" class="small-12 small-centered columns nD">
+                                <h4>11 Doble Ave. Apt 1</h4>
+                                <h4>Medford, MA 02155</h4>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <footer>
-            	<div class="pntr h1Style" onClick="orderPizzaPage()"><span id="orderText" class="nD">order</span><span id="createText">next: create account</span> <span class="rightArrow">&gt;&gt;</span></div>
+            	<div class="pntr h1Style" onClick="orderPizzaPage()"><span id="orderText" class="nD">order</span><span id="createText">Pick your Restaurant</span> <span class="rightArrow">&gt;&gt;</span></div>
             </footer>
         </section>
-        <section id="delOptsSec">
+
+        <section id="delOptsSec"> <!-- Section 1 -->
        		<header>
-            	<span class="pl10 aChev fL pntr" title="Back">&laquo;</span>
-            	<img class="vBottom fR" src="images/redGear.svg">
-            	<h1>SpeedSlice</h1>
+                <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
+                <h1>SpeedSlice</h1>
             </header>
         	<div class="center" id="delOpts">
                 <div class="next bigRed delLoc">Add New Location</div>
@@ -124,98 +187,63 @@ document.ontouchmove = function(e){
             	<h1>Delivery Address</h1>
             </footer>
         </section>
-        <section id="deliveryLoc">
+
+        <section id="deliveryLoc"> <!-- Section 2, Delivery Location History/GPS -->
        		<header>
-            	<span class="pl10 aChev fL pntr" title="Back">&laquo;</span>
-            	<img class="vBottom fR" src="images/redGear.svg">
-            	<h1>SpeedSlice</h1>
+                <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
+                <h1>SpeedSlice</h1>
             </header>
-        	<div class="infoWrapper">
-                <div>
-                    <h4>Place nickname:</h4><input type="text" id="addrNick" placeholder="Name">
+                <div id="map-canvas"></div>
+                <form>
+                    <div class="row">
+                        <div class="small-12 columns">
+                          <div class="row collapse">
+                            <div class="small-10 columns">
+                              <input id="gpsAddress" name="gpsAddress" type="text" placeholder="Enter Address">
+                            </div>
+                            <div class="small-2 columns">
+                              <a href="#" class="button prefix">GPS</a>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="small-10 small-centered columns">
+                        <h2>Previous Locations</h2>
+                    </div>
+                    <div class="small-10 small-centered columns card">
+                        <ul id="locHistory" class="locList">
+                            <li class="favLocation">11 Doble Ave., Medford, MA</li>
+                            <li class="favLocation">222 3rd St. Suite 4000, Cambridge, MA</li>
+                            <li>23 Cedar St, Apt B, Somerville, MA</li>
+                            <li>1498 Mass Ave., Apt 6a, Somerville, MA</li>
+                            <li>182 Beacon St, Apt 44, Brighton, MA</li>
+                            <li>65 Mt. Vernon St, Reading, MA</li>
+                            <li>23 Cedar St, Apt B, Somerville, MA</li>
+                            <li>1498 Mass Ave., Apt 6a, Somerville, MA</li>
+                            <li>182 Beacon St, Apt 44, Brighton, MA</li>
+                            <li>65 Mt. Vernon St, Reading, MA</li>
+                            <li>23 Cedar St, Apt B, Somerville, MA</li>
+                            <li>1498 Mass Ave., Apt 6a, Somerville, MA</li>
+                            <li>182 Beacon St, Apt 44, Brighton, MA</li>
+                            <li>65 Mt. Vernon St, Reading, MA</li>
+                            <li>23 Cedar St, Apt B, Somerville, MA</li>
+                            <li>1498 Mass Ave., Apt 6a, Somerville, MA</li>
+                            <li>182 Beacon St, Apt 44, Brighton, MA</li>
+                            <li>65 Mt. Vernon St, Reading, MA</li>
+                        </ul>
+                    </div>
                 </div>
-                <div>
-                    <h4>Deliver to:</h4><input type="text" id="addr" placeholder="Address Line 1">
-                </div>
-                <div><h4>Address Line 2:</h4>
-                    <input type="text" id="addr2">
-                </div>
-                <div>
-                    <h4>City:</h4><input type="text" id="city">
-                </div>
-                <div><h4>State:</h4>
-                	<select id="state">
-                        <option value="AK">AK</option>
-                        <option value="AL">AL</option>
-                        <option value="AR">AR</option>
-                        <option value="AZ">AZ</option>
-                        <option value="CA">CA</option>
-                        <option value="CO">CO</option>
-                        <option value="CT">CT</option>
-                        <option value="DC">DC</option>
-                        <option value="DE">DE</option>
-                        <option value="FL">FL</option>
-                        <option value="GA">GA</option>
-                        <option value="HI">HI</option>
-                        <option value="IA">IA</option>
-                        <option value="ID">ID</option>
-                        <option value="IL">IL</option>
-                        <option value="IN">IN</option>
-                        <option value="KS">KS</option>
-                        <option value="KY">KY</option>
-                        <option value="LA">LA</option>
-                        <option value="MA">MA</option>
-                        <option value="MD">MD</option>
-                        <option value="ME">ME</option>
-                        <option value="MI">MI</option>
-                        <option value="MN">MN</option>
-                        <option value="MO">MO</option>
-                        <option value="MS">MS</option>
-                        <option value="MT">MT</option>
-                        <option value="NC">NC</option>
-                        <option value="ND">ND</option>
-                        <option value="NE">NE</option>
-                        <option value="NH">NH</option>
-                        <option value="NJ">NJ</option>
-                        <option value="NM">NM</option>
-                        <option value="NV">NV</option>
-                        <option value="NY">NY</option>
-                        <option value="OH">OH</option>
-                        <option value="OK">OK</option>
-                        <option value="OR">OR</option>
-                        <option value="PA">PA</option>
-                        <option value="RI">RI</option>
-                        <option value="SC">SC</option>
-                        <option value="SD">SD</option>
-                        <option value="TN">TN</option>
-                        <option value="TX">TX</option>
-                        <option value="UT">UT</option>
-                        <option value="VA">VA</option>
-                        <option value="VT">VT</option>
-                        <option value="WA">WA</option>
-                        <option value="WI">WI</option>
-                        <option value="WV">WV</option>
-                        <option value="WY">WY</option>
-                  </select>
-                </div>
-                <div><h4>ZIP:</h4>
-                    <input type="number" id="zip">
-                </div>
-                <div><h4>Phone:</h4>
-                	<input type="number" id="phone">
-                    <div id="deleteAddress" onClick="deleteAddress()" class="nD">Delete Address</div>
-                </div>
-			</div>
-            <div class="next bigRed" onClick="setNewAddress()">Next</div>
             <footer>
-            	<h1>Delivery Address</h1>
+            	<h1>Deliver it Here! <span class="rightArrow">&gt;&gt;</span></h1>
             </footer>
         </section>
-        <section id="userInfo">
+
+        <section id="userInfo"> <!-- Section 3, New User Info -->
        		<header>
-	            <span class="pl10 aChev fL pntr" title="Back">&laquo;</span>
-            	<img class="vBottom fR" src="images/redGear.svg">
-            	<h1>SpeedSlice</h1>
+                <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
+                <h1>SpeedSlice</h1>
             </header>
         	<div class="infoWrapper">
                 <div>
@@ -239,63 +267,93 @@ document.ontouchmove = function(e){
             	<h1>Your Info</h1>
             </footer>
         </section>
-        <section id="signIn">
+
+        <section id="signIn"> <!-- Section 4, Sign In-->
        		<header>
-	            <span class="pl10 aChev fL pntr" title="Back">&laquo;</span>
-            	<img class="vBottom fR" src="images/redGear.svg">
-            	<h1>SpeedSlice</h1>
+                <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
+                <h1>SpeedSlice</h1>
             </header>
-        	<div class="infoWrapper">
-                <div>
-                    <h4>Email</h4><input type="email" id="emailLogIn">
+            <div class="small-10 columns card small-centered">
+                <div class="row">
+                    <div class="small-12 columns">
+                        <form>
+                            <div class="small-12 columns">
+                                <label class="cardLabel">Email Address</label>
+                                <input class="cardInput" type="email" placeholder="yourname@email.com" id="emailLogIn">
+                            </div>
+                            <div class="small-12 columns">
+                                <label class="cardLabel" id="pWordLogIn">Password</label>
+                                <input class="cardInput" type="password" placeholder="Your Password">
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div>
-                    <h4>Password</h4><input type="password" id="pWordLogIn">
-                </div>
-			</div>
-            <div class="next bigRed" onClick="logIn(this)">Next</div>
-            <div class="userOpt">
-            	Don't have an account?<br>
-				Click <a onClick="switchSlides(4,3)" class="pntr">here</a> to sign up.
             </div>
+            <div class="small-10 small-centered columns userOpt">
+                        Don't have an account?<br>
+                        Click <a onClick="switchSlides(4,3)" class="pntr">here</a> to sign up.
+                    </div>
             <footer>
-            	<h1>Sign In</h1>
+            	<h1 onClick="logIn(this)">Sign Me In</h1>
             </footer>
         </section>
-        <section id="cardInfo">
+
+        <section id="cardInfo"> <!-- Section 5, Payment Info -->
        		<header>
-            	<span class="pl10 aChev fL pntr" title="Back">&laquo;</span>
-            	<img class="vBottom fR" src="images/redGear.svg">
-            	<h1>SpeedSlice</h1>
+                <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
+                <h1>SpeedSlice</h1>
             </header>
-        	<div class="infoWrapper">
-                <div>
-                    <h4>Card Number</h4><input type="number" id="cNum">
+
+            <div class="row">
+                <div class="small-10 small-centered columns">
+                    <h2 class="settingsHeader">Payment Information</h2>
                 </div>
-                <div>
-                    <h4>Expiration</h4><input id="expMo" type="number" size="2" ><span class="b backslash">/</span>
-    <input id="expYr" type="number" size="4">
+                <div class="small-10 columns card small-centered">
+                    <div class="row">
+                        <div class="small-12 columns">
+                            <form>
+                                <div class="small-12 columns">
+                                    <label class="cardLabel">Card Number</label>
+                                    <input class="cardInput" type="number" placeholder="XXXXXXXXXXXXXXXX">
+                                </div>
+                                <div class="small-12 columns">
+                                    <label class="cardLabel">Expiration Date</label>
+                                    <div class="row">
+                                        <div class="small-5 columns">
+                                            <input class="cardInput" type="number" placeholder="00" name="expDateMonth">
+                                        </div>
+                                        <div class="small-2 columns">
+                                            <span id="expDateSlash">/</span>
+                                        </div>
+                                        <div class="small-5 columns">
+                                            <input class="cardInput" type="number" placeholder="20XX" name="expDateYear">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="small-6 columns">
+                                    <label class="cardLabel">Security Code</label>
+                                    <input class="cardInput" type="number" placeholder="XXX" name="CVV2">
+                                </div>
+                                <div class="small-6 columns">
+                                    <label class="cardLabel">Zip Code</label>
+                                    <input class="cardInput" type="number" placeholder="XXXXX" name="CVV2">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                	<h4>Security code</h4><input id="csc" type="number" size="4">
+                <div class="small-10 small-centered columns">
+                    <h2 class="settingsHeader">Tip</h2>
                 </div>
-                <div>
-                	<h4>Billing ZIP</h4><input id="cardZip" type="number" size="5">
-                </div>
-			</div>
-            <div class="w94 infoWrapper">
-            	<div class="bigRed">Tip</div>
             </div>
             <div class="next tip bigRed">15%</div><div class="next tip bigRed tipSelected">20%</div><div class="next tip bigRed">Cash</div>
             <div class="next bigRed" onClick="addCard()" id="addCardButton">Next</div>
-            <footer>
-            	<h1>Payment Info</h1>
-            </footer>
         </section>
-        <section id="pickSpot">
+
+        <section id="pickSpot"> <!-- Section 6, Pick Restaurant -->
        		<header>
-            	<img class="vBottom fR" src="images/redGear.svg">
-            	<h1>SpeedSlice</h1>
+                <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
+                <h1>SpeedSlice</h1>
             </header>
             <h2>Pick Your Spot!</h2>
         	<div class="infoWrapper" id="orderOptions">
@@ -307,72 +365,86 @@ document.ontouchmove = function(e){
             </footer>
             <div class="nD" id="confirmOrder" title="Confirm Order"></div>
         </section>
-        <section id="profile">
-       		<header>
-            	<img class="vBottom fR" src="images/redGear.svg">
-            	<h1>SpeedSlice</h1>
+
+        <section id="profile"> <!-- Section 7, Account Info -->
+            <header>
+                <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
+                <h1>SpeedSlice</h1>
             </header>
-  			<div class="pl10 pntr">
-                	<span class="fL aChev">&laquo;</span><h2 class="fL"><img src="images/Bike.png"><span class="pl10" id="welcome">Welcome, User</span></h2>
-            </div>
-            <div class="infoWrapper">
-                <div>
-                    <h4>Name</h4><div class="rInfo" id="nameChange"></div>
+            <div class="row">
+                <div class="small-10 small-centered columns">
+                    <h2 class="settingsHeader">Account Information</h2>
                 </div>
-                <div>
-                    <h4>Email</h4><div class="rInfo" id="yourEmail"></div>
-                </div>
-                <div onClick="updateCard()">
-                    <h4>Payment Info</h4><div class="rInfo" id="accntCard"> <span class="cRed pntr">&gt;&gt;</span></div>
-                </div>
-                <div onClick="viewAddresses()">
-                    <h4>Saved Addresses</h4><div class="rInfo cRed pntr">&gt;&gt;</div>
-                </div>
-            </div>
-            <div class="infoWrapper w94">
-                <div>
-                    <h4 class="w94 lh15"><a id="facebookLink" href="https://www.facebook.com/SpeedSlice" target="_new">Like us on Facebook</a></h4>
-                </div>
-                <div onClick="switchSlides(7,10)">
-                    <h4 class="lh15 pntr">About SpeedSlice</h4><div class="rInfo cRed pntr">&gt;&gt;</div>
-                </div>
-                <div onClick="switchSlides(7,12)">
-                    <h4 class="lh15 pntr">Support</h4><div class="rInfo cRed pntr">&gt;&gt;</div>
+                <div class="small-10 columns card small-centered">
+                    <div class="row">
+                        <div class="small-12 columns">
+                            <form>
+                                <div class="small-12 columns">
+                                    <label class="cardLabel">Name</label>
+                                    <input class="cardInput" type="text" placeholder="Your Full Name" value="Alex Boerstler">
+                                </div>
+                                <div class="small-12 columns">
+                                    <label class="cardLabel">Email Address</label>
+                                    <input class="cardInput" type="text" placeholder="Your Email Address" value="arboestler@gmail.com">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="infoWrapper w94">
-                <div onClick="switchSlides(7,9)">
-                    <h4 class="lh15 pntr w60">Terms and Conditions</h4><div class="rInfo cRed pntr">&gt;&gt;</div>
+            <div class="row">
+                <div class="small-10 small-centered columns">
+                    <h2 class="settingsHeader">Change Password</h2>
+                </div>
+                <div class="small-10 columns card small-centered">
+                    <div class="row">
+                        <div class="small-12 columns">
+                            <form>
+                                <div class="small-12 columns">
+                                    <label class="cardLabel">Old Password</label>
+                                    <input class="cardInput" type="password" value="test password">
+                                </div>
+                                <div class="small-12 columns">
+                                    <label class="cardLabel">New Password</label>
+                                    <input class="cardInput" type="password" value="test password">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="next bigRed fL mt20 w94" onClick="switchSlides(7,0)">Order a Pizza</div>
-            <div class="u" id="signOut">Sign Out</div>
-            <footer>
-            	<h1>Account Info</h1>
-            </footer>
         </section>
-        <section id="successfulOrder">
-        	<header>
-            	<span class="pl10 aChev fL pntr" title="Back">&laquo;</span>
-            	<img class="vBottom fR" src="images/redGear.svg">
-            	<h1>SpeedSlice</h1>
+
+        <section id="successfulOrder"> <!-- Section 8, Order Success -->
+            <header>
+                <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
+                <h1>SpeedSlice</h1>
             </header>
-            <div class="infoWrapper w94">
-                <p>Order successful</p>
-                <p>Ref #: <span id="refNum"></span></p>
-                <p>Order ID: <span id="successID"></span></p>
-                <p id="discAmtWrapper" class="nD">Discount received: <span id="discAmt"></span></p>
-            </div>
-            <div class="next bigRed" onClick="switchSlides(8,0)">Return to order page</div>
-            <footer>
+            <div class="row">
+                <div class="small-10 small-centered columns">
+                    <h2 class="settingsHeader">Your pizza is</h2>
+                    <h2 class="settingsHeader">ON ITS WAY!</h2>
+                </div>
+                <div class="small-10 small-centered columns card">
+                    <p><span id="restaurantName">Hillside Cafe</span> takes an average of <span id="avgDeliverTime">49 minutes</span> to deliver to your area.</p>
+
+                    <p>Ref #: <span id="refNum"></span></p>
+                    <p>Order ID: <span id="successID"></span></p>
+                    <p id="discAmtWrapper" class="nD">Discount received: <span id="discAmt"></span></p>
+                    <p>We will be emailing you a receipt shortly!</p>
+
+
+                </div>
+             </div>
+            <footer onClick="switchSlides(8,0)">
             	<h1>Order Completed</h1>
             </footer>
         </section>
-        <section id="privPolicy"><!--10-->
+
+        <section id="privPolicy"><!-- Section 9, Terms & Privacy Policy -->
        		<header>
-            	<span class="pl10 aChev fL pntr" title="Back">&laquo;</span>
-            	<img class="vBottom fR" src="images/redGear.svg">
-            	<h1>SpeedSlice</h1>
+                <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
+                <h1>SpeedSlice</h1>
             </header>
             <div class="infoWrapper">
             	<div class="bigRed">Terms and Conditions</div>                
@@ -448,11 +520,11 @@ SpeedSlice reserves the right, in its sole discretion, to revise and amend the A
             	<h1>Privacy Policy</h1>
             </footer>
         </section>
-        <section id="aboutSpeedslice"><!--11-->
+
+        <section id="aboutSpeedslice"><!-- Section 10, About SpeedSlice -->
        		<header>
-            	<span class="pl10 aChev fL pntr" title="Back">&laquo;</span>
-                <img class="vBottom fR" src="images/redGear.svg">
-            	<h1>SpeedSlice</h1>
+                <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
+                <h1>SpeedSlice</h1>
             </header>
             <div class="infoWrapper">
             	<div class="bigRed">About SpeedSlice</div>                
@@ -477,20 +549,20 @@ SpeedSlice reserves the right, in its sole discretion, to revise and amend the A
             	<h1>About SpeedSlice</h1>
             </footer>
         </section>
-        <section id="faq"><!--12-->
+
+        <section id="faq"><!-- Section 11, FAQ -->
        		<header>
-            	<span class="pl10 aChev fL pntr" title="Back">&laquo;</span>
-                <img class="vBottom fR" src="images/redGear.svg">
-            	<h1>SpeedSlice</h1>
+                <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
+                <h1>SpeedSlice</h1>
             </header>
             <footer>
             	<h1>FAQ</h1>
             </footer>
         </section>
-        <section id="support"><!--13-->
+
+        <section id="support"><!-- Section 12, Support -->
             <header>
-                <span class="pl10 aChev fL pntr" title="Back">&laquo;</span>
-                <img class="vBottom fR" src="images/redGear.svg">
+                <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
                 <h1>SpeedSlice</h1>
             </header>
             <div class="infoWrapper">
@@ -521,17 +593,54 @@ SpeedSlice reserves the right, in its sole discretion, to revise and amend the A
                 <h1>Support Information</h1>
             </footer>
         </section>
-         <ul id='menuOptions'>
+        <ul id='menuOptions'>
                 <li>Order a Pizza</li>
-             <li>Account Information</li>
-             <li>About SpeedSlice</li>
-             <li>Terms and Conditions</li>
-         </ul>
+                <li>Account Information</li>
+                <li>About SpeedSlice</li>
+                <li>Terms and Conditions</li>
+            </ul>
          <select class="nD" id="pizzaID">
             <option value="2" data-toppings="Cheese">Cheese</option>
              <option value="9" data-toppings="Cheese,Pepperoni">Pepperoni</option>
              <option selected></option>
          </select>
     </div>
+    <script type="text/javascript">
+        $('#pepperoniToggle').change(function(){
+            if($(this).is(":checked")) {
+                $('#toppingPepperoni').removeClass("nD");
+            } else {
+                $('#toppingPepperoni').addClass("nD");
+            }
+        });
+        $('#sausageToggle').change(function(){
+            if($(this).is(":checked")) {
+                $('#toppingSausage').removeClass("nD");
+            } else {
+                $('#toppingSausage').addClass("nD");
+            }
+        });
+        $('#peppersToggle').change(function(){
+            if($(this).is(":checked")) {
+                $('#toppingPeppers').removeClass("nD");
+            } else {
+                $('#toppingPeppers').addClass("nD");
+            }
+        });
+        $('#onionsToggle').change(function(){
+            if($(this).is(":checked")) {
+                $('#toppingOnions').removeClass("nD");
+            } else {
+                $('#toppingOnions').addClass("nD");
+            }
+        });
+        $('#mushroomsToggle').change(function(){
+            if($(this).is(":checked")) {
+                $('#toppingMushrooms').removeClass("nD");
+            } else {
+                $('#toppingMushrooms').addClass("nD");
+            }
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,108 @@
+.row.pizzaBuilder {
+	margin-bottom: emCalc(220px);
+}
+
+/* Pizza Circle */
+.pizzaCircle {
+	// box-shadow:0 0 2.5rem -.5rem black;
+	border:1rem solid $brown;
+	color:white;
+	z-index:100
+}
+.pizzaCircleContent {
+	text-align: center;
+	color: $darkRed;
+	margin-top: 30%;
+}
+#pizzaCircleOrder {
+	text-transform: uppercase;
+}
+.pizzaCircle, #pizzaBG, #toppingPepperoni, #toppingSausage, #toppingPeppers, #toppingOnions, #toppingMushrooms, #toppingOlives {
+	position: fixed;
+	width:16rem;
+	height:16rem;
+	border-radius:16rem;
+	left: 50%;
+	margin-left: -8rem;
+}
+#toppingPepperoni {
+	background: url('../img/toppings/pepperoni.png') no-repeat;
+	z-index:10
+}
+#toppingSausage {
+	background: url('../img/toppings/sausage.png') no-repeat;
+	z-index:7;
+}
+#toppingPeppers {
+	background: url('../img/toppings/peppers.png') no-repeat;
+	z-index: 4;
+}
+#toppingOnions {
+	background: url('../img/toppings/onions.png') no-repeat;
+	z-index: 5;
+}
+#toppingMushrooms {
+	background: url('../img/toppings/mushrooms.png') no-repeat;
+	z-index: 6;
+}
+#pizzaBG {
+	background:$gold;
+	// box-shadow:0 0 2.5rem -.5rem black;
+	color:white;
+	z-index:1
+}
+
+/* Topping Toggles */
+input[type=checkbox].toppingToggle { 
+	visibility: hidden !important;
+}
+.toppingToggle {
+	height:3.5rem;
+	width:3.5rem;
+	background: $red;
+	border-radius: 100%;
+	position: relative;
+	-webkit-transition: all .3s ease;
+	-moz-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	-ms-transition: all .3s ease;
+	transition: all .3s ease;
+	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+	box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+}
+.toppingToggle.toppingToggleLarge {
+	height:7rem;
+	width:7rem;
+}
+.toppingToggle label {
+	display: block;
+	height:2.9rem;
+	width:2.9rem;
+	border-radius: 100px;
+	-webkit-transition: all .3s ease;
+	-moz-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	-ms-transition: all .3s ease;
+	transition: all .3s ease;
+	cursor: pointer;
+	position: absolute;
+	top: .3rem;
+	left: .3rem;
+	z-index: 1;
+	background: $white;
+	// -webkit-box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
+	// -moz-box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
+	// box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
+}
+.toppingToggle.toppingToggleLarge label {
+	height:6rem;
+	width:6rem;
+	top: .5rem;
+	left: .5rem;
+}
+.toppingToggle input[type=checkbox]:checked + label {
+	background: $gold;
+}
+
+//Order Summary 
