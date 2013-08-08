@@ -146,12 +146,12 @@
                             <hr>
                             <p>1x Pizza with:</p>
                             <ul class="inline-list toppingsList">
-                                <li>Pepperoni</li>
-                                <li class="nD">Sausage</li>
-                                <li class="nD">Peppers</li>
-                                <li class="nD">Onions</li>
-                                <li class="nD">Olives</li>
-                                <li class="nD">Mushrooms</li>
+                                <li class="ordSumPepperoni nD">Pepperoni</li>
+                                <li class="ordSumSausage nD ">Sausage</li>
+                                <li class="ordSumPeppers nD">Peppers</li>
+                                <li class="ordSumOnions nD">Onions</li>
+                                <li class="ordSumOlives nD">Olives</li>
+                                <li class="ordSumMushrooms nD">Mushrooms</li>
                             </ul>
                             <hr>
                         </div>
@@ -214,24 +214,24 @@
                     </div>
                     <div class="small-10 small-centered columns card">
                         <ul id="locHistory" class="locList">
-                            <li class="favLocation">11 Doble Ave., Medford, MA</li>
-                            <li class="favLocation">222 3rd St. Suite 4000, Cambridge, MA</li>
-                            <li>23 Cedar St, Apt B, Somerville, MA</li>
-                            <li>1498 Mass Ave., Apt 6a, Somerville, MA</li>
-                            <li>182 Beacon St, Apt 44, Brighton, MA</li>
-                            <li>65 Mt. Vernon St, Reading, MA</li>
-                            <li>23 Cedar St, Apt B, Somerville, MA</li>
-                            <li>1498 Mass Ave., Apt 6a, Somerville, MA</li>
-                            <li>182 Beacon St, Apt 44, Brighton, MA</li>
-                            <li>65 Mt. Vernon St, Reading, MA</li>
-                            <li>23 Cedar St, Apt B, Somerville, MA</li>
-                            <li>1498 Mass Ave., Apt 6a, Somerville, MA</li>
-                            <li>182 Beacon St, Apt 44, Brighton, MA</li>
-                            <li>65 Mt. Vernon St, Reading, MA</li>
-                            <li>23 Cedar St, Apt B, Somerville, MA</li>
-                            <li>1498 Mass Ave., Apt 6a, Somerville, MA</li>
-                            <li>182 Beacon St, Apt 44, Brighton, MA</li>
-                            <li>65 Mt. Vernon St, Reading, MA</li>
+                            <li class="favLocation location">11 Doble Ave., Medford, MA</li>
+                            <li class="favLocation location">222 3rd St. Suite 4000, Cambridge, MA</li>
+                            <li class="location">23 Cedar St, Apt B, Somerville, MA</li>
+                            <li class="location">1498 Mass Ave., Apt 6a, Somerville, MA</li>
+                            <li class="location">182 Beacon St, Apt 44, Brighton, MA</li>
+                            <li class="location">65 Mt. Vernon St, Reading, MA</li>
+                            <li class="location">23 Cedar St, Apt B, Somerville, MA</li>
+                            <li class="location">1498 Mass Ave., Apt 6a, Somerville, MA</li>
+                            <li class="location">182 Beacon St, Apt 44, Brighton, MA</li>
+                            <li class="location">65 Mt. Vernon St, Reading, MA</li>
+                            <li class="location">23 Cedar St, Apt B, Somerville, MA</li>
+                            <li class="location">1498 Mass Ave., Apt 6a, Somerville, MA</li>
+                            <li class="location">182 Beacon St, Apt 44, Brighton, MA</li>
+                            <li class="location">65 Mt. Vernon St, Reading, MA</li>
+                            <li class="location">23 Cedar St, Apt B, Somerville, MA</li>
+                            <li class="location">1498 Mass Ave., Apt 6a, Somerville, MA</li>
+                            <li class="location">182 Beacon St, Apt 44, Brighton, MA</li>
+                            <li class="location">65 Mt. Vernon St, Reading, MA</li>
                         </ul>
                     </div>
                 </div>
@@ -283,7 +283,7 @@
                             </div>
                             <div class="small-12 columns">
                                 <label class="cardLabel" id="pWordLogIn">Password</label>
-                                <input class="cardInput" type="password" placeholder="Your Password">
+                                <input class="cardInput" type="password" placeholder="Your Password" id="pWordLogIn">
                             </div>
                         </form>
                     </div>
@@ -609,36 +609,55 @@ SpeedSlice reserves the right, in its sole discretion, to revise and amend the A
         $('#pepperoniToggle').change(function(){
             if($(this).is(":checked")) {
                 $('#toppingPepperoni').removeClass("nD");
+                $('.ordSumPepperoni').removeClass("nD");
             } else {
                 $('#toppingPepperoni').addClass("nD");
+                $('.ordSumPepperoni').addClass("nD");
             }
         });
         $('#sausageToggle').change(function(){
             if($(this).is(":checked")) {
                 $('#toppingSausage').removeClass("nD");
+                $('.ordSumSausage').removeClass("nD");
             } else {
                 $('#toppingSausage').addClass("nD");
+                $('.ordSumSausage').addClass("nD");
             }
         });
         $('#peppersToggle').change(function(){
             if($(this).is(":checked")) {
                 $('#toppingPeppers').removeClass("nD");
+                $('.ordSumPeppers').removeClass("nD");
             } else {
                 $('#toppingPeppers').addClass("nD");
+                $('.ordSumPeppers').addClass("nD");
             }
         });
         $('#onionsToggle').change(function(){
             if($(this).is(":checked")) {
                 $('#toppingOnions').removeClass("nD");
+                $('.ordSumOnions').removeClass("nD");
             } else {
                 $('#toppingOnions').addClass("nD");
+                $('.ordSumOnions').addClass("nD");
             }
         });
         $('#mushroomsToggle').change(function(){
             if($(this).is(":checked")) {
                 $('#toppingMushrooms').removeClass("nD");
+                $('.ordSumMushrooms').removeClass("nD");
             } else {
                 $('#toppingMushrooms').addClass("nD");
+                $('.ordSumMushrooms').addClass("nD");
+            }
+        });
+        $('#olivesToggle').change(function(){
+            if($(this).is(":checked")) {
+                $('#toppingOlives').removeClass("nD");
+                $('.ordSumOlives').removeClass("nD");
+            } else {
+                $('#toppingOlives').addClass("nD");
+                $('.ordSumOlives').addClass("nD");
             }
         });
     </script>

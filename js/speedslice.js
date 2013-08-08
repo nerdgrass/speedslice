@@ -1,11 +1,11 @@
 address=new Object();
-address.addrNick="";
-address.addr="";
-address.addr2="";
-address.city="";
-address.zip="";
-address.phone="";
-address.state="";
+address.addrNick="Home";
+address.addr="11 Doble Ave";
+address.addr2="Apt 1";
+address.city="Medford";
+address.zip="02155";
+address.phone="2035778844";
+address.state="MA";
 //update this value;
 additionalPizzas=new Object();
 cardReturnTo="account";
@@ -85,8 +85,8 @@ function loadInfo(){
 	// mMenu Navigation, note: currently wired to avoid logging in.
 	$("#orderPizza").on("touchstart",function(e){ //Home Slide/Pizza Builder
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
-			if(sctnInd!=0){
-				switchSlides(sctnInd,0);
+			if(sctnInd!=4){
+				switchSlides(sctnInd,4);
 			}
 	});
 	$("#accountInfo").on("touchstart",function(e){ //Account Information
@@ -145,6 +145,14 @@ function loadInfo(){
 		}
 	});
 
+	// Clicking location icon takes you to the location page
+	$("#pickLocation").on("touchstart",function(e){
+		var sctnInd=$(this).parentsUntil("section").parent("section").index();
+			if(sctnInd!=2){
+				switchSlides(sctnInd,2);
+			}
+	});
+
 
 	$("#menuOptions").on("touchstart","li",function(e){
 		e.stopPropagation();
@@ -199,9 +207,9 @@ function loadInfo(){
 			'No,Yes'
 		);
 	});
-	$("#addPizza.ribbon").on("touchstart",function(){ 
+	$("#addPizza").on("touchstart",function(){ 
 		//fix bug where pizza can have same name and different toppings
-		thePiz=$("#pizzaName");
+		thePiz=$("TESTPIZZANAME");//NOTE: This is a workaround for testing -Alex
 		//ie
 		if($(thePiz).val()=="" || $(thePiz).val=="Custom Pizza"){
 			navigator.notification.alert("Please give your pizza a name.",function(){},"No pizza name","Okay");
@@ -438,7 +446,7 @@ function finalOrderConfirmation(indexSel){
 		if($("#couponCode").val()!=""){
 			pizzaOrderInfo.Coupon=$("#couponCode").val();
 		}
-		$.post(host+"PlaceOrder.php",pizzaOrderInfo,function(data){			
+		$.post(host+"PlaceOrder.php",pizzaOrderInfo,function(data){	
 			$("#loader").remove();
 			$("#pickSpot").css("opacity",1);
 			try{
