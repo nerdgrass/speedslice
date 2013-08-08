@@ -3263,6 +3263,11 @@ html.mm-no-overflowscrolling.mm-right .mm-menu {
     right: 500px;
   }
 }
+/* line 714, ../sass/_mmenu.scss */
+.mm-menu a.menuButton {
+  background: #a33f2d;
+}
+
 /* line 1, ../sass/_pizzaBuilder.scss */
 .row.pizzaBuilder {
   margin-bottom: 13.75em;

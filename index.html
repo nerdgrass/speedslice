@@ -63,6 +63,7 @@
                 <li><a id="about" href="#">About Us</a></li><!--  Section X -->
                 <li><a id="support" href="#">Support</a></li><!--  Section X -->
                 <li><a id="terms" href="#">Terms of Use</a></li><!--  Section X -->
+                <li><a href="" id="signIn" class="menuButton button expand">Sign In</a></li><!--  Section 4 -->
             </ul>
             <ul class="inline-list">
                 <li>facebook</li>
@@ -70,7 +71,7 @@
             </ul>
             <div class="row">
                 <div class="small-10 small-centered columns">
-                    <button id="signIn" class="button expand">Sign In</button><!--  Section X -->
+                    
                 </div>
             </div>
             
@@ -191,7 +192,7 @@
             </footer>
         </section>
 
-        <section id="deliveryLoc"> <!-- Section 2, Delivery Location History/GPS -->
+        <section id="deliveryLoc"> <!-- Section 2, Delivery Location/Add Location -->
        		<header>
                 <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
                 <h1>SpeedSlice</h1>
@@ -200,44 +201,19 @@
                 <form>
                     <div class="row">
                         <div class="small-12 columns">
-                          <div class="row collapse">
-                            <div class="small-10 columns">
-                              <input id="gpsAddress" name="gpsAddress" type="text" placeholder="Enter Address">
-                            </div>
-                            <div class="small-2 columns">
-                              <a href="#" class="button prefix">GPS</a>
-                            </div>
-                          </div>
+                            <form>
+                              <div class="row collapse">
+                                <div class="small-10 columns">
+                                  <input id="addr" name="gpsAddress" type="text" placeholder="Enter Address">
+                                </div>
+                                <div class="small-2 columns">
+                                  <a href="#" class="button prefix">GPS</a>
+                                </div>
+                              </div>
+                          </form>
                         </div>
                     </div>
                 </form>
-                <div class="row">
-                    <div class="small-10 small-centered columns">
-                        <h2>Previous Locations</h2>
-                    </div>
-                    <div class="small-10 small-centered columns card">
-                        <ul id="locHistory" class="locList">
-                            <li class="favLocation location">11 Doble Ave., Medford, MA</li>
-                            <li class="favLocation location">222 3rd St. Suite 4000, Cambridge, MA</li>
-                            <li class="location">23 Cedar St, Apt B, Somerville, MA</li>
-                            <li class="location">1498 Mass Ave., Apt 6a, Somerville, MA</li>
-                            <li class="location">182 Beacon St, Apt 44, Brighton, MA</li>
-                            <li class="location">65 Mt. Vernon St, Reading, MA</li>
-                            <li class="location">23 Cedar St, Apt B, Somerville, MA</li>
-                            <li class="location">1498 Mass Ave., Apt 6a, Somerville, MA</li>
-                            <li class="location">182 Beacon St, Apt 44, Brighton, MA</li>
-                            <li class="location">65 Mt. Vernon St, Reading, MA</li>
-                            <li class="location">23 Cedar St, Apt B, Somerville, MA</li>
-                            <li class="location">1498 Mass Ave., Apt 6a, Somerville, MA</li>
-                            <li class="location">182 Beacon St, Apt 44, Brighton, MA</li>
-                            <li class="location">65 Mt. Vernon St, Reading, MA</li>
-                            <li class="location">23 Cedar St, Apt B, Somerville, MA</li>
-                            <li class="location">1498 Mass Ave., Apt 6a, Somerville, MA</li>
-                            <li class="location">182 Beacon St, Apt 44, Brighton, MA</li>
-                            <li class="location">65 Mt. Vernon St, Reading, MA</li>
-                        </ul>
-                    </div>
-                </div>
             <footer>
             	<h1>Deliver it Here! <span class="rightArrow">&gt;&gt;</span></h1>
             </footer>

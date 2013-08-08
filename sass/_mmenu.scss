@@ -709,3 +709,6 @@ html.mm-no-overflowscrolling.mm-right .mm-menu
 		right: 500px;
 	}
 }
+
+// Overrides/Custom SCSS
+.mm-menu a.menuButton {background: $red;}
