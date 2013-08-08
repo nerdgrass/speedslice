@@ -12,7 +12,7 @@ cardReturnTo="account";
 prevSlide=1;
 host="https://speedslice.com/app/Final/";
 //host="http://pizzadelivery.piecewise.com/Final/";
-loader=$("<img src='images/loading.gif' id='loader'>");
+loader=$("<img src='img/loading.gif' id='loader'>");
 lastY=0;
 initY=0;
 lastSlides=new Array();
@@ -144,6 +144,13 @@ function loadInfo(){
 			switchSlides(sctnInd,9);
 		}
 	});
+	$("#signIn").on("touchstart",function(e){ //Terms & privacy policy
+		var sctnInd=$(this).parentsUntil("section").parent("section").index();
+		if(sctnInd!=4){
+			switchSlides(sctnInd,4);
+		}
+	});
+
 
 	// Clicking location icon takes you to the location page
 	$("#pickLocation").on("touchstart",function(e){

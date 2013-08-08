@@ -54,23 +54,26 @@
 <body onLoad="onLoad()">
     <nav id="my-menu">
             <ul>
-                <li class="Label">Settings</li>
+                <li class="Label">SpeedSlice Settings</li>
                 <li><a id="orderPizza" href="#">Order a Pizza</a></li><!--  Section 0 -->
                 <li><a id="accountInfo" href="#">Account Info</a></li><!--  Section 7 -->
                 <li><a id="paymentInfo" href="#">Payment Info</a></li><!--  Section 5 -->
                 <li><a id="addresses" href="#">Addresses</a></li><!--  Section 2 -->
-            </ul>
-            <hr>
-            <ul>
-                <li><a id="about" href="#">About SpeedSlice</a></li><!--  Section X -->
+                <li class="Label">About SpeedSlice</li>
+                <li><a id="about" href="#">About Us</a></li><!--  Section X -->
                 <li><a id="support" href="#">Support</a></li><!--  Section X -->
                 <li><a id="terms" href="#">Terms of Use</a></li><!--  Section X -->
             </ul>
             <ul class="inline-list">
-                <li>fb</li>
-                <li>twit</li>
+                <li>facebook</li>
+                <li>twitter</li>
             </ul>
-            <button>Sign Out</button><!--  Section X -->
+            <div class="row">
+                <div class="small-10 small-centered columns">
+                    <button id="signIn" class="button expand">Sign In</button><!--  Section X -->
+                </div>
+            </div>
+            
         </nav>
 	<div id="container">
         
@@ -660,6 +663,10 @@ SpeedSlice reserves the right, in its sole discretion, to revise and amend the A
                 $('.ordSumOlives').addClass("nD");
             }
         });
+    </script>
+    <script src="js/foundation/foundation.js"></script>
+    <script>
+      $(document).foundation();
     </script>
 </body>
 </html>
