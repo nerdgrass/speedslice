@@ -154,6 +154,8 @@ function loadInfo(){
 			switchSlides(sctnInd,4);
 			setTimeout(function(){
 				$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
+				alert($("section:visible").width());
+				alert(window.innerHeight/3);
 				initialize();
 			},150);
 		}
