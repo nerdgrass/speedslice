@@ -16,7 +16,7 @@
 		William Neely
 	</author>
 	<preference name="phonegap-version" value="2.2.0" />
-	<preference name="permissions" value="none"/>
+	<feature name="http://api.phonegap.com/1.0/geolocation"/>
 	<preference name="fullscreen" value="true" />
 	<icon src="images/App_Icon.png" gap:role="default" />
 	<gap:splash src="images/splash.png" />

@@ -157,14 +157,12 @@ function loadInfo(){
 
 
 	// Clicking location icon takes you to the location page
+	$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
+	initialize();
 	$("#location").on("touchstart",function(e){
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 			if(sctnInd!=2){
 				switchSlides(sctnInd,2);
-				setTimeout(function(){
-					$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
-					initialize();
-				},150);
 			}
 	});
 	// Clicking saved addresses icon takes you to the addresses page
