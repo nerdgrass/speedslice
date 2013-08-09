@@ -152,6 +152,9 @@ function loadInfo(){
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 		if(sctnInd!=4){
 			switchSlides(sctnInd,4);
+			setTimeout(function(){
+				$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
+			},150);
 		}
 	});
 

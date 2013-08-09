@@ -3677,8 +3677,8 @@ input[type=checkbox].toppingToggle {
 
 /* line 1, ../sass/_locations.scss */
 #map-canvas, #map_canvas {
-  height: 35rem;
-  width: 50rem;
+  height: 35vh;
+  width: 100%;
 }
 
 @media print {
@@ -3690,8 +3690,8 @@ input[type=checkbox].toppingToggle {
 
   /* line 12, ../sass/_locations.scss */
   #map-canvas, #map_canvas {
-    height:30rem;
-	width:50rem;
+    height: 30vh;
+    width: 100%;
   }
 }
 /* line 17, ../sass/_locations.scss */
