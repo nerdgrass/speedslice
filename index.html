@@ -5,6 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0,width=device-width,height=device-height,user-scalable=0" />
     <title>SpeedSlice: The fastest way to order local pizza</title>
 
+    <!-- REPLACE THIS WITH @FONT-FACE? -->
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
 
     <!-- Libraries -->
@@ -48,36 +49,34 @@
 
     <!-- Foundation compiled CSS -->
     <link href="css/app.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
-    
 
+    <script src="js/foundation/foundation.js"></script>
 </head>
 <body onLoad="onLoad()">
     <nav id="my-menu">
-            <ul>
-                <li class="Label">SpeedSlice Settings</li>
-                <li><a id="orderPizza" href="#">Order a Pizza</a></li><!--  Section 0 -->
-                <li><a id="accountInfo" href="#">Account Info</a></li><!--  Section 7 -->
-                <li><a id="paymentInfo" href="#">Payment Info</a></li><!--  Section 5 -->
-                <li><a id="addresses" href="#">Addresses</a></li><!--  Section 2 -->
-                <li class="Label">About SpeedSlice</li>
-                <li><a id="about" href="#">About Us</a></li><!--  Section X -->
-                <li><a id="support" href="#">Support</a></li><!--  Section X -->
-                <li><a id="terms" href="#">Terms of Use</a></li><!--  Section X -->
-                <li><a href="" id="signIn" class="menuButton button expand">Sign In</a></li><!--  Section 4 -->
-            </ul>
-            <ul class="inline-list">
-                <li>facebook</li>
-                <li>twitter</li>
-            </ul>
-            <div class="row">
-                <div class="small-10 small-centered columns">
-                    
-                </div>
+        <ul>
+            <li class="Label">SpeedSlice Settings</li>
+            <li><a id="orderPizza" href="#">Order a Pizza</a></li><!--  Section 0 -->
+            <li><a id="accountInfo" href="#">Account Info</a></li><!--  Section 7 -->
+            <li><a id="paymentInfo" href="#">Payment Info</a></li><!--  Section 5 -->
+            <li><a id="addresses" href="#">Addresses</a></li><!--  Section 2 -->
+            <li class="Label">About SpeedSlice</li>
+            <li><a id="about" href="#">About Us</a></li><!--  Section X -->
+            <li><a id="support" href="#">Support</a></li><!--  Section X -->
+            <li><a id="terms" href="#">Terms of Use</a></li><!--  Section X -->
+            <li><a id="signIn" href="#" class="menuButton button expand">Sign In</a></li><!--  Section 4 -->
+        </ul>
+        <ul class="inline-list">
+            <li>facebook</li>
+            <li>twitter</li>
+        </ul>
+        <div class="row">
+            <div class="small-10 small-centered columns">
+                
             </div>
-            
-        </nav>
+        </div>   
+    </nav>
 	<div id="container">
-        
     	<section id="createPizza"><!-- Section 0, Pizza Builder -->
         	<header>
                 <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
@@ -162,11 +161,17 @@
                         <div id="orderSummary" class="small-11 small-centered columns">
                             <h3>Deliver To</h3>
                             <hr>
-                            <div id="pickLocation" class="small-6 small-centered columns">
-                                <div id="addresses" class="location icon"></div>
-                                <label>Pick Location</label>
+                            <div id="location" class="small-11 small-centered columns">
+                                <div class="small-6 columns">
+                                    <div id="location" class="location icon"></div>
+                                    <label>Pick Location</label>
+                                </div>
+                                <div id="addresses" class="small-6 columns">
+                                    <div id="addresses" class="location icon"></div>
+                                    <label>Saved Locations</label>
+                                </div>
                             </div>
-                            <div id="addressTo" class="small-12 small-centered columns nD">
+                            <div id="addressTo" class="small-11 small-centered columns nD">
                                 <h4>11 Doble Ave. Apt 1</h4>
                                 <h4>Medford, MA 02155</h4>
                             </div>
@@ -179,7 +184,7 @@
             </footer>
         </section>
 
-        <section id="delOptsSec"> <!-- Section 1 -->
+        <section id="delOptsSec"> <!-- Section 1, Location Selection? -->
        		<header>
                 <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
                 <h1>SpeedSlice</h1>
@@ -192,28 +197,102 @@
             </footer>
         </section>
 
-        <section id="deliveryLoc"> <!-- Section 2, Delivery Location/Add Location -->
+        <section id="locations"> <!-- Section 2, Delivery Location/Add Location -->
        		<header>
                 <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
                 <h1>SpeedSlice</h1>
             </header>
                 <div id="map-canvas"></div>
-                <form>
-                    <div class="row">
-                        <div class="small-12 columns">
-                            <form>
-                              <div class="row collapse">
-                                <div class="small-10 columns">
-                                  <input id="addr" name="gpsAddress" type="text" placeholder="Enter Address">
-                                </div>
-                                <div class="small-2 columns">
-                                  <a href="#" class="button prefix">GPS</a>
-                                </div>
-                              </div>
-                          </form>
-                        </div>
+                <hr>
+                <div class="row">
+                    <div class="small-12 columns">
+                      <div class="row collapse">
+                        <form class="custom">
+                            <div class="small-10 small-centered columns">
+                              <a id="gpsButton" href="#" class="large button expand">Find my Address</a>
+                            </div>
+                            <div class="small-12 small-centered columns">
+                              <input id="addr1" name="addr1" type="text" placeholder="Address Line 1">
+                            </div>
+                            <div class="small-6 columns">
+                              <input id="addr2" name="addr2" type="text" placeholder="Address Line 2">
+                            </div>
+                            <div class="small-5 small-offset-1 columns">
+                              <input id="addr" name="gpsAddress" type="text" placeholder="City">
+                            </div>
+                            <div class="small-4 columns">
+                                <select>
+                                    <option value="AK">AK</option>
+                                    <option value="AL">AL</option>
+                                    <option value="AR">AR</option>
+                                    <option value="AZ">AZ</option>
+                                    <option value="CA">CA</option>
+                                    <option value="CO">CO</option>
+                                    <option value="CT">CT</option>
+                                    <option value="DC">DC</option>
+                                    <option value="DE">DE</option>
+                                    <option value="FL">FL</option>
+                                    <option value="GA">GA</option>
+                                    <option value="HI">HI</option>
+                                    <option value="IA">IA</option>
+                                    <option value="ID">ID</option>
+                                    <option value="IL">IL</option>
+                                    <option value="IN">IN</option>
+                                    <option value="KS">KS</option>
+                                    <option value="KY">KY</option>
+                                    <option value="LA">LA</option>
+                                    <option value="MA" selected="selected">MA</option>
+                                    <option value="MD">MD</option>
+                                    <option value="ME">ME</option>
+                                    <option value="MI">MI</option>
+                                    <option value="MN">MN</option>
+                                    <option value="MO">MO</option>
+                                    <option value="MS">MS</option>
+                                    <option value="MT">MT</option>
+                                    <option value="NC">NC</option>
+                                    <option value="ND">ND</option>
+                                    <option value="NE">NE</option>
+                                    <option value="NH">NH</option>
+                                    <option value="NJ">NJ</option>
+                                    <option value="NM">NM</option>
+                                    <option value="NV">NV</option>
+                                    <option value="NY">NY</option>
+                                    <option value="OH">OH</option>
+                                    <option value="OK">OK</option>
+                                    <option value="OR">OR</option>
+                                    <option value="PA">PA</option>
+                                    <option value="RI">RI</option>
+                                    <option value="SC">SC</option>
+                                    <option value="SD">SD</option>
+                                    <option value="TN">TN</option>
+                                    <option value="TX">TX</option>
+                                    <option value="UT">UT</option>
+                                    <option value="VA">VA</option>
+                                    <option value="VT">VT</option>
+                                    <option value="WA">WA</option>
+                                    <option value="WI">WI</option>
+                                    <option value="WV">WV</option>
+                                    <option value="WY">WY</option>
+                                </select>
+                            </div>
+                            <div class="small-7 small-offset-1 columns">
+                              <input id="addr" name="gpsAddress" type="text" placeholder="Zip Code">
+                            </div>
+                            <hr>
+                            <div class="small-4 columns">
+                                <label for="checkbox1">
+                                    <input type="checkbox" id="checkbox1">
+                                    <span class="custom checkbox"></span>Save Address?
+                                </label>
+                            </div>
+                            <div class="small-8 columns">
+                              <input id="nickName" name="nickName" type="text" placeholder="Address Name">
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
+            </div>
+            
             <footer>
             	<h1>Deliver it Here! <span class="rightArrow">&gt;&gt;</span></h1>
             </footer>
@@ -340,7 +419,7 @@
                 <div id="couponCodeDiv"><h4 style="line-height:1;">Coupon code<br><span class="tinytxt">*applied on confirmation</span></h4><input class="fR" type="text" id="couponCode" placeholder="Enter coupon code"></div>
 			</div>
             <footer>
-            	<h5 onClick="switchSlides(6,0)"><span class="fL smChev">&laquo;</span><img class="fL" src="images/Bike.png" height="30" width="30"><span class="fL pl10">Back</span></h5>
+            	<h5 onClick="switchSlides(6,0)"><span class="fL smChev">&laquo;</span><img class="fL" src="img/Bike.png" height="30" width="30"><span class="fL pl10">Back</span></h5>
             </footer>
             <div class="nD" id="confirmOrder" title="Confirm Order"></div>
         </section>
@@ -572,6 +651,25 @@ SpeedSlice reserves the right, in its sole discretion, to revise and amend the A
                 <h1>Support Information</h1>
             </footer>
         </section>
+        <section id="addresses"><!-- Section 13, Location History -->
+            <header>
+                 <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
+                 <h1>SpeedSlice</h1>
+             </header>
+             <div class="center" id="delOpts">
+                <div id="addresses" class="next bigRed delLoc">Add New Location</div>
+            </div>           
+            <footer>
+                <h1>Saved Address</h1>
+            </footer>
+        </section>
+
+
+
+
+
+
+
         <ul id='menuOptions'>
                 <li>Order a Pizza</li>
                 <li>Account Information</li>
@@ -640,7 +738,6 @@ SpeedSlice reserves the right, in its sole discretion, to revise and amend the A
             }
         });
     </script>
-    <script src="js/foundation/foundation.js"></script>
     <script>
       $(document).foundation();
     </script>

@@ -85,17 +85,17 @@ function loadInfo(){
 	// mMenu Navigation, note: currently wired to avoid logging in.
 	$("#orderPizza").on("touchstart",function(e){ //Home Slide/Pizza Builder
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
-			if(sctnInd!=4){
-				switchSlides(sctnInd,4);
+			if(sctnInd!=0){
+				switchSlides(sctnInd,0);
 			}
 	});
 	$("#accountInfo").on("touchstart",function(e){ //Account Information
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
-		if(loggedIn){
-			if(sctnInd!=7){
+		if(loggedIn) {
+			if(sctnInd!=7) {
 				switchSlides(sctnInd,7);
 			}
-		}else{
+		} else {
 			if(sctnInd!=7){
 				switchSlides(sctnInd,7);
 			}
@@ -107,22 +107,22 @@ function loadInfo(){
 			if(sctnInd!=5){
 				switchSlides(sctnInd,5);
 			}
-		}else{
+		} else {
 			if(sctnInd!=5){
 				switchSlides(sctnInd,5);
 			}
 		}
 	});
-	$("#addresses").on("touchstart",function(e){ //Addresses and/or locations
+	$("#addresses").on("touchstart",function(e){ //Addresses
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 		if(loggedIn){
-			if(sctnInd!=2){
-				switchSlides(sctnInd,2);
+			if(sctnInd!=13){
+				switchSlides(sctnInd,13);
 			}
 		}
 		else{
-			if(sctnInd!=2){
-				switchSlides(sctnInd,2);
+			if(sctnInd!=13){
+				switchSlides(sctnInd,13);
 			}
 		}
 	});
@@ -153,7 +153,7 @@ function loadInfo(){
 
 
 	// Clicking location icon takes you to the location page
-	$("#pickLocation").on("touchstart",function(e){
+	$("#location").on("touchstart",function(e){
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 			if(sctnInd!=2){
 				switchSlides(sctnInd,2);
