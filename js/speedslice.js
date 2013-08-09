@@ -1074,12 +1074,12 @@ function adjustSlider(iContMrgnTop,innerContainer,sliderHandle,sliderHeight){
 function onMenuKeyDown(){
 	var mO=$("#menuOptions");
 	$(mO).toggle().children("li").show();
-	if($("#overlay").length==0){
+	/*if($("#overlay").length==0){
 		$("body").append("<div id='overlay'></div>");
 	}
 	else{
 		setTimeout("$('#overlay').remove()",400);
-	}
+	}*/
 	if(!loggedIn){
 		$(mO).children("li:eq(1)").hide();	
 	}
