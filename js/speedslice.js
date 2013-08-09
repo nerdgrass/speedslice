@@ -159,6 +159,13 @@ function loadInfo(){
 				switchSlides(sctnInd,2);
 			}
 	});
+	// Clicking saved addresses icon takes you to the addresses page
+	$("#addresses").on("touchstart",function(e){
+		var sctnInd=$(this).parentsUntil("section").parent("section").index();
+			if(sctnInd!=13){
+				switchSlides(sctnInd,13);
+			}
+	});
 
 
 	$("#menuOptions").on("touchstart","li",function(e){
