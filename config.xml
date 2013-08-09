@@ -22,8 +22,8 @@
 	<gap:splash src="images/splash.png" />
 	<preference name="splash-screen-duration" value="4000" />
     
-	<gap:plugin name="ChildBrowser" />
-	<gap:plugin name="GenericPush" />
+	<gap:plugin name="com.phonegap.plugins.childbrowser" />
+	<gap:plugin name="com.phonegap.plugins.genericpush" />
 	<preference name="orientation" value="portrait" />
 	<preference name="webviewbounce" value="false" />	
 	<preference name="show-splash-screen-spinner" value="false" />
