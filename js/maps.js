@@ -10,7 +10,7 @@ var map;
               mapOptions);
 
           // Try HTML5 geolocation
-          if(navigator.geolocation) {
+          //if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
               var pos = new google.maps.LatLng(position.coords.latitude,
                                                position.coords.longitude);
@@ -26,10 +26,10 @@ var map;
             }, function() {
               handleNoGeolocation(true);
             });
-          } else {
+        /*  } else {
             // Browser doesn't support Geolocation
             handleNoGeolocation(false);
-          }
+          }*/
         }
 
         function handleNoGeolocation(errorFlag) {
