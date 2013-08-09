@@ -144,7 +144,7 @@ function loadInfo(){
 			switchSlides(sctnInd,9);
 		}
 	});
-	$("#signIn").on("touchstart",function(e){ //Terms & privacy policy
+	$("#login").on("touchstart",function(e){ //Terms & privacy policy
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 		if(sctnInd!=4){
 			switchSlides(sctnInd,4);
