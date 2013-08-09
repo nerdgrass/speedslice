@@ -3677,7 +3677,7 @@ input[type=checkbox].toppingToggle {
 
 /* line 1, ../sass/_locations.scss */
 #map-canvas, #map_canvas {
-  height: 35vh;
+  height: 350px;
   width: 100%;
 }
 
