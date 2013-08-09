@@ -151,11 +151,11 @@ function loadInfo(){
 	$("#login").on("touchstart",function(e){ //Terms & privacy policy
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 		if(sctnInd!=4){
-			switchSlides(sctnInd,4);
+			switchSlides(sctnInd,4);alert($("section:visible").width());
+				alert(window.innerHeight/3);
 			setTimeout(function(){
 				$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
-				alert($("section:visible").width());
-				alert(window.innerHeight/3);
+				
 				initialize();
 			},150);
 		}
