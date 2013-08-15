@@ -46,5 +46,7 @@ var map;
           var marker = new google.maps.Marker(options);
           map.setCenter(options.position);
         }
-
+function getAddressFromGeonames(lat,long){
+	
+}
         //google.maps.event.addDomListener(window, 'load', initialize);

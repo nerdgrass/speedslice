@@ -916,13 +916,14 @@ function rightPizza(){
 	$("#savedPizzaName").text($("#pizzaName").val());
 }
 function switchSlides(newSlide,backButton){
-	console.log(1);
 	prevSlide=$("section:visible").index();
-	console.log(newSlide);
 	if(typeof backButton=="undefined"){
 		lastSlides.push(prevSlide);
 	}
-	$("section").hide().eq(newSlide).show();
+	$('nav#my-menu').hide();
+	setTimeout(function(){
+		$("section").hide().eq(newSlide).show();
+	},50);
 	window.scrollTo(0,0);
 	//iphone only
 	checkCustomScrolling();
