@@ -166,8 +166,8 @@
                                     <div id="location" class="location icon"></div>
                                     <label>Pick Location</label>
                                 </div>
-                                <div id="addresses" class="small-6 columns">
-                                    <div id="addresses" class="home icon"></div>
+                                <div class="small-6 columns">
+                                    <div class="home icon"></div>
                                     <label>Saved Locations</label>
                                 </div>
                             </div>
@@ -652,7 +652,7 @@ SpeedSlice reserves the right, in its sole discretion, to revise and amend the A
             </footer>
         </section>
 
-        <section id="addresses"><!-- Section 13, Location History -->
+        <section id="addressesSctn"><!-- Section 13, Location History -->
             <header>
                  <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
                  <h1>SpeedSlice</h1>
@@ -686,56 +686,44 @@ SpeedSlice reserves the right, in its sole discretion, to revise and amend the A
     <script type="text/javascript">
         $('#pepperoniToggle').change(function(){
             if($(this).is(":checked")) {
-                $('#toppingPepperoni').removeClass("nD");
-                $('.ordSumPepperoni').removeClass("nD");
+                $('#toppingPepperoni,.ordSumPepperoni').removeClass("nD");
             } else {
-                $('#toppingPepperoni').addClass("nD");
-                $('.ordSumPepperoni').addClass("nD");
+                $('#toppingPepperoni,.ordSumPepperoni').addClass("nD");
             }
         });
         $('#sausageToggle').change(function(){
             if($(this).is(":checked")) {
-                $('#toppingSausage').removeClass("nD");
-                $('.ordSumSausage').removeClass("nD");
+                $('#toppingSausage,.ordSumSausage').removeClass("nD");
             } else {
-                $('#toppingSausage').addClass("nD");
-                $('.ordSumSausage').addClass("nD");
+                $('#toppingSausage,.ordSumSausage').addClass("nD");
             }
         });
         $('#peppersToggle').change(function(){
             if($(this).is(":checked")) {
-                $('#toppingPeppers').removeClass("nD");
-                $('.ordSumPeppers').removeClass("nD");
+                $('#toppingPeppers,.ordSumPeppers').removeClass("nD");
             } else {
-                $('#toppingPeppers').addClass("nD");
-                $('.ordSumPeppers').addClass("nD");
+                $('#toppingPeppers,.ordSumPeppers').addClass("nD");
             }
         });
         $('#onionsToggle').change(function(){
             if($(this).is(":checked")) {
-                $('#toppingOnions').removeClass("nD");
-                $('.ordSumOnions').removeClass("nD");
+                $('#toppingOnions,.ordSumOnions').removeClass("nD");
             } else {
-                $('#toppingOnions').addClass("nD");
-                $('.ordSumOnions').addClass("nD");
+                $('#toppingOnions,.ordSumOnions').addClass("nD");
             }
         });
         $('#mushroomsToggle').change(function(){
             if($(this).is(":checked")) {
-                $('#toppingMushrooms').removeClass("nD");
-                $('.ordSumMushrooms').removeClass("nD");
+                $('#toppingMushrooms,.ordSumMushrooms').removeClass("nD");
             } else {
-                $('#toppingMushrooms').addClass("nD");
-                $('.ordSumMushrooms').addClass("nD");
+                $('#toppingMushrooms,.ordSumMushrooms').addClass("nD");
             }
         });
         $('#olivesToggle').change(function(){
             if($(this).is(":checked")) {
-                $('#toppingOlives').removeClass("nD");
-                $('.ordSumOlives').removeClass("nD");
+                $('#toppingOlives,.ordSumOlives').removeClass("nD");
             } else {
-                $('#toppingOlives').addClass("nD");
-                $('.ordSumOlives').addClass("nD");
+                $('#toppingOlives,.ordSumOlives').addClass("nD");
             }
         });
     </script>

@@ -92,68 +92,62 @@ function loadInfo(){
 	$("#orderPizza").on("touchstart",function(e){ //Home Slide/Pizza Builder
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 			if(sctnInd!=0){
-				switchSlides(sctnInd,0);
+				switchSlides(0);
 			}
 	});
 	$("#accountInfo").on("touchstart",function(e){ //Account Information
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 		if(loggedIn) {
 			if(sctnInd!=7) {
-				switchSlides(sctnInd,7);
+				switchSlides(7);
 			}
-		} else {
-			if(sctnInd!=7){
-				switchSlides(sctnInd,7);
-			}
+		} else if(sctnInd!=7){
+			switchSlides(7);
 		}
 	});
 	$("#paymentInfo").on("touchstart",function(e){ //Payment Information
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 		if(loggedIn){
 			if(sctnInd!=5){
-				switchSlides(sctnInd,5);
+				switchSlides(5);
 			}
-		} else {
-			if(sctnInd!=5){
-				switchSlides(sctnInd,5);
-			}
+		} else if(sctnInd!=5){
+			switchSlides(5);
 		}
 	});
 	$("#addresses").on("touchstart",function(e){ //Addresses
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 		if(loggedIn){
 			if(sctnInd!=13){
-				switchSlides(sctnInd,13);
+				switchSlides(13);
 			}
 		}
-		else{
-			if(sctnInd!=13){
-				switchSlides(sctnInd,13);
-			}
+		else if(sctnInd!=13){
+			switchSlides(13);
 		}
 	});
 	$("#about").on("touchstart",function(e){ //About SpeedSlice
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 			if(sctnInd!=10){
-				switchSlides(sctnInd,10);
+				switchSlides(10);
 			}
 	});
 	$("#support").on("touchstart",function(e){ //Support & FAQ
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 		if(sctnInd!=12){
-			switchSlides(sctnInd,12);
+			switchSlides(12);
 		}
 	});
 	$("#terms").on("touchstart",function(e){ //Terms & privacy policy
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 		if(sctnInd!=9){
-			switchSlides(sctnInd,9);
+			switchSlides(9);
 		}
 	});
 	$("#signIn").on("touchstart",function(e){ 
 		var sctnInd=$("section:visible").index();
 		if(sctnInd!=4){
-			switchSlides(sctnInd,4);
+			switchSlides(4);
 		}
 	});
 
@@ -162,36 +156,27 @@ function loadInfo(){
 	$("#location").on("touchstart",function(e){
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 			if(sctnInd!=2){
-				switchSlides(sctnInd,2);
+				switchSlides(2);
 				setTimeout(function(){
 					$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
 					initialize();
 				},100);
 			}
 	});
-	// Clicking saved addresses icon takes you to the addresses page
-	$("#addresses").on("touchstart",function(e){
-		var sctnInd=$(this).parentsUntil("section").parent("section").index();
-			if(sctnInd!=13){
-				switchSlides(sctnInd,13);
-			}
-	});
-
 
 	$("#menuOptions").on("touchstart","li",function(e){
 		e.stopPropagation();
 		e.preventDefault();
-		var visSctn=$("section:visible").index();
 		switch($(this).index()){
-			case 0: switchSlides(visSctn,0);
+			case 0: switchSlides(0);
 			break;
-			case 1: switchSlides(visSctn,7);
+			case 1: switchSlides(7);
 			break;
-			case 2: switchSlides(visSctn,10);
+			case 2: switchSlides(10);
 			break;
-			case 3: switchSlides(visSctn,9);
+			case 3: switchSlides(9);
 			break;
-			case 4: //switchSlides($("section:visible").index(),7);
+			case 4: //switchSlides(7);
 			break;
 		}
 		onMenuKeyDown();
@@ -199,7 +184,7 @@ function loadInfo(){
 	$("#addressTo").on("touchstart focus",function(e){
 		e.preventDefault();
 		$(this).blur();
-		addressToTimer=setTimeout("selectAddress(0); addrRtrnTo='selectPizza';",100);
+		addressToTimer=setTimeout("selectAddress(); addrRtrnTo='selectPizza';",100);
 	}).on("touchmove",function(e){
 		clearTimeout(addressToTimer);
 	}).on("click",function(e){
@@ -207,7 +192,7 @@ function loadInfo(){
 	});
 	$(".aChev").on("touchstart",function(e){
 		if(lastSlides.length!=0){
-			switchSlides($("section:visible").index(),lastSlides.pop(),1);
+			switchSlides(lastSlides.pop(),1);
 		}
 	});
 	$("#pRight").on("touchstart",function(e){
@@ -339,7 +324,7 @@ function loadInfo(){
 	});
 	$("#delOpts").on("touchstart",".delLoc",function(){
 		if($(this).index()==0){
-			switchSlides(1,2);	
+			switchSlides(2);	
 			$("#deleteAddress").hide();
 			clearAddressForm();
 		}
@@ -347,9 +332,9 @@ function loadInfo(){
 			address.addrNick=$(this).text().substr(4);//ie placeholder
 			$("#addressTo").val(address.addrNick).removeClass("redBrdr placeholder");
 			switch(addrRtrnTo){
-				case "selectPizza":	switchSlides(1,0);
+				case "selectPizza":	switchSlides(0);
 				break;
-				case "account": switchSlides(1,7);
+				case "account": switchSlides(7);
 				break;
 			}
 		}
@@ -359,7 +344,7 @@ function loadInfo(){
 		$(this).parent().removeAttr("name");
 	}).on("touchstart",".editButton",function(e){
 		e.stopPropagation();
-		switchSlides(1,2);
+		switchSlides(2);
 		//code for filling in fields
 		var addrNick=$(this).parent().text().substr(4);
 		$("#addrNick").val(addrNick);
@@ -476,7 +461,7 @@ function finalOrderConfirmation(indexSel){
 			try{
 				data=$.parseJSON(data);
 				if(typeof data.error=="undefined"){
-					switchSlides(6,8);
+					switchSlides(8);
 					$("#refNum").text(data.refnum);
 					$("#successID").text(data.cs_order_id);
 					if(typeof data.discAmt!="undefined"){
@@ -531,24 +516,24 @@ function orderPizzaPage(curSlide){
 		return false;
 	}
 	if(!loggedIn){
-		switchSlides(0,3);	
+		switchSlides(3);	
 	}
 	else{
 		if($("#expYr").val()==""){
 			if(typeof curSlide!="undefined"){
-				switchSlides(curSlide,5);	
+				switchSlides(5);	
 			}
 			else{
-				switchSlides(0,5);
+				switchSlides(5);
 			}
 			cardReturnTo="order";
 			return false;	
 		}
 		if($("#cardInfo").css("display")!="none"){
-			switchSlides(5,6);
+			switchSlides(6);
 		}
 		else{
-			switchSlides(0,6);
+			switchSlides(6);
 		}
 		$(".orderOpt").parent("div").remove();
 		$("#orderOptions").children("div:first").after($(loader).clone());
@@ -603,12 +588,12 @@ function setNewAddress(){
 		return false;	
 	}
 	switch(addrRtrnTo){
-		case "selectPizza":	switchSlides(2,0);
+		case "selectPizza":	switchSlides(0);
 		$("#addressTo").val($("#addrNick").val()).removeClass("redBrdr");
 		break;
-		case "account": switchSlides(2,7);
+		case "account": switchSlides(7);
 		break;
-		case "card":switchSlides(3,6);
+		case "card":switchSlides(6);
 		$("#noCards").remove();
 		break;
 	}
@@ -626,7 +611,7 @@ function deleteAddress(){
 		}
     });
 	clearAddressForm();
-	switchSlides(2,1);
+	switchSlides(1);
 }
 function clearAddressForm(){
 	$("#addr,#addr2,#addrNick,#zip,#phone,#city").val("");	
@@ -641,13 +626,13 @@ function emptyLine(addrLine,addrID){
 		return false;
 	}
 }
-function selectAddress(active){
+function selectAddress(){
 	$("#addressTo").blur();
 	if($("#delOpts").children(".delLoc").length==1){
-		switchSlides(active,2);
+		switchSlides(2);
 	}
 	else{
-		switchSlides(active,1);
+		switchSlides(1);
 	}
 }
 function logIn(theDiv){
@@ -671,10 +656,10 @@ function logIn(theDiv){
 				showUserInfo(data);
 				addUserPizza();
 				if(!orderPizzaPage(4)){
-					switchSlides(4,0);
+					switchSlides(0);
 				}
 				else{
-					switchSlides(4,7);
+					switchSlides(7);
 				}
 				break;
 			}
@@ -699,10 +684,10 @@ function createAccount(theDiv){
 			$("#emailAdd").removeClass("redBrdr");
 			var dVal=$("#addressTo").val();
 			if(dVal.length==0 || dVal=="ADDRESS"){
-				switchSlides(3,0);
+				switchSlides(0);
 			}
 			else{//should be tested
-				switchSlides(3,5);//check me
+				switchSlides(5);//check me
 				cardReturnTo="order";
 				$.post(host+"SetAddress.php",address);
 				addUserPizza();
@@ -826,14 +811,14 @@ function addCard(){
 		//needs to be updated to show error without wrapper.
 		switch(data){
 			case "":switch(cardReturnTo){
-				case "account": switchSlides(5,7);
+				case "account": switchSlides(7);
 				break;
 				case "order": orderPizzaPage();
 				break;	
 			}
 			break;
 			case "address": addrRtrnTo="card";
-				$("#cardInfo>.infoWrapper:first>div:last").after("<div class='cRed' id='noCards'>Please make sure one of your addresses matches your <span onclick=\"switchSlides($('section:visible').index(),3); clearAddressForm();\" class='u pntr'>billing address.</span></div>");
+				$("#cardInfo>.infoWrapper:first>div:last").after("<div class='cRed' id='noCards'>Please make sure one of your addresses matches your <span onclick=\"switchSlides(3); clearAddressForm();\" class='u pntr'>billing address.</span></div>");
 			break;
 			default: 
 				var errorLoc=$("#cardInfo .infoWrapper:first>div:last");
@@ -867,7 +852,7 @@ function changePizza(theChoice){
 	}	
 }
 function updateCard(){
-	switchSlides(7,5);
+	switchSlides(5);
 	cardReturnTo="account";	
 }
 function getCardInfo(){
@@ -883,7 +868,7 @@ function getCardInfo(){
 }
 function viewAddresses(){
 	addrRtrnTo="account";
-	selectAddress(7);	
+	selectAddress();	
 }
 function getUserInfo(){
 	$.get(host+"CheckAccount.php",function(data){
@@ -952,7 +937,7 @@ function rightPizza(){
 	$("#savedPizzaName").text($("#pizzaName").val());
 }
 function switchSlides(active,newSlide,backButton){
-	prevSlide=active;
+	prevSlide=$("section:visible").index();
 	if(typeof backButton=="undefined"){
 		lastSlides.push(prevSlide);
 	}
@@ -1100,7 +1085,7 @@ function onBackButton(){
 	$("#menuOptions").hide();
 	$("#overlay").remove();
 	if(lastSlides.length!=0){
-		switchSlides($("section:visible").index(),lastSlides.pop(),1);
+		switchSlides(lastSlides.pop(),1);
 	}
 	else{
 		navigator.app.exitApp();	
