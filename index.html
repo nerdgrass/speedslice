@@ -39,8 +39,10 @@
     <!-- <link type="text/css" rel="stylesheet" media="all" href="css/mmenu.css" /> -->
     <script type="text/javascript">
         $(function() {
-			$("body").on("touchstart","#mm-blocker",function(e){
-				alert("start");
+			$("body").on("touchstart",function(e){
+				alert(e.target);
+			}).on("click",function(e){
+				alert(e.target);
 			});
             $('nav#my-menu').mmenu().on("closed",function(){
 				$("#mm-blocker").hide();

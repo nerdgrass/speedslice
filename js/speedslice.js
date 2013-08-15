@@ -920,10 +920,8 @@ function switchSlides(newSlide,backButton){
 	if(typeof backButton=="undefined"){
 		lastSlides.push(prevSlide);
 	}
-	$('nav#my-menu').hide();
-	setTimeout(function(){
-		$("section").hide().eq(newSlide).show();
-	},50);
+	
+	$("section").hide().eq(newSlide).show();
 	window.scrollTo(0,0);
 	//iphone only
 	checkCustomScrolling();
