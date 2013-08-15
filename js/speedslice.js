@@ -90,29 +90,20 @@ function loadInfo(){
 
 	// mMenu Navigation, note: currently wired to avoid logging in.
 	$("#orderPizza").on("touchstart",function(e){ //Home Slide/Pizza Builder
-		var sctnInd=$(this).parentsUntil("section").parent("section").index();
-			if(sctnInd!=0){
-				switchSlides(0);
-			}
+		switchSlides(0);
 	});
 	$("#accountInfo").on("touchstart",function(e){ //Account Information
-		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 		if(loggedIn) {
-			if(sctnInd!=7) {
-				switchSlides(7);
-			}
-		} else if(sctnInd!=7){
 			switchSlides(7);
+		} else{
+			switchSlides(4);
 		}
 	});
 	$("#paymentInfo").on("touchstart",function(e){ //Payment Information
-		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 		if(loggedIn){
-			if(sctnInd!=5){
-				switchSlides(5);
-			}
-		} else if(sctnInd!=5){
 			switchSlides(5);
+		} else{
+			switchSlides(4);
 		}
 	});
 	$("#addresses").on("touchstart",function(e){ //Addresses
@@ -127,28 +118,16 @@ function loadInfo(){
 		}
 	});
 	$("#about").on("touchstart",function(e){ //About SpeedSlice
-		var sctnInd=$(this).parentsUntil("section").parent("section").index();
-			if(sctnInd!=10){
-				switchSlides(10);
-			}
+		switchSlides(10);
 	});
 	$("#support").on("touchstart",function(e){ //Support & FAQ
-		var sctnInd=$(this).parentsUntil("section").parent("section").index();
-		if(sctnInd!=12){
-			switchSlides(12);
-		}
+		switchSlides(12);
 	});
 	$("#terms").on("touchstart",function(e){ //Terms & privacy policy
-		var sctnInd=$(this).parentsUntil("section").parent("section").index();
-		if(sctnInd!=9){
-			switchSlides(9);
-		}
+		switchSlides(9);
 	});
 	$("#signIn").on("touchstart",function(e){ 
-		var sctnInd=$("section:visible").index();
-		if(sctnInd!=4){
-			switchSlides(4);
-		}
+		switchSlides(4);
 	});
 
 
@@ -859,7 +838,6 @@ function getCardInfo(){
 	$.getJSON(host+"Card.php",function(data){	
 		if(data.First.cc_last5!=""){
 			$("#cNum").val("****"+data.First.cc_last5);
-			$("#accntCard").html(data.First.type+" "+data.First.cc_last5+$("#accntCard").html().substring($("#accntCard").html().indexOf("<")));
 			$("#expMo").val(data.First.expiry_month);
 			$("#expYr").val(data.First.expiry_year);
 			$("#cardZip").val(data.First.bill_zip);		
@@ -888,7 +866,8 @@ function showUserInfo(data){
 		case "C": $(".tip:eq(2)").addClass("tipSelected");
 		break;
 	}
-	pushNotification.register(successHandler, errorHandler,{"senderID":"157047801644","ecb":"onNotificationGCM"});
+	//add once live
+	//pushNotification.register(successHandler, errorHandler,{"senderID":"157047801644","ecb":"onNotificationGCM"});
 }
 function leftPizza(){
 	pizzaIndex=document.getElementById("pizzaID").selectedIndex;
@@ -936,8 +915,10 @@ function rightPizza(){
 	}
 	$("#savedPizzaName").text($("#pizzaName").val());
 }
-function switchSlides(active,newSlide,backButton){
+function switchSlides(newSlide,backButton){
+	console.log(1);
 	prevSlide=$("section:visible").index();
+	console.log(newSlide);
 	if(typeof backButton=="undefined"){
 		lastSlides.push(prevSlide);
 	}
