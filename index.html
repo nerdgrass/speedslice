@@ -39,7 +39,9 @@
     <!-- <link type="text/css" rel="stylesheet" media="all" href="css/mmenu.css" /> -->
     <script type="text/javascript">
         $(function() {
-            $('nav#my-menu').mmenu({configuration:{hardwareAcceleration: true}});
+            $('nav#my-menu').mmenu().on("closed",function(){
+				$("#mm-blocker").hide();
+			});
         });
     </script>
 
