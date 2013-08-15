@@ -1,17 +1,17 @@
 address=new Object();
-address.addrNick="Home";
-address.addr="11 Doble Ave";
-address.addr2="Apt 1";
-address.city="Medford";
-address.zip="02155";
-address.phone="2035778844";
-address.state="MA";
+address.addrNick="";
+address.addr="";
+address.addr2="";
+address.city="";
+address.zip="";
+address.phone="";
+address.state="";
 //update this value;
 additionalPizzas=new Object();
 cardReturnTo="account";
 prevSlide=1;
-host="https://speedslice.com/app/Final/";
-//host="http://pizzadelivery.piecewise.com/Final/";
+//host="https://speedslice.com/app/Final/";
+host="http://pizzadelivery.piecewise.com/Final/";
 loader=$("<img src='img/loading.gif' id='loader'>");
 lastY=0;
 initY=0;
@@ -36,7 +36,9 @@ function onDeviceReady() {
 function checkConnection(){  
 	var networkState = navigator.network.connection.type;//needs to be navigator.connection if phonegap updated.
 	if(networkState==Connection.NONE){
-		navigator.notification.alert("SpeedSlice requires an active internet connection.",checkConnection,"SpeedSlice","Okay");
+		navigator.notification.alert("SpeedSlice requires an active internet connection.",function(){
+			setTimeout(checkConnection,1000);
+		},"SpeedSlice","Okay");
 	}
 	else{
 		if(typeof loggedIn=="undefined"){
@@ -148,8 +150,8 @@ function loadInfo(){
 			switchSlides(sctnInd,9);
 		}
 	});
-	$("#login").on("touchstart",function(e){ //Terms & privacy policy
-		var sctnInd=$(this).parentsUntil("section").parent("section").index();
+	$("#signIn").on("touchstart",function(e){ 
+		var sctnInd=$("section:visible").index();
 		if(sctnInd!=4){
 			switchSlides(sctnInd,4);
 		}
