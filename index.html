@@ -40,9 +40,9 @@
     <script type="text/javascript">
         $(function() {
 			$("body").on("touchstart",function(e){
-				alert(e.target);
+				$(this).prepend(e.target);
 			}).on("click",function(e){
-				alert(e.target);
+				$(this).prepend(e.target);
 			});
             $('nav#my-menu').mmenu().on("closed",function(){
 				$("#mm-blocker").hide();
