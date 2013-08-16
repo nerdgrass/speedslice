@@ -129,36 +129,13 @@ function loadInfo(){
 	$("#signIn").on("touchstart",function(e){ 
 		switchSlides(4);
 	});
-
-
 	// Clicking location icon takes you to the location page
 	$("#location").on("touchstart",function(e){
-		var sctnInd=$(this).parentsUntil("section").parent("section").index();
-			if(sctnInd!=2){
-				switchSlides(2);
-				setTimeout(function(){
-					$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
-					initialize();
-				},100);
-			}
-	});
-
-	$("#menuOptions").on("touchstart","li",function(e){
-		e.stopPropagation();
-		e.preventDefault();
-		switch($(this).index()){
-			case 0: switchSlides(0);
-			break;
-			case 1: switchSlides(7);
-			break;
-			case 2: switchSlides(10);
-			break;
-			case 3: switchSlides(9);
-			break;
-			case 4: //switchSlides(7);
-			break;
-		}
-		onMenuKeyDown();
+		switchSlides(2);
+		setTimeout(function(){
+			$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
+			initialize();
+		},100);
 	});
 	$("#addressTo").on("touchstart focus",function(e){
 		e.preventDefault();
@@ -349,10 +326,6 @@ function loadInfo(){
 			makeActive("#deliveryLoc>.infoWrapper",blockChanges);
 			$("#deleteAddress").show();
 		});
-	});
-	$("body").on("touchstart","#overlay",function(e){
-		$("#menuOptions").hide();
-		$("#overlay").remove();		
 	});
 }
 function makeActive(cntnrStr,rdOnlyStr){
@@ -1039,31 +1012,9 @@ function adjustSlider(iContMrgnTop,innerContainer,sliderHandle,sliderHeight){
 	$(sliderHandle).css("top",slidePixels+"px"); 
 }
 function onMenuKeyDown(){
-	var mO=$("#menuOptions");
-	$(mO).toggle().children("li").show();
-	/*if($("#overlay").length==0){
-		$("body").append("<div id='overlay'></div>");
-	}
-	else{
-		setTimeout("$('#overlay').remove()",400);
-	}*/
-	if(!loggedIn){
-		$(mO).children("li:eq(1)").hide();	
-	}
-	switch($("section:visible").index()){
-		case 0: $(mO).children("li:eq(0)").hide();
-		break;
-		case 7: $(mO).children("li:eq(1)").hide();
-		break;
-		case 9:  $(mO).children("li:eq(3)").hide();
-		break;
-		case 10: $(mO).children("li:eq(2)").hide();
-		break;
-	}
+	$('nav#my-menu').mmenu().trigger("open.mm");
 }
 function onBackButton(){
-	$("#menuOptions").hide();
-	$("#overlay").remove();
 	if(lastSlides.length!=0){
 		switchSlides(lastSlides.pop(),1);
 	}
