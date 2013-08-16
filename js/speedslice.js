@@ -191,7 +191,7 @@ function loadInfo(){
 			initialize();
 		},100);
 	});
-	new FastButton(document.getElementById("#addressTo"),function(){
+	new FastButton(document.getElementById("addressTo"),function(){
 		$("#addressTo").blur();
 		selectAddress(); 
 		addrRtrnTo='selectPizza';
