@@ -46,7 +46,17 @@ var map;
           var marker = new google.maps.Marker(options);
           map.setCenter(options.position);
         }
-function getAddressFromGeonames(lat,long){
-	
+function getGpsLocation(){
+	navigator.geolocation.getCurrentPosition(getGeonamesData,function(){alert("Getting location failed");},{enableHighAccuracy:true,timeout:10000});
+	function getGeonamesData(res){
+		$.get("http://api.geonames.org/extendedFindNearby?lat="+res.coords.latitude+"&lng="+res.coords.longitude+"&username=piecewise",function(data){
+			var data=$.parseXML(data);
+			$("#addr1").val($(data).find("streetNumber").text()+" "+$(data).find("street"));
+			$("#city").val($(data).find("placename").text());
+			$("#state").children("option").removeAttr("selected");
+			$("#state").children("[value="+$(data).find("adminCode1").text()+"]").attr("selected","selected");
+			$("#zip").val($(data).find("postalcode").text());
+		});
+	}
 }
         //google.maps.event.addDomListener(window, 'load', initialize);

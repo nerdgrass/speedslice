@@ -154,6 +154,7 @@ function loadInfo(){
 		window.scrollTo(0,0);
 	});
 	new FastButton(document.getElementsByClassName("home")[0],function(){switchSlides(3);});
+	new FastButton(document.getElementById("gpsButton"),getGpsLocation);
 	new FastButton(document.getElementById("orderPizza"),function(){switchSlides(0);});
 	new FastButton(document.getElementById("accountInfo"),function(){
 		if(loggedIn) {

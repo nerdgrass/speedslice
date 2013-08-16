@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="initial-scale=1.0,width=device-width,height=device-height" />
+    <meta name="viewport" content="initial-scale=1.0,width=device-width,height=device-height,user-scalable=no" />
     <title>SpeedSlice: The fastest way to order local pizza</title>
 
     <!-- REPLACE THIS WITH @FONT-FACE? -->
@@ -218,10 +218,10 @@
                               <input id="addr2" name="addr2" type="text" placeholder="Address Line 2">
                             </div>
                             <div class="small-5 small-offset-1 columns">
-                              <input id="addr" name="gpsAddress" type="text" placeholder="City">
+                              <input id="city" name="city" type="text" placeholder="City">
                             </div>
                             <div class="small-4 columns">
-                                <select>
+                                <select id="state">
                                     <option value="AK">AK</option>
                                     <option value="AL">AL</option>
                                     <option value="AR">AR</option>
@@ -276,7 +276,7 @@
                                 </select>
                             </div>
                             <div class="small-7 small-offset-1 columns">
-                              <input id="addr" name="gpsAddress" type="text" placeholder="Zip Code">
+                              <input id="zip" name="zip" type="text" placeholder="ZIP Code">
                             </div>
                             <hr>
                             <div class="small-4 columns">
