@@ -891,6 +891,7 @@ function showUserInfo(data){
 }
 
 function switchSlides(newSlide,backButton){
+	$('nav#my-menu').trigger("close.mm");
 	prevSlide=$("section:visible").index();
 	if(typeof backButton=="undefined"){
 		lastSlides.push(prevSlide);
@@ -1014,7 +1015,7 @@ function adjustSlider(iContMrgnTop,innerContainer,sliderHandle,sliderHeight){
 	$(sliderHandle).css("top",slidePixels+"px"); 
 }
 function onMenuKeyDown(){
-	$('nav#my-menu').mmenu().trigger($('nav#my-menu.mm-opened').length==0 ? "open.mm":"close.mm");
+	$('nav#my-menu').trigger($('nav#my-menu.mm-opened').length==0 ? "open.mm":"close.mm");
 }
 function onBackButton(){
 	if(lastSlides.length!=0){
