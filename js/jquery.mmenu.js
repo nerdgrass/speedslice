@@ -1368,6 +1368,7 @@
 	}
 	function click( $b, fn, onTouchStart, add )
 	{
+		onTouchStart=true;
 		if ( typeof $b == 'string' )
 		{
 			$b = $( $b );
@@ -1378,7 +1379,7 @@
 				? _e.touchstart
 				: _e.mousedown
 			: _e.click;
-
+		
 		if ( !add )
 		{
 			$b.off( event );

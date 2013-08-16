@@ -153,7 +153,6 @@ function loadInfo(){
 	$("section").on("blur","input",function(){
 		window.scrollTo(0,0);
 	});
-	new FastButton(document.getElementsByClassName("mmenuButton")[0],function(){this.click()});
 	new FastButton(document.getElementsByClassName("home")[0],function(){switchSlides(13);});
 	new FastButton(document.getElementById("gpsButton"),getGpsLocation);
 	new FastButton(document.getElementById("orderPizza"),function(){switchSlides(0);});
