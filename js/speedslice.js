@@ -2,7 +2,6 @@ var clickbuster={};
 FastButton = function(element, handler) {
   this.element = element;
   this.handler = handler;
-console.log(element);
   element.addEventListener('touchstart', this, false);
   element.addEventListener('click', this, false);
 };
