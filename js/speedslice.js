@@ -383,7 +383,7 @@ function makeActive(cntnrStr,rdOnlyStr){
 function getDeliveryOpts(){
 	$.getJSON(host+"DeliveryOpts.php",function(data){
 		if(data!=null){
-			$(".delLoc:not(:first)").remove();
+			$(".delLoc:gt(2)").remove();
 			$.each(data,function(index,value){
 				$("#delOpts").append('<div class="next bigRed delLoc"><div class="editButton">EDIT</div>'+value+'</div>');
 			});
