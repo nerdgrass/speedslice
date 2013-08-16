@@ -153,10 +153,6 @@ function loadInfo(){
 	$("section").on("blur","input",function(){
 		window.scrollTo(0,0);
 	});
-	/*var mmBtns=document.getElementsByClassName("mmenuLink");
-	for(var i=0; i<mmBtns.length; i++){
-		new FastButton(mmBtns[i],function(){$("nav#my-menu").trigger("open.mm");});
-	}	*/
 	new FastButton(document.getElementsByClassName("home")[0],function(){switchSlides(13);});
 	new FastButton(document.getElementById("gpsButton"),getGpsLocation);
 	new FastButton(document.getElementById("orderPizza"),function(){switchSlides(0);});
@@ -1014,7 +1010,7 @@ function adjustSlider(iContMrgnTop,innerContainer,sliderHandle,sliderHeight){
 	$(sliderHandle).css("top",slidePixels+"px"); 
 }
 function onMenuKeyDown(){
-	$('nav#my-menu').mmenu().trigger($('nav#my-menu:visible').length==0 ? "open.mm":"close.mm");
+	$('nav#my-menu').mmenu().trigger($('nav#my-menu.mm-opened').length==0 ? "open.mm":"close.mm");
 }
 function onBackButton(){
 	if(lastSlides.length!=0){
