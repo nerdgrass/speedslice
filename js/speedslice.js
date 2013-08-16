@@ -65,7 +65,6 @@ clickbuster.onClick = function(event) {
 
 document.addEventListener('click', clickbuster.onClick, true);
 clickbuster.coordinates = [];
-
 address=new Object();
 address.addrNick="";
 address.addr="";
@@ -157,73 +156,50 @@ function loadInfo(){
 	});
 	new FastButton(document.getElementsByClassName("home")[0],function(){switchSlides(3);});
 	new FastButton(document.getElementById("orderPizza"),function(){switchSlides(0);});
-	// mMenu Navigation, note: currently wired to avoid logging in.
-	$("#accountInfo").on("touchstart",function(e){ //Account Information
+	new FastButton(document.getElementById("accountInfo"),function(){
 		if(loggedIn) {
 			switchSlides(7);
 		} else{
 			switchSlides(4);
 		}
 	});
-	$("#paymentInfo").on("touchstart",function(e){ //Payment Information
+	new FastButton(document.getElementById("paymentInfo"),function(){
 		if(loggedIn){
 			switchSlides(5);
 		} else{
 			switchSlides(4);
 		}
 	});
-	$("#addresses").on("touchstart",function(e){ //Addresses
-		var sctnInd=$(this).parentsUntil("section").parent("section").index();
+
+	new FastButton(document.getElementById("addresses"),function(){ //Addresses
 		if(loggedIn){
-			if(sctnInd!=13){
-				switchSlides(13);
-			}
-		}
-		else if(sctnInd!=13){
 			switchSlides(13);
 		}
+		else {
+			switchSlides(4);
+		}
 	});
-	$("#about").on("touchstart",function(e){ //About SpeedSlice
-		switchSlides(10);
-	});
-	$("#support").on("touchstart",function(e){ //Support & FAQ
-		switchSlides(12);
-	});
-	$("#terms").on("touchstart",function(e){ //Terms & privacy policy
-		switchSlides(9);
-	});
-	$("#signIn").on("touchstart",function(e){ 
-		switchSlides(4);
-	});
+	new FastButton(document.getElementById("about")[0],function(){switchSlides(10);});
+	new FastButton(document.getElementById("support")[0],function(){switchSlides(12);}); //Support & FAQ
+	new FastButton(document.getElementById("terms")[0],function(){switchSlides(9);});
+	new FastButton(document.getElementById("signIn")[0],function(){switchSlides(4);});
 	// Clicking location icon takes you to the location page
-	$("#location").on("touchstart",function(e){
+	new FastButton(document.getElementById("location"),function(){
 		switchSlides(2);
 		setTimeout(function(){
 			$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
 			initialize();
 		},100);
 	});
-	$("#addressTo").on("touchstart focus",function(e){
-		e.preventDefault();
-		$(this).blur();
-		addressToTimer=setTimeout("selectAddress(); addrRtrnTo='selectPizza';",100);
-	}).on("touchmove",function(e){
-		clearTimeout(addressToTimer);
-	}).on("click",function(e){
-		e.preventDefault();
+	new FastButton(document.getElementById("#addressTo"),function(){
+		$("#addressTo").blur();
+		selectAddress(); 
+		addrRtrnTo='selectPizza';
 	});
 	$(".aChev").on("touchstart",function(e){
 		if(lastSlides.length!=0){
 			switchSlides(lastSlides.pop(),1);
 		}
-	});
-	$("#pRight").on("touchstart",function(e){
-		e.stopPropagation();
-		rightPizza();
-	});
-	$("#pLeft").on("touchstart",function(e){
-		e.stopPropagation();
-		leftPizza();	
 	});
 	$(".tip").on("touchstart",function(){
 		$(".tipSelected").removeClass("tipSelected");
@@ -909,52 +885,7 @@ function showUserInfo(data){
 	//add once live
 	//pushNotification.register(successHandler, errorHandler,{"senderID":"157047801644","ecb":"onNotificationGCM"});
 }
-function leftPizza(){
-	pizzaIndex=document.getElementById("pizzaID").selectedIndex;
-	numOptions=$("#pizzaID").children("option").length;
-	if(pizzaIndex==0){
-		changePizza($("#pizzaID").children("option:last").attr("selected","selected"));
-		$("#pizzaID").children("option:not(:last)").removeAttr("selected");
-	}
-	else{
-		changePizza($("#pizzaID").children("option:eq("+(pizzaIndex-1)+")").attr("selected","selected"));
-		$("#pizzaID").children("option:not(:eq("+(pizzaIndex-1)+"))").removeAttr("selected");
-	}
-	if(pizzaIndex==0 || numOptions==1){
-		$("#pizzaToppings,.tapAddTxt").show();
-		$("#pizzaName").show();
-		$("#savedPizzaName").hide();
-	}
-	else{
-		$("#pizzaToppings,.tapAddTxt").hide();
-		$("#pizzaName").hide();
-		$("#savedPizzaName").show();
-	}	
-	$("#savedPizzaName").text($("#pizzaName").val());
-}
-function rightPizza(){
-	pizzaIndex=document.getElementById("pizzaID").selectedIndex;
-	numOptions=$("#pizzaID").children("option").length;
-	if(numOptions==(pizzaIndex+1)){
-		changePizza($("#pizzaID").children("option:first").attr("selected","selected"));
-		$("#pizzaID").children("option:not(:first)").removeAttr("selected");
-	}
-	else{
-		changePizza($("#pizzaID").children("option:eq("+(pizzaIndex+1)+")").attr("selected","selected"));
-		$("#pizzaID").children("option:not(:eq("+(pizzaIndex+1)+"))").removeAttr("selected");
-	}
-	if((pizzaIndex+2)==numOptions || numOptions==1){
-		$("#pizzaToppings,.tapAddTxt").show();
-		$("#pizzaName").show();
-		$("#savedPizzaName").hide();
-	}
-	else{
-		$("#pizzaToppings,.tapAddTxt").hide();
-		$("#pizzaName").hide();
-		$("#savedPizzaName").show();
-	}
-	$("#savedPizzaName").text($("#pizzaName").val());
-}
+
 function switchSlides(newSlide,backButton){
 	prevSlide=$("section:visible").index();
 	if(typeof backButton=="undefined"){

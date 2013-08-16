@@ -690,51 +690,18 @@ SpeedSlice reserves the right, in its sole discretion, to revise and amend the A
          </select>
     </div>
     <script type="text/javascript">
-        $('#pepperoniToggle').change(function(){
-            if($(this).is(":checked")) {
-                $('#toppingPepperoni,.ordSumPepperoni').removeClass("nD");
-            } else {
-                $('#toppingPepperoni,.ordSumPepperoni').addClass("nD");
-            }
-        });
-        $('#sausageToggle').change(function(){
-            if($(this).is(":checked")) {
-                $('#toppingSausage,.ordSumSausage').removeClass("nD");
-            } else {
-                $('#toppingSausage,.ordSumSausage').addClass("nD");
-            }
-        });
-        $('#peppersToggle').change(function(){
-            if($(this).is(":checked")) {
-                $('#toppingPeppers,.ordSumPeppers').removeClass("nD");
-            } else {
-                $('#toppingPeppers,.ordSumPeppers').addClass("nD");
-            }
-        });
-        $('#onionsToggle').change(function(){
-            if($(this).is(":checked")) {
-                $('#toppingOnions,.ordSumOnions').removeClass("nD");
-            } else {
-                $('#toppingOnions,.ordSumOnions').addClass("nD");
-            }
-        });
-        $('#mushroomsToggle').change(function(){
-            if($(this).is(":checked")) {
-                $('#toppingMushrooms,.ordSumMushrooms').removeClass("nD");
-            } else {
-                $('#toppingMushrooms,.ordSumMushrooms').addClass("nD");
-            }
-        });
-        $('#olivesToggle').change(function(){
-            if($(this).is(":checked")) {
-                $('#toppingOlives,.ordSumOlives').removeClass("nD");
-            } else {
-                $('#toppingOlives,.ordSumOlives').addClass("nD");
-            }
-        });
-    </script>
-    <script>
-      $(document).foundation();
+	function ucFirst(string){
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+	var toppingsToToggle=["pepperoni","sausage","peppers","onions","mushrooms","olives"];
+	toppingsToToggle.forEach(function(ele){
+		new FastButton(document.getElementById(ele+"Toggle"),function(){
+			eleUc=ucFirst(ele);
+			$('#topping'+eleUc+',.ordSum'+eleUc).toggleClass("nD");
+		});
+	});
+     
+	$(document).foundation();
     </script>
 </body>
 </html>
