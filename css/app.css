@@ -3125,6 +3125,8 @@ html.mm-opened .mm-page {
   height: 100%;
   position: absolute;
   z-index: 9999;
+  opacity:1;
+  background:red;
 }
 
 /* line 319, ../sass/_mmenu.scss */
