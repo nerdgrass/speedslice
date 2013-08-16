@@ -2,7 +2,7 @@ var clickbuster={};
 FastButton = function(element, handler) {
   this.element = element;
   this.handler = handler;
-
+console.log(element);
   element.addEventListener('touchstart', this, false);
   element.addEventListener('click', this, false);
 };
@@ -179,10 +179,10 @@ function loadInfo(){
 			switchSlides(4);
 		}
 	});
-	new FastButton(document.getElementById("about")[0],function(){switchSlides(10);});
-	new FastButton(document.getElementById("support")[0],function(){switchSlides(12);}); //Support & FAQ
-	new FastButton(document.getElementById("terms")[0],function(){switchSlides(9);});
-	new FastButton(document.getElementById("signIn")[0],function(){switchSlides(4);});
+	new FastButton(document.getElementById("about"),function(){switchSlides(10);});
+	new FastButton(document.getElementById("support"),function(){switchSlides(12);}); //Support & FAQ
+	new FastButton(document.getElementById("terms"),function(){switchSlides(9);});
+	new FastButton(document.getElementById("signIn"),function(){switchSlides(4);});
 	// Clicking location icon takes you to the location page
 	new FastButton(document.getElementById("location"),function(){
 		switchSlides(2);
