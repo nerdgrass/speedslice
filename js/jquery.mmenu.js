@@ -1368,7 +1368,7 @@
 	}
 	function click( $b, fn, onTouchStart, add )
 	{
-		onTouchStart=true;
+		onTouchStart=false;
 		if ( typeof $b == 'string' )
 		{
 			$b = $( $b );
