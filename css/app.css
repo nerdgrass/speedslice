@@ -1558,11 +1558,11 @@ button, .button {
   color: white;
 }
 /* line 122, ../../../../../../.rvm/gems/ruby-1.9.3-p448/gems/zurb-foundation-4.3.1/scss/foundation/components/_buttons.scss */
-button:hover, button:focus, .button:hover, .button:focus {
+button:active, button:focus, .button:active, .button:focus {
   background-color: #7b3022;
 }
 /* line 133, ../../../../../../.rvm/gems/ruby-1.9.3-p448/gems/zurb-foundation-4.3.1/scss/foundation/components/_buttons.scss */
-button:hover, button:focus, .button:hover, .button:focus {
+button:active, button:focus, .button:active, .button:focus {
   color: white;
 }
 /* line 176, ../../../../../../.rvm/gems/ruby-1.9.3-p448/gems/zurb-foundation-4.3.1/scss/foundation/components/_buttons.scss */
