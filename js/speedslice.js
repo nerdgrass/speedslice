@@ -153,10 +153,10 @@ function loadInfo(){
 	$("section").on("blur","input",function(){
 		window.scrollTo(0,0);
 	});
-	var mmBtns=document.getElementsByClassName("mmenuLink");
+	/*var mmBtns=document.getElementsByClassName("mmenuLink");
 	for(var i=0; i<mmBtns.length; i++){
 		new FastButton(mmBtns[i],function(){$("nav#my-menu").trigger("open.mm");});
-	}	
+	}	*/
 	new FastButton(document.getElementsByClassName("home")[0],function(){switchSlides(13);});
 	new FastButton(document.getElementById("gpsButton"),getGpsLocation);
 	new FastButton(document.getElementById("orderPizza"),function(){switchSlides(0);});
