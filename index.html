@@ -39,10 +39,7 @@
     <!-- <link type="text/css" rel="stylesheet" media="all" href="css/mmenu.css" /> -->
     <script type="text/javascript">
         $(function() {
-            $('nav#my-menu').mmenu().on("closed.mm",function(){
-				$("#mm-blocker").hide();
-				alert("close event triggered");
-			});
+            $('nav#my-menu').mmenu();
         });
     </script>
 
@@ -73,10 +70,10 @@
             <li>facebook</li>
             <li>twitter</li>
         </ul>
-        <div class="row">
+       <!-- <div class="row">
             <div class="small-10 small-centered columns">
                 
-            </div>
+            </div>-->
         </div>   
     </nav>
 	<div id="container">

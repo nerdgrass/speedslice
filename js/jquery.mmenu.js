@@ -634,7 +634,11 @@
 		})(),
 
 		transition: (function() {
-			return 'transition' in document.createElement( 'div' ).style;
+			var fake=document.createElement( 'div' ).style;
+			if('webkitTransition' in fake){
+				return 'webkitTransition';	
+			}
+			return 'transition' in fake;
 		})()
 	};
 
@@ -1325,8 +1329,12 @@
 
 	function transitionend( $e, fn, duration )
 	{
-		if ( $.fn.mmenu.support.transition )
-		{
+		var transSupport=$.fn.mmenu.support.transition;
+		if ( transSupport == 'webkitTransition')
+		{			
+			$e.one("webkitTransitionEnd",fn);
+		}
+		else if(transSupport){
 			$e.one( _e.transitionend, fn );
 		}
 		else
