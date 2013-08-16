@@ -1,4 +1,5 @@
-google.ui.FastButton = function(element, handler) {
+var clickbuster={};
+FastButton = function(element, handler) {
   this.element = element;
   this.handler = handler;
 
@@ -6,7 +7,7 @@ google.ui.FastButton = function(element, handler) {
   element.addEventListener('click', this, false);
 };
 
-google.ui.FastButton.prototype.handleEvent = function(event) {
+FastButton.prototype.handleEvent = function(event) {
   switch (event.type) {
     case 'touchstart': this.onTouchStart(event); break;
     case 'touchmove': this.onTouchMove(event); break;
@@ -14,7 +15,7 @@ google.ui.FastButton.prototype.handleEvent = function(event) {
     case 'click': this.onClick(event); break;
   }
 };
-google.ui.FastButton.prototype.onTouchStart = function(event) {
+FastButton.prototype.onTouchStart = function(event) {
   event.stopPropagation();
 
   this.element.addEventListener('touchend', this, false);
@@ -23,38 +24,38 @@ google.ui.FastButton.prototype.onTouchStart = function(event) {
   this.startX = event.touches[0].clientX;
   this.startY = event.touches[0].clientY;
 };
-google.ui.FastButton.prototype.onTouchMove = function(event) {
+FastButton.prototype.onTouchMove = function(event) {
   if (Math.abs(event.touches[0].clientX - this.startX) > 10 ||
       Math.abs(event.touches[0].clientY - this.startY) > 10) {
     this.reset();
   }
 };
-google.ui.FastButton.prototype.onClick = function(event) {
+FastButton.prototype.onClick = function(event) {
   event.stopPropagation();
   this.reset();
   this.handler(event);
 
   if (event.type == 'touchend') {
-    google.clickbuster.preventGhostClick(this.startX, this.startY);
+    clickbuster.preventGhostClick(this.startX, this.startY);
   }
 };
 
-google.ui.FastButton.prototype.reset = function() {
+FastButton.prototype.reset = function() {
   this.element.removeEventListener('touchend', this, false);
   document.body.removeEventListener('touchmove', this, false);
 };
-google.clickbuster.preventGhostClick = function(x, y) {
-  google.clickbuster.coordinates.push(x, y);
-  window.setTimeout(google.clickbuster.pop, 2500);
+clickbuster.preventGhostClick = function(x, y) {
+  clickbuster.coordinates.push(x, y);
+  window.setTimeout(clickbuster.pop, 2500);
 };
 
-google.clickbuster.pop = function() {
-  google.clickbuster.coordinates.splice(0, 2);
+clickbuster.pop = function() {
+  clickbuster.coordinates.splice(0, 2);
 };
-google.clickbuster.onClick = function(event) {
-  for (var i = 0; i < google.clickbuster.coordinates.length; i += 2) {
-    var x = google.clickbuster.coordinates[i];
-    var y = google.clickbuster.coordinates[i + 1];
+clickbuster.onClick = function(event) {
+  for (var i = 0; i < clickbuster.coordinates.length; i += 2) {
+    var x = clickbuster.coordinates[i];
+    var y = clickbuster.coordinates[i + 1];
     if (Math.abs(event.clientX - x) < 25 && Math.abs(event.clientY - y) < 25) {
       event.stopPropagation();
       event.preventDefault();
@@ -62,8 +63,8 @@ google.clickbuster.onClick = function(event) {
   }
 };
 
-document.addEventListener('click', google.clickbuster.onClick, true);
-google.clickbuster.coordinates = [];
+document.addEventListener('click', clickbuster.onClick, true);
+clickbuster.coordinates = [];
 
 address=new Object();
 address.addrNick="";
@@ -154,11 +155,9 @@ function loadInfo(){
 	$("section").on("blur","input",function(){
 		window.scrollTo(0,0);
 	});
-
+	new FastButton(document.getElementsByClassName("home")[0],function(){switchSlides(3);});
+	new FastButton(document.getElementById("orderPizza"),function(){switchSlides(0);});
 	// mMenu Navigation, note: currently wired to avoid logging in.
-	$("#orderPizza").on("touchstart",function(e){ //Home Slide/Pizza Builder
-		switchSlides(0);
-	});
 	$("#accountInfo").on("touchstart",function(e){ //Account Information
 		if(loggedIn) {
 			switchSlides(7);
@@ -393,9 +392,6 @@ function loadInfo(){
 			makeActive("#deliveryLoc>.infoWrapper",blockChanges);
 			$("#deleteAddress").show();
 		});
-	google.ui.FastButton(document.getElementsByClassName("home")[0],function(){
-		switchSlides(3);
-	});
 	});
 	
 }
