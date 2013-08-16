@@ -3649,11 +3649,11 @@ input[type=checkbox].toppingToggle {
   height: 2.9rem;
   width: 2.9rem;
   border-radius: 100px;
-  -webkit-transition: all .3s ease;
-  -moz-transition: all .3s ease;
-  -o-transition: all .3s ease;
-  -ms-transition: all .3s ease;
-  transition: all .3s ease;
+  -webkit-transition: all .1s ease;
+  -moz-transition: all .1s ease;
+  -o-transition: all .1s ease;
+  -ms-transition: all .1s ease;
+  transition: all .1s ease;
   cursor: pointer;
   position: absolute;
   top: .3rem;
