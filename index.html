@@ -39,12 +39,7 @@
     <!-- <link type="text/css" rel="stylesheet" media="all" href="css/mmenu.css" /> -->
     <script type="text/javascript">
         $(function() {
-			$("body").on("touchstart",function(e){
-				$("body").prepend(e.target.id+"<br>");
-			}).on("click",function(e){
-				$("body").prepend(e.target.id+"<br>");
-			});
-            $('nav#my-menu').mmenu().on("closed",function(){
+            $('nav#my-menu').mmenu().on("closed.mm",function(){
 				$("#mm-blocker").hide();
 			});
         });
