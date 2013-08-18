@@ -40,7 +40,7 @@ FastButton.prototype.onClick = function(event) {
 };
 
 FastButton.prototype.reset = function() {
-  this.element.removeEventListener('touchend', this, false);
+  //this.element.removeEventListener('touchend', this, false);
   document.body.removeEventListener('touchmove', this, false);
 };
 clickbuster.preventGhostClick = function(x, y) {
