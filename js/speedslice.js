@@ -132,7 +132,7 @@ function loadInfo(){
 			getCardInfo();
 			getUserInfo();
 			$("#signIn").hide();
-			$("#signOut").show();
+			$("#signOut").removeClass("nD");
 			if(localStorage.getItem("LastAddress")!=null){
 				address.addrNick=localStorage.LastAddress;//ie placeholder
 				$("#addressTo").val(address.addrNick);
@@ -190,14 +190,10 @@ function loadInfo(){
 	new FastButton(document.getElementById("signIn"),function(){switchSlides(4);});
 	// Clicking location icon takes you to the location page
 	new FastButton(document.getElementById("location"),function(){
-		switchSlides(2);
-		setTimeout(function(){
-			$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
-			initialize();
-		},100);
+		selectAddress(); 
+		addrRtrnTo='selectPizza';
 	});
 	new FastButton(document.getElementById("addressTo"),function(){
-		$("#addressTo").blur();
 		selectAddress(); 
 		addrRtrnTo='selectPizza';
 	});
@@ -586,14 +582,17 @@ function emptyLine(addrLine,addrID){
 		return false;
 	}
 }
-function selectAddress(){
-	$("#addressTo").blur();
+function selectAddress(){	
 	if($("#delOpts").children(".delLoc").length==1){
 		switchSlides(2);
 	}
 	else{
 		switchSlides(1);
 	}
+	setTimeout(function(){
+		$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
+		initialize();
+	},50);
 }
 function logIn(theDiv){
 	$(theDiv).append($(loader).clone());
