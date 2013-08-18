@@ -135,7 +135,7 @@ function loadInfo(){
 			$("#signOut").removeClass("nD");
 			if(localStorage.getItem("LastAddress")!=null){
 				address.addrNick=localStorage.LastAddress;//ie placeholder
-				$("#addressTo").val(address.addrNick);
+				$("#addressTo>span").text(address.addrNick);
 			}
 		}
 	});	
@@ -160,6 +160,7 @@ function loadInfo(){
 	}	
 	new FastButton(document.getElementsByClassName("home")[0],function(){selectAddress(1); addrRtrnTo="selectPizza";});
 	new FastButton(document.getElementById("gpsButton"),getGpsLocation);
+	new FastButton(document.getElementById("setNewAddress"),setNewAddress);
 	new FastButton(document.getElementById("orderPizza"),function(){switchSlides(0);});
 	new FastButton(document.getElementById("accountInfo"),function(){
 		if(loggedIn) {
@@ -406,7 +407,7 @@ function finalOrderConfirmation(indexSel){
 		$("#pickSpot").append($(newLoader).addClass("bigLoader"));
 		var pizzaOrderInfo={RestaurantID:$(theSelection).attr("data-restID"),
 							TrayOrder:$(theSelection).attr("data-order"),
-							AddressName:$("#addressTo").val(),
+							AddressName:$("#addressTo>span").text(),
 							Price:$(theSelection).children(".fR").text()};
 		if($("#couponCode").val()!=""){
 			pizzaOrderInfo.Coupon=$("#couponCode").val();
@@ -468,7 +469,7 @@ function orderPizzaPage(curSlide){
 	}
 	if($("input[name^=q]").length==0){
 		navigator.notification.alert("Please add at least 1 pizza to order.",function(){},"No pizza added","Okay");
-		$("#addressTo").parent("div").after("<div class='cRed' id='noPizzas'>Please add at least 1 pizza to order</div>");	
+		$("#addressTo").after("<div class='cRed' id='noPizzas'>Please add at least 1 pizza to order</div>");	
 		return false;
 	}
 	if(!loggedIn){
@@ -545,7 +546,7 @@ function setNewAddress(){
 	}
 	switch(addrRtrnTo){
 		case "selectPizza":	switchSlides(0);
-		$("#addressTo").val($("#addrNick").val()).removeClass("redBrdr");
+		$("#addressTo>span").text($("#addrNick").val()).removeClass("redBrdr");
 		break;
 		case "account": switchSlides(7);
 		break;
@@ -556,7 +557,7 @@ function setNewAddress(){
 	if(loggedIn){
 		$.post(host+"SetAddress.php",address,function(data){
 			getDeliveryOpts();	
-		});	
+		});
 	}
 }
 function deleteAddress(){
@@ -644,7 +645,7 @@ function createAccount(theDiv){
 			loggedIn=1;
 			$("#orderText,#createText").toggle();
 			$("#emailAdd").removeClass("redBrdr");
-			var dVal=$("#addressTo").val();
+			var dVal=$("#addressTo>span").text();
 			if(dVal.length==0 || dVal=="ADDRESS"){
 				switchSlides(0);
 			}
