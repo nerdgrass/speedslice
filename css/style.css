@@ -632,6 +632,10 @@ header>h1{
 #orderSummary>h3{
 	float:left;
 }
+#addressTo{
+	margin-bottom:23px;
+	width:100%;
+}
 .swipeText{
 	vertical-align: text-bottom;
 	float: right;

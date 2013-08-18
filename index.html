@@ -161,10 +161,9 @@
                             <div id="pizzasOnOrder"></div>
                             <hr>                            
                         </div>
-                        <div class="small-11 small-centered columns">
-                            <h3 class="fL">Deliver To</h3> 
-                            <div id="addressTo" class="small-11 small-centered columns nD fL">
-                                <h4></h4>
+                        <div class="small-11 small-centered columns"> 
+                        	<div id="addressTo" class="small-11 fL">
+                            	<h3 class="fL">Deliver To</h3><span class="fR">No location selected</span>
                             </div>
                             <hr>
                             <div id="locationPicker" class="small-11 small-centered columns">
@@ -213,7 +212,10 @@
                             <div class="small-10 small-centered columns">
                               <a id="gpsButton" href="#" class="large button expand">Find my Address</a>
                             </div>
-                            <div class="small-12 small-centered columns">
+                            <div class="small-12">
+                              <input id="nickName" name="nickName" type="text" placeholder="Name to remember address by">
+                            </div>
+                            <div class="small-12">
                               <input id="addr1" name="addr1" type="text" placeholder="Address Line 1">
                             </div>
                             <div class="small-6 columns">
@@ -279,16 +281,6 @@
                             </div>
                             <div class="small-7 small-offset-1 columns">
                               <input id="zip" name="zip" type="text" placeholder="ZIP Code">
-                            </div>
-                            <hr>
-                            <div class="small-4 columns">
-                                <label for="checkbox1">
-                                    <input type="checkbox" id="checkbox1">
-                                    <span class="custom checkbox"></span>Save Address?
-                                </label>
-                            </div>
-                            <div class="small-8 columns">
-                              <input id="nickName" name="nickName" type="text" placeholder="Address Name">
                             </div>
                         </form>
                     </div>

@@ -287,7 +287,7 @@ function loadInfo(){
 		}
 		else{
 			address.addrNick=$(this).text().substr(4);//ie placeholder
-			$("#addressTo").removeClass("nD").children("h4").text(address.addrNick);
+			$("#addressTo").removeClass("nD").children("span").text(address.addrNick);
 			switch(addrRtrnTo){
 				case "selectPizza":	switchSlides(0);
 				break;
@@ -597,7 +597,7 @@ function selectAddress(slide){
 	setTimeout(function(){
 		$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
 		initialize();
-	},50);
+	},100);
 }
 function logIn(theDiv){
 	$(theDiv).append($(loader).clone());
