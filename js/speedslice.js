@@ -158,7 +158,7 @@ function loadInfo(){
 	for(var i=0; i<mmBtns.length; i++){
 		new FastButton(mmBtns[i],function(){$("nav#my-menu").trigger("open.mm");});
 	}	
-	new FastButton(document.getElementsByClassName("home")[0],function(){switchSlides(1);});
+	new FastButton(document.getElementsByClassName("home")[0],function(){selectAddress(1); addrRtrnTo="selectPizza";});
 	new FastButton(document.getElementById("gpsButton"),getGpsLocation);
 	new FastButton(document.getElementById("orderPizza"),function(){switchSlides(0);});
 	new FastButton(document.getElementById("accountInfo"),function(){
@@ -190,11 +190,11 @@ function loadInfo(){
 	new FastButton(document.getElementById("signIn"),function(){switchSlides(4);});
 	// Clicking location icon takes you to the location page
 	new FastButton(document.getElementById("location"),function(){
-		selectAddress(); 
+		selectAddress(2); 
 		addrRtrnTo='selectPizza';
 	});
 	new FastButton(document.getElementById("addressTo"),function(){
-		selectAddress(); 
+		selectAddress(1); 
 		addrRtrnTo='selectPizza';
 	});
 	new FastButton(document.getElementById("addPizza"),function(){
@@ -287,7 +287,7 @@ function loadInfo(){
 		}
 		else{
 			address.addrNick=$(this).text().substr(4);//ie placeholder
-			$("#addressTo").val(address.addrNick).removeClass("redBrdr placeholder");
+			$("#addressTo").removeClass("nD").children("h4").text(address.addrNick);
 			switch(addrRtrnTo){
 				case "selectPizza":	switchSlides(0);
 				break;
@@ -582,12 +582,17 @@ function emptyLine(addrLine,addrID){
 		return false;
 	}
 }
-function selectAddress(){	
-	if($("#delOpts").children(".delLoc").length==1){
-		switchSlides(2);
+function selectAddress(slide){
+	if(typeof slide=="undefined"){
+		if($("#delOpts").children(".delLoc").length==1){
+			switchSlides(2);
+		}
+		else{
+			switchSlides(1);
+		}
 	}
 	else{
-		switchSlides(1);
+		switchSlides(slide);
 	}
 	setTimeout(function(){
 		$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});

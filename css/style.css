@@ -638,7 +638,7 @@ header>h1{
 	font-size: .8rem;
 	line-height: 1.6rem;
 }
-.swipeText+hr{
+hr{
 	clear:both;
 }
 /* Alex's CSS */
