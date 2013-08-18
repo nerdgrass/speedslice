@@ -64,7 +64,9 @@
             <li><a id="about" href="#">About Us</a></li><!--  Section X -->
             <li><a id="support" href="#">Support</a></li><!--  Section X -->
             <li><a id="terms" href="#">Terms of Use</a></li><!--  Section X -->
-            <li><a id="signIn" href="#" class="menuButton button expand">Sign In</a></li><!--  Section 4 -->
+            <li><a id="signIn" href="#" class="menuButton button expand">Sign In</a>
+            	<a id="signOut" href="#" class="menuButton button expand nD">Sign Out</a>
+            </li><!--  Section 4 -->
         </ul>
         <ul class="inline-list">
             <li>facebook</li>
@@ -119,7 +121,7 @@
                         </div>
                         <div class="small-8 columns"><!--  Pizza Circle -->
                             <div id="addPizza" class="pizzaCircle">
-                                <p class="pizzaCircleContent" type="text" id="pizzaName" value="">
+                                <p class="pizzaCircleContent" type="text" value="">
                                     Tap to<br /><span id="pizzaCircleOrder">Order</span>
                                 </p>
                             </div><!-- End Pizza Circle -->
@@ -136,7 +138,7 @@
                                 <input type="checkbox" id="peppersToggle" class="toppingToggle">
                                 <label for="peppersToggle"></label>
                             </div>
-                        </div class="">
+                        </div>
                     </div>
                 	<!-- <div id="cheeseTopping" class="topping chSelect"></div> -->
                 </div>
@@ -145,10 +147,7 @@
                 <div class="small-10 small-centered columns card">
                     <div class="row">
                         <div id="orderSummary" class="small-11 small-centered columns">
-                            <h3>Order Summary</h3>
-                            <hr>
-                            <p>1x Pizza with:</p>
-                            <ul class="inline-list toppingsList">
+                             <ul class="inline-list toppingsList">
                                 <li class="ordSumPepperoni nD">Pepperoni</li>
                                 <li class="ordSumSausage nD ">Sausage</li>
                                 <li class="ordSumPeppers nD">Peppers</li>
@@ -156,9 +155,13 @@
                                 <li class="ordSumOlives nD">Olives</li>
                                 <li class="ordSumMushrooms nD">Mushrooms</li>
                             </ul>
+                            <h3>Order Summary</h3><span class="swipeText">Swipe to remove pizza</span>
                             <hr>
+                           
+                            <div id="pizzasOnOrder"></div>
+                            <hr>                            
                         </div>
-                        <div id="orderSummary" class="small-11 small-centered columns">
+                        <div class="small-11 small-centered columns">
                             <h3>Deliver To</h3>
                             <hr>
                             <div id="locationPicker" class="small-11 small-centered columns">
@@ -656,21 +659,6 @@ SpeedSlice reserves the right, in its sole discretion, to revise and amend the A
                 <h1>Support Information</h1>
             </footer>
         </section>
-
-        
-
-
-        <ul id='menuOptions'>
-                <li>Order a Pizza</li>
-                <li>Account Information</li>
-                <li>About SpeedSlice</li>
-                <li>Terms and Conditions</li>
-            </ul>
-         <select class="nD" id="pizzaID">
-            <option value="2" data-toppings="Cheese">Cheese</option>
-             <option value="9" data-toppings="Cheese,Pepperoni">Pepperoni</option>
-             <option selected></option>
-         </select>
     </div>
     <script type="text/javascript">
 	function ucFirst(string){

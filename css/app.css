@@ -3557,9 +3557,12 @@ html.mm-no-overflowscrolling.mm-right .mm-menu {
 
 /* line 12, ../sass/_pizzaBuilder.scss */
 .pizzaCircleContent {
-  text-align: center;
-  color: #2b0905;
-  margin-top: 30%;
+	text-align: center;
+	color: #2b0905;
+	margin-top: 30%;
+	margin-left:1rem;
+	width:90%;
+	font-size:2.3rem;	
 }
 
 /* line 17, ../sass/_pizzaBuilder.scss */
@@ -3659,51 +3662,45 @@ input[type=checkbox].toppingToggle {
 }*/
 #pepperoniToggle+label{
 	background-image:url(../img/toppings/pepperoniIconDark.png);
-	background-position: 8px 19px
+	background-position: .3rem .5rem;
 }
 #pepperoniToggle+label:active,#pepperoniToggle:checked+label{
 	background-image:url(../img/toppings/pepperoniIcon.png); 
-	background-position:8px 19px;
 }
 #onionsToggle+label{
   background-image:url(../img/toppings/onionIconDark.png);
-  background-position: 4px 3px;
+  background-position: .16rem .08rem;
 }
 #onionsToggle+label:active,#onionsToggle:checked+label{
   background-image:url(../img/toppings/onionIcon.png);
-  background-position: 4px 3px;
 }
 #mushroomsToggle+label{
   background-image:url(../img/toppings/mushroomIconDark.png);
-  background-position:4px 5px;
+  background-position:0.17rem .2rem;
 }
 #mushroomsToggle+label:active,#mushroomsToggle:checked+label{
   background-image:url(../img/toppings/mushroomIcon.png);
-  background-position: 4px 5px;
 }
 #sausageToggle+label{
   background-image:url(../img/toppings/sausageIconDark.png);
-  background-position: 8px 12px;
+  background-position: 0.3rem .5rem;
 }
 #sausageToggle+label:active,#sausageToggle:checked+label{
   background-image:url(../img/toppings/sausageIcon.png);
-  background-position:8px 12px;
 }
 #peppersToggle+label{
   background-image:url(../img/toppings/pepperIconDark.png);
-  background-position: 4px 3px;
+  background-position:.15rem 0.1rem;
 }
 #peppersToggle+label:active,#peppersToggle:checked+label{
   background-image:url(../img/toppings/pepperIcon.png);
-  background-position: 4px 3px;
 }
 #olivesToggle+label{
   background-image:url(../img/toppings/oliveIconDark.png);
-  background-position: 4px 5px;
+  background-position: 0.2rem .1rem;
 }
 #olivesToggle+label:active,#olivesToggle:checked+label{
   background-image:url(../img/toppings/oliveIcon.png);
-  background-position: 4px 5px;
 }
 /* line 78, ../sass/_pizzaBuilder.scss */
 .toppingToggle label {

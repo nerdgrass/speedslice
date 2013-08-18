@@ -89,7 +89,7 @@ window.onerror = function(msg, url, linenumber) {
     alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
     return true;
 }
-function onLoad() {
+function onLoad() {loadInfo();
 	document.addEventListener("deviceready", onDeviceReady, false);
 }
 function onDeviceReady() {
@@ -129,9 +129,10 @@ function loadInfo(){
 		if(loggedIn){
 			$("#orderText,#createText").toggle();
 			getDeliveryOpts();
-			getPizzaList();
 			getCardInfo();
 			getUserInfo();
+			$("#signIn").hide();
+			$("#signOut").show();
 			if(localStorage.getItem("LastAddress")!=null){
 				address.addrNick=localStorage.LastAddress;//ie placeholder
 				$("#addressTo").val(address.addrNick);
@@ -200,6 +201,32 @@ function loadInfo(){
 		selectAddress(); 
 		addrRtrnTo='selectPizza';
 	});
+	new FastButton(document.getElementById("addPizza"),function(){
+		//check if pizza exists already
+		//if not exists, add
+		//else increase count
+		var toppingsString="";
+		$(".toppingsList>li:not(.nD)").each(function(index, element) {
+            toppingsString+=$(this).text()+", ";
+        });
+		toppingsString=toppingsString.substr(0,toppingsString.length-2);
+		var numPizzasOnOrder=$("#pizzasOnOrder>.pizzaOnOrder").length;
+		if(numPizzasOnOrder>0){
+			$(".pizzaOnOrder").each(function(index, element) {
+				if($(element).children(".orderToppings").text()==toppingsString){
+					var $quant=$(element).children(".quantity");
+					$quant.text(parseInt($quant.text())+1+"x");
+					return false;		
+				}
+				else if(index==numPizzasOnOrder-1){
+					$("#pizzasOnOrder").prepend(pizzaOnOrderHtml(toppingsString));	
+				}
+			});
+		}
+		else{
+			$("#pizzasOnOrder").prepend(pizzaOnOrderHtml(toppingsString));	
+		}
+	});
 	$(".aChev").on("touchstart",function(e){
 		if(lastSlides.length!=0){
 			switchSlides(lastSlides.pop(),1);
@@ -209,106 +236,38 @@ function loadInfo(){
 		$(".tipSelected").removeClass("tipSelected");
 		$(this).addClass("tipSelected");		
 	});
-	$("#orderSummary").on("swipe",".removePizza",function(){
-		pizzaToDelete=this;
-		navigator.notification.confirm(
-			"Are you sure you wish to remove "+$(this).children("h4").text().substr(0,$(this).children("h4").text().length-1)+"?",
-			deletePizza,        
-			'Press "Yes" to delete pizza',
-			'No,Yes'
-		);
-	});
-	$("#addPizza").on("touchstart",function(){ 
-		//fix bug where pizza can have same name and different toppings
-		thePiz=$("TESTPIZZANAME");//NOTE: This is a workaround for testing -Alex
-		//ie
-		if($(thePiz).val()=="" || $(thePiz).val=="Custom Pizza"){
-			navigator.notification.alert("Please give your pizza a name.",function(){},"No pizza name","Okay");
-			$("#pizzaName").addClass("redBrdr");
-			return false;
+	$("#pizzasOnOrder").on("touchstart",".pizzaOnOrder",function(e){
+			deletePizzaStartX=e.originalEvent.touches[0].pageX;
+			deletePizzaInitX=deletePizzaStartX;
+	}).on("touchmove",".pizzaOnOrder",function(e){
+		var touch = e.originalEvent.touches[0];
+		var x = touch.pageX;
+		var distTraveled=x-deletePizzaInitX;
+		
+		if(Math.abs(distTraveled)>20){
+			var distMovedSinceLastEvent=x-deletePizzaStartX;
+			$(this).css({marginLeft:(distMovedSinceLastEvent>0 ? "+=":"-=")+Math.abs(distMovedSinceLastEvent),whiteSpace:"nowrap"});
+			deletePizzaStartX=x;
 		}
-		$(thePiz).removeClass("redBrdr");		
-		$("#pizzaID").children("option").each(function(index, element) {
-			if($("#pizzaName").val()==$(element).text()){
-				if(loggedIn){
-					if($("[name=q"+$(element).val()+"]").length!=0){
-						$("[name=q"+$(element).val()+"]").val(parseInt($("[name=q"+$(element).val()+"]").val())+1);
-					}
-					else{
-						$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+thePiz.val()+":</h4><input type='number' value='1' name='q"+$(element).val()+"'></div>");
-					}
-				}
-				else{
-					$("#orderSummary>.infoWrapper>div>h4").each(function(ind, ele) {//basically, if pizza exists increase num for that pizza		
-						if($(ele).text()==($(element).text()+":")){
-					//same as $(element).prev("h4").text().substr(0,$(element).prev("h4").text().length-1) might want to change the long one
-							$(ele).next("input").val((parseInt($(ele).next("input").val())+1));
-							return false;
-						}
-						else{
-							if(ind==$("#orderSummary>.infoWrapper>div>h4").length-1){
-								$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+$(element).text()+":</h4><input type='number' value='1' name='"+(parseInt($(element).val())=="NaN" ? "qUpdate":"q"+$(element).val())+"'></div>");
-							}
-						}
-					});	
-				}
-				return false;	
-			}
-			else{
-				if((index+1)==$("#pizzaID").children("option").length){
-					hasPizzaAlready=false;
-					$("[name=qUpdate]").each(function(index, element) {
-						if($(element).prev("h4").text().substr(0,$(element).prev("h4").text().length-1)==$("#pizzaName").val()){
-							$(element).val(parseInt($(element).val())+1);
-							hasPizzaAlready=true;
-						}
-					});
-					if(!hasPizzaAlready){
-						addUserPizza();
-						$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+thePiz.val()+":</h4><input type='number' value='1' name='qUpdate'></div>");
-					}
-				}
-			}
-		});
-		$("#delTxt").show();
+	}).on("touchend",".pizzaOnOrder",function(e){
+		var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+		var x = touch.pageX;
+		var distTraveled=x-deletePizzaInitX;
+		if(Math.abs(distTraveled)>100){
+			$(this).remove();
+		}
+		else{
+			$(this).css({marginLeft:"auto",whiteSpace:"normal"});
+		}
 	});
-	$("#tapOrder").on("touchstart",function(){
-		orderPizzaPage();
-	});
-	var signout;
-    $("#signOut").on("touchstart",function(e){
-		signout=setTimeout(function(){
-			navigator.notification.confirm(
+	//new FastButton(document.getElementById("tapOrder"),orderPizzaPage);
+	new FastButton(document.getElementById("signOut"),function(){
+		navigator.notification.confirm(
 				"You need to be signed in to order pizza. Are you sure you want to sign out?",
 				completeSignout,
 				'Press "Confirm" to sign out',
 				'Cancel,Confirm'
 			);
-		},100);
-	}).on("touchmove",function(e){
-		clearTimeout(signout);
-	}).on("click",function(e){
-		e.preventDefault();
-	});
-	$("#pizzaToppings").on("touchstart",".topping:not(#cheeseTopping)",function(e){
-		//check this with logged in
-		theTopID=$(this).attr("id");
-		toppingTouched=setTimeout(function(){
-			var removeName=false;
-			$("#orderSummary>.infoWrapper>div:not(:first)").each(function(index, element) {
-				var theH4=$(element).children("h4").text();
-				theH4=theH4.substr(0,theH4.length-1);
-				if(theH4.toUpperCase()==$("#pizzaName").val().toUpperCase()){
-					removeName=true;
-				}
-			});
-			if(removeName){
-				$("#pizzaName").val("").attr("name","");
-			}
-			addTopping(theTopID);
-		},150);
-	}).on("touchmove",".topping:not(#cheeseTopping)",function(e){
-		clearTimeout(toppingTouched);
 	});
 	$("#orderOptions").on("touchstart",".orderOpt",function(){
 		theSelection=this;
@@ -375,6 +334,21 @@ function loadInfo(){
 	});
 	
 }
+function pizzaOnOrderHtml(toppingsString){
+	var html=document.createElement("div");
+	html.setAttribute("class","pizzaOnOrder");
+	var quant=document.createElement("span");
+	quant.setAttribute("class","quantity");
+	quant.textContent="1x";
+	var text=document.createTextNode(toppingsString=="" ? " Cheese Pizza":" Pizza with:")
+	var toppings=document.createElement("label");
+	toppings.setAttribute("class","orderToppings");
+	toppings.textContent=toppingsString;
+	html.appendChild(toppings);
+	html.insertBefore(quant,toppings);
+	html.insertBefore(text,toppings);
+	return html;
+}
 function makeActive(cntnrStr,rdOnlyStr){
 	$(rdOnlyStr).removeAttr("readonly");
 	$(cntnrStr).animate({opacity:1},300);
@@ -390,19 +364,6 @@ function getDeliveryOpts(){
 			checkCustomScrolling();
 		}
 	});
-}
-function deletePizza(indSel){
-	if(indSel==2){
-		var pizName=$(pizzaToDelete).children("h4").text();
-		pizName=pizName.substr(0,pizName.length-1);
-		if(typeof additionalPizzas!="undefined" && typeof additionalPizzas[pizName] != "undefined"){
-			delete(additionalPizzas[pizName]);
-		}
-		$(pizzaToDelete).remove();
-		if($(".removePizza").length==0){
-			$("#delTxt").hide();	
-		}		
-	}
 }
 function orderError(theError){
 	$("#orderErrorOccurred").remove();
@@ -650,10 +611,8 @@ function logIn(theDiv){
 				loggedIn=1;
 				$("#orderText,#createText").toggle();
 				getDeliveryOpts();
-				getPizzaList();	
 				getCardInfo();
 				showUserInfo(data);
-				addUserPizza();
 				if(!orderPizzaPage(4)){
 					switchSlides(0);
 				}
@@ -689,7 +648,6 @@ function createAccount(theDiv){
 				switchSlides(5);//check me
 				cardReturnTo="order";
 				$.post(host+"SetAddress.php",address);
-				addUserPizza();
 				getUserInfo();
 				getCardInfo();
 				getDeliveryOpts();
@@ -700,46 +658,6 @@ function createAccount(theDiv){
 		}
 	});			
 }
-function addUserPizza(){//same pizza different name doesn't get added to array, how to handle?
-	if(!loggedIn){
-		toppings=currentToppings();
-		var pizzaName=$("#pizzaName").val();
-		if(typeof additionalPizzas[pizzaName] == "undefined"){
-			additionalPizzas[pizzaName]=toppings;
-		}
-		$.post(host+"CreatePizza.php",{"Toppings":toppings,"PizzaName":pizzaName},function(data){			
-			populatePizzaList($.parseJSON(data));
-		});
-		return false;
-	}
-	//multiple pizzas on first sign up
-	//if pizza isn't saved by the time the order button is clicked (maybe just use loading icon on pizza)
-	if(typeof additionalPizzas != "undefined" && !$.isEmptyObject(additionalPizzas)){
-		//add the additional pizzas	and update the numbers
-		var count = 0;
-		for (k in additionalPizzas){
-			count++;
-		}
-		var theCount=0;
-		$.each(additionalPizzas,function(index,value){
-			$.post(host+"CreatePizza.php",{"Toppings":value,"PizzaName":index},function(data){
-				if(theCount==(count-1)){
-					populatePizzaList($.parseJSON(data));	
-				}
-			});
-			theCount++;	
-		});
-		delete(additionalPizzas);
-		return false;
-	}
-	if(($("#pizzaName").attr("name")=="" || typeof $("#pizzaName").attr("name")=="undefined") && $("#pizzaName").val()!=""){//name is the pizzaid, if no pizza id, needs to be saved
-		toppings=currentToppings();
-		//validate pizzaname
-		$.post(host+"CreatePizza.php",{"Toppings":toppings,"PizzaName":$("#pizzaName").val()},function(data){
-			populatePizzaList($.parseJSON(data));	
-		});	
-	}
-}
 function currentToppings(){
 	toppings="";
 	$("#someToppings").children("li").each(function(index, element) {
@@ -747,45 +665,6 @@ function currentToppings(){
 	});
 	toppings=toppings.substr(0,toppings.length-1);
 	return toppings;
-}
-function getPizzaList(){
-	$.getJSON(host+"GetUserPizzas.php",function(data){
-		if(data!=null){
-			populatePizzaList(data);
-		}
-	}).error(function(){
-		populatePizzaList({});
-	});
-}
-function populatePizzaList(data){
-	$("#pizzaID").children("option:not([value=9]):not([value=2])" ).remove();
-	if($("[name=qUpdate]").length>1){
-		var qLength=$("[name=qUpdate]").length-1;	
-	}
-	$.each(data,function(index,value){
-		//relies on most recent pizza being the highest num, also on only one pizza being added at a time (so should use swirly loader)
-		//if(parseInt(value.PizzaID)!=2 && parseInt(value.PizzaID)!=9){
-			$("#pizzaID").append("<option value='"+value.PizzaID+"' data-toppings='"+value.Toppings+"'>"+value.PizzaName+"</option>");
-			if(typeof qLength !="undefined"){
-				if($("#pizzaName").val()==value.PizzaName){
-					$("#pizzaName").attr("name",value.PizzaID);
-				}
-				$("[name=qUpdate]:eq("+qLength+")").attr("name","q"+value.PizzaID);
-				qLength--;
-			}		
-			else{
-				if(value.PizzaName==$("#pizzaName").val()){
-					$("#pizzaName").attr("name",value.PizzaID);	
-					$("[name=qUpdate]").attr("name","q"+value.PizzaID);
-				}
-			}
-		//}
-		//ie
-		if(index==0){
-			$("#pizzaName").removeClass("placeholder");	
-		}
-	});
-	$("#pizzaID").append("<option selected></option>");	
 }
 function addCard(){
 	if($(".tipSelected").length==0){
@@ -831,25 +710,7 @@ function addCard(){
 		}
 	});
 }
-function changePizza(theChoice){
-	$("#pizzaName").attr("name",$(theChoice).val()).val($(theChoice).text());
-	$("#someToppings > li:not(:first)").remove();
-	$(".topping:not(.chSelect)").attr("class","topping");
-	if($(theChoice).val()!=""){
-		pizTop=$(theChoice).attr("data-toppings").split(",");
-		$.each(pizTop,function(ind,top){
-			if(top=="Peppers" && $("#p3ppersTopping").attr("class").indexOf("Select")==-1){
-				addTopping("p3ppersTopping");
-			}
-			else{
-				top=top.toLowerCase();
-				if($("#"+top+"Topping").attr("class").indexOf("Select")==-1){
-					addTopping(top+"Topping");
-				}
-			}
-		});
-	}	
-}
+
 function updateCard(){
 	switchSlides(5);
 	cardReturnTo="account";	
