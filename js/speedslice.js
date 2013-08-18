@@ -332,7 +332,7 @@ function loadInfo(){
 	
 }
 function pizzaOnOrderHtml(toppingsString){
-	var html=document.createElement("div");
+	/*var html=document.createElement("div");
 	html.setAttribute("class","pizzaOnOrder");
 	var quant=document.createElement("span");
 	quant.setAttribute("class","quantity");
@@ -343,8 +343,8 @@ function pizzaOnOrderHtml(toppingsString){
 	toppings.textContent=toppingsString;
 	html.appendChild(toppings);
 	html.insertBefore(quant,toppings);
-	html.insertBefore(text,toppings);
-	return html;
+	html.insertBefore(text,toppings);*/
+	return "bb";/*html;*/
 }
 function makeActive(cntnrStr,rdOnlyStr){
 	$(rdOnlyStr).removeAttr("readonly");
