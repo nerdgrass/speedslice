@@ -3643,6 +3643,68 @@ input[type=checkbox].toppingToggle {
   width: 7rem;
 }
 
+
+
+/* line 98, ../sass/_pizzaBuilder.scss */
+.toppingToggle.toppingToggleLarge label {
+  height: 6rem;
+  width: 6rem;
+  top: .5rem;
+  left: .5rem;
+}
+
+/* line 104, ../sass/_pizzaBuilder.scss */
+/*.toppingToggle input[type=checkbox]:checked + label {
+  background: #efc657;
+}*/
+#pepperoniToggle+label{
+	background-image:url(../img/toppings/pepperoniIconDark.png);
+	background-position: 8px 19px
+}
+#pepperoniToggle+label:active,#pepperoniToggle:checked+label{
+	background-image:url(../img/toppings/pepperoniIcon.png); 
+	background-position:8px 19px;
+}
+#onionsToggle+label{
+  background-image:url(../img/toppings/onionIconDark.png);
+  background-position: 4px 3px;
+}
+#onionsToggle+label:active,#onionsToggle:checked+label{
+  background-image:url(../img/toppings/onionIcon.png);
+  background-position: 4px 3px;
+}
+#mushroomsToggle+label{
+  background-image:url(../img/toppings/mushroomIconDark.png);
+  background-position:4px 5px;
+}
+#mushroomsToggle+label:active,#mushroomsToggle:checked+label{
+  background-image:url(../img/toppings/mushroomIcon.png);
+  background-position: 4px 5px;
+}
+#sausageToggle+label{
+  background-image:url(../img/toppings/sausageIconDark.png);
+  background-position: 8px 12px;
+}
+#sausageToggle+label:active,#sausageToggle:checked+label{
+  background-image:url(../img/toppings/sausageIcon.png);
+  background-position:8px 12px;
+}
+#peppersToggle+label{
+  background-image:url(../img/toppings/pepperIconDark.png);
+  background-position: 4px 3px;
+}
+#peppersToggle+label:active,#peppersToggle:checked+label{
+  background-image:url(../img/toppings/pepperIcon.png);
+  background-position: 4px 3px;
+}
+#olivesToggle+label{
+  background-image:url(../img/toppings/oliveIconDark.png);
+  background-position: 4px 5px;
+}
+#olivesToggle+label:active,#olivesToggle:checked+label{
+  background-image:url(../img/toppings/oliveIcon.png);
+  background-position: 4px 5px;
+}
 /* line 78, ../sass/_pizzaBuilder.scss */
 .toppingToggle label {
   display: block;
@@ -3659,22 +3721,10 @@ input[type=checkbox].toppingToggle {
   top: .3rem;
   left: .3rem;
   z-index: 1;
-  background: #f8f6f3;
+  background-size:90%;
+  background-repeat:no-repeat;
+  background-color:#f8f6f3;
 }
-
-/* line 98, ../sass/_pizzaBuilder.scss */
-.toppingToggle.toppingToggleLarge label {
-  height: 6rem;
-  width: 6rem;
-  top: .5rem;
-  left: .5rem;
-}
-
-/* line 104, ../sass/_pizzaBuilder.scss */
-.toppingToggle input[type=checkbox]:checked + label {
-  background: #efc657;
-}
-
 /* line 1, ../sass/_locations.scss */
 #map-canvas, #map_canvas {
   /*height: 35vh;
