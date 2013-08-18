@@ -40,7 +40,7 @@ FastButton.prototype.onClick = function(event) {
 };
 
 FastButton.prototype.reset = function() {
-  //this.element.removeEventListener('touchend', this, false);
+  this.element.removeEventListener('touchend', this, false);
   document.body.removeEventListener('touchmove', this, false);
 };
 clickbuster.preventGhostClick = function(x, y) {
@@ -89,7 +89,7 @@ window.onerror = function(msg, url, linenumber) {
     alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
     return true;
 }
-function onLoad() {loadInfo();
+function onLoad() {
 	document.addEventListener("deviceready", onDeviceReady, false);
 }
 function onDeviceReady() {
