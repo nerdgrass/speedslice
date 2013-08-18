@@ -10,8 +10,8 @@ FastButton.prototype.handleEvent = function(event) {
   switch (event.type) {
     case 'touchstart': this.onTouchStart(event); break;
     case 'touchmove': this.onTouchMove(event); break;
-    case 'touchend': this.onClick(event); break;
-    case 'click': this.onClick(event); break;
+    case 'touchend': $("section").before("first<br>");this.onClick(event); break;
+    case 'click':$("section").before("second<br>"); this.onClick(event); break;
   }
 };
 FastButton.prototype.onTouchStart = function(event) {
