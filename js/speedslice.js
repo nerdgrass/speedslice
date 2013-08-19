@@ -161,7 +161,8 @@ function loadInfo(){
 	var mmBtns=document.getElementsByClassName("mmenuLink");
 	for(var i=0; i<mmBtns.length; i++){
 		new FastButton(mmBtns[i],function(){$("nav#my-menu").trigger("open.mm");});
-	}	
+	}
+	new FastButton(document.getElementById("createAccount"),createAccount);
 	new FastButton(document.getElementsByClassName("home")[0],function(){selectAddress(1); addrRtrnTo="selectPizza";});
 	new FastButton(document.getElementById("gpsButton"),getGpsLocation);
 	new FastButton(document.getElementById("setNewAddress"),setNewAddress);
@@ -632,7 +633,7 @@ function selectAddress(slide){
 		},100);
 	}
 }
-function logIn(theDiv){
+function logIn(){
 	showLoader();
 	var PW=document.getElementById('pWordLogIn').value;
 	var email=document.getElementById('emailLogIn').value;
@@ -664,7 +665,7 @@ function logIn(theDiv){
 		$("#pWordLogin").parent("div").after("<div id='badLogin' class='cRed'>Invalid email or password</div>");
 	});
 }
-function createAccount(theDiv){
+function createAccount(){
 	var PW=document.getElementById('pWord').value;
 	var email=document.getElementById('emailAdd').value;
 	var fName=document.getElementById('fName').value;

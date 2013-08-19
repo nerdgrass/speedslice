@@ -303,23 +303,23 @@
                 <a href="#my-menu" class="mmenuLink vBottom fL "><span class="mmenuButton"></span></a>
                 <h1>SpeedSlice</h1>
             </header>
-        	<div class="infoWrapper">
-                <div>
-                    <h4>First Name:</h4><input type="text" id="fName">
+        	<div class="small-10 small-centered columns">
+                <div class="small-10 small-centered columns">
+                    <h4 class="small-5 columns">First Name:</h4><input class="small-5 columns" type="text" id="fName">
                 </div>
-                <div>
-                    <h4>Last Name:</h4><input type="text" id="lName">
+                <div class="small-10 small-centered columns">
+                    <h4 class="small-5 columns">Last Name:</h4><input class="small-5 columns" type="text" id="lName">
                 </div>
-                <div>
-                    <h4>Email</h4><input type="email" id="emailAdd">
+                <div class="small-10 small-centered columns">
+                    <h4 class="small-5 columns">Email</h4><input class="small-5 columns" type="email" id="emailAdd">
                 </div>
-                <div>
-                    <h4>Password</h4><input type="password" id="pWord">
+                <div class="small-10 small-centered columns">
+                    <h4 class="small-5 columns">Password</h4><input class="small-5 columns" type="password" id="pWord">
                 </div>
 			</div>
-            <div class="next bigRed" onClick="createAccount(this)">Next</div>
+            <div class="next expand large button" id="createAccount">Next</div>
             <div class="userOpt">
-            	Already a member? Click <a onClick="switchSlides(3,4)" class="pntr">here</a> to sign in.
+            	Already a member? Click <a onClick="switchSlides(4)" class="pntr">here</a> to sign in.
             </div>
             <footer>
             	<h1>Your Info</h1>
@@ -349,7 +349,7 @@
             </div>
             <div class="small-10 small-centered columns userOpt">
                         Don't have an account?<br>
-                        Click <a onClick="switchSlides(4,3)" class="pntr">here</a> to sign up.
+                        Click <a onClick="switchSlides(3)" class="pntr">here</a> to sign up.
                     </div>
             <footer>
             	<h1 onClick="logIn(this)">Sign Me In</h1>
@@ -489,17 +489,15 @@
                     <h2 class="settingsHeader">ON ITS WAY!</h2>
                 </div>
                 <div class="small-10 small-centered columns card">
-                    <p><span id="restaurantName">Hillside Cafe</span> takes an average of <span id="avgDeliverTime">49 minutes</span> to deliver to your area.</p>
+                    <p><span id="restaurantName"></span> Your pizza should arrive in approximately <span id="avgDeliverTime">45 minutes</span>.</p>
 
                     <p>Ref #: <span id="refNum"></span></p>
                     <p>Order ID: <span id="successID"></span></p>
                     <p id="discAmtWrapper" class="nD">Discount received: <span id="discAmt"></span></p>
                     <p>We will be emailing you a receipt shortly!</p>
-
-
                 </div>
              </div>
-            <footer onClick="switchSlides(8,0)">
+            <footer>
             	<h1>Order Completed</h1>
             </footer>
         </section>
