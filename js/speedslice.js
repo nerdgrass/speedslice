@@ -295,7 +295,7 @@ function activateOrderOptions(){
 	var orderOpts=document.getElementsByClassName("orderOpt");
 	for(var i=0; i<orderOpts.length; i++){
 		new FastButton(orderOpts[i],function(){
-			theSelection=this;
+			theSelection=this.element;
 			var restAndPrice=$(theSelection).text().split("$");
 			navigator.notification.confirm(
 				restAndPrice[0]+" $"+restAndPrice[1],

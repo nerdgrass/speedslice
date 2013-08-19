@@ -154,10 +154,12 @@ section>header+div{
 #loader{
 	height:100%;
 	width:100%;
-	background:rgba(0,0,0,0.2);
+	background:rgba(0,0,0,0.3);
 	display:none;
 	z-index:10000;
 	position:absolute;
+	top:0;
+	left:0;
 }
 #loader>img{
 	height:4.6rem;

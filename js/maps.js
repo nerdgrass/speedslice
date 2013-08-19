@@ -48,7 +48,7 @@ var map;
         }
 function getGpsLocation(){
 	showLoader();
-	navigator.geolocation.getCurrentPosition(getGeonamesData,function(){alert("Getting location failed");},{enableHighAccuracy:true,timeout:10000});
+	navigator.geolocation.getCurrentPosition(getGeonamesData,function(){alert("Getting location failed");hideLoader();},{enableHighAccuracy:true,timeout:10000});
 	function getGeonamesData(res){
 		$.get("http://api.geonames.org/extendedFindNearby?lat="+res.coords.latitude+"&lng="+res.coords.longitude+"&username=piecewise",function(data){			
 			hideLoader();
