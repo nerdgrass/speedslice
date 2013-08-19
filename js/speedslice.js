@@ -78,7 +78,6 @@ cardReturnTo="account";
 prevSlide=1;
 //host="https://speedslice.com/app/Final/";
 host="http://pizzadelivery.piecewise.com/Final/";
-loader=$("<img src='img/loading.gif' id='loader'>");
 lastY=0;
 initY=0;
 lastSlides=new Array();
@@ -146,9 +145,9 @@ function loadInfo(){
 			}
 		}
 	});	
-	customScrolling("abtContentWrapper","abtContent","aboutSlider");
-	customScrolling("legalContentWrapper","legalContent","legalSlider");
-	customScrolling("supportContentWrapper","supportContent","supportSlider");
+	$.customScrolling("abtContentWrapper","abtContent","aboutSlider");
+	$.customScrolling("legalContentWrapper","legalContent","legalSlider");
+	$.customScrolling("supportContentWrapper","supportContent","supportSlider");
 	checkCustomScrolling();
 	/*new FastButton(document.getElementById("facebookLink"),function(){
 		window.plugins.childBrowser.showWebPage("https://www.facebook.com/SpeedSlice");
@@ -306,7 +305,7 @@ function pizzaOnOrderHtml(toppingsString){
 function makeActive(cntnrStr,rdOnlyStr){
 	$(rdOnlyStr).removeAttr("readonly");
 	$(cntnrStr).animate({opacity:1},300);
-	$("#loader").remove();
+	hideLoader();
 }
 function getDeliveryOpts(){
 	$.getJSON(host+"DeliveryOpts.php",function(data){
@@ -330,11 +329,9 @@ function getDeliveryOpts(){
 					//code for filling in fields
 					var addrNick=$(this.element).parent().text();
 					$("#editAddrNick").val(addrNick);
-					var loaderClone=$(loader).clone();
-					$(loaderClone).addClass("bigLoader");
+					showLoader();
 					var blockChanges="#editAddr,#editAddr2,#editCity,#editState,#editZip,#editPhone";
 					$(blockChanges).attr("readonly","1");
-					$("#deliveryLoc>.infoWrapper").css("opacity","0.5").prepend(loaderClone);
 					$.getJSON(host+"DeliveryOpts.php?addrNick="+addrNick,function(data){
 						$("#editAddr").val(data.addr);
 						$("#editAddr2").val(data.addr2);
@@ -372,7 +369,7 @@ function getDeliveryOpts(){
 function orderError(theError){
 	$("#orderErrorOccurred").remove();
 	$("#orderOptions>.bigRed:first").after("<div id='orderErrorOccurred'><span class='cRed'>"+(typeof theError!="undefined" ? theError:"Order failed. Please try again later.")+"</span></div>");
-	$("#loader").remove();
+	hideLoader();
 	$("#pickSpot").css("opacity",1);
 }
 function addTopping(theID){
@@ -405,13 +402,11 @@ function completeSignout(indexSel){
 	}
 }
 function finalOrderConfirmation(indexSel){
-	$("#loader").remove();
+	hideLoader();
 	$("#pickSpot").css("opacity",1);
 	$("#orderErrorOccurred").remove();
 	if(indexSel==2){
-		var newLoader=$(loader).clone();
-		$("#pickSpot").css("opacity",0.8);
-		$("#pickSpot").append($(newLoader).addClass("bigLoader"));
+		showLoader();
 		var pizzaOrderInfo={RestaurantID:$(theSelection).attr("data-restID"),
 							TrayOrder:$(theSelection).attr("data-order"),
 							AddressName:$("#addressTo>span").text(),
@@ -420,7 +415,7 @@ function finalOrderConfirmation(indexSel){
 			pizzaOrderInfo.Coupon=$("#couponCode").val();
 		}
 		$.post(host+"PlaceOrder.php",pizzaOrderInfo,function(data){	
-			$("#loader").remove();
+			hideLoader();
 			$("#pickSpot").css("opacity",1);
 			try{
 				data=$.parseJSON(data);
@@ -500,7 +495,7 @@ function orderPizzaPage(curSlide){
 			switchSlides(6);
 		}
 		$(".orderOpt").parent("div").remove();
-		$("#orderOptions").children("div:first").after($(loader).clone());
+		showLoader();
 		pizzasString="";
 		$("[name^=q]").each(function(index, element) {
             pizzasString+=$(element).attr("name").substr(1)+"q"+$(element).val()+",";
@@ -508,7 +503,7 @@ function orderPizzaPage(curSlide){
 		pizzasString=pizzasString.substr(0,(pizzasString.length-1));
 		localStorage.setItem("LastAddress",address.addrNick);
 		$.getJSON(host+"FindPizzaPlaces.php?PizzaID="+pizzasString+"&AddressName="+address.addrNick,function(data){
-			$("#loader").remove();
+			hideLoader();
 			if(typeof data.error=="undefined"){				
 				$.each(data,function(index,value){
 					$("#orderOptions").append("<div><h4 class='orderOpt' data-order='"+value.Tray_Order+"' data-restID='"+value.RestaurantID+"'>"+value.Rest_Name+"<span class='fR pl10'>$"+value.Total_Price+"</span></h4></div>");
@@ -521,16 +516,16 @@ function orderPizzaPage(curSlide){
 				$("#orderOptions").append("<div><h4 id='noRests'>"+data.error+"</h4></div>");
 			}
 		}).error(function(){
-			$("#loader").remove();
+			hideLoader();
 			$("#orderOptions").append("<div><h4 id='noRests'>Unknown error occurred. Please try again in a couple of minutes.</h4></div>");
 		});	
 	}
 	return true;
 }
-function updateAddress(){
+function updateAddress(e){
 	address={};
 	addrRtrnTo="addresses";
-	setNewAddress({	addr:"editAddr",
+	setNewAddress(e,{addr:"editAddr",
 					addr2:"editAddr2",
 					city:"editCity",
 					zip:"editZip",
@@ -538,7 +533,7 @@ function updateAddress(){
 					phone:"editPhone",
 					addrNick:"editAddrNick"});
 }
-function setNewAddress(ids){
+function setNewAddress(e,ids){
 	var useIds=typeof ids!=="undefined";
 	address.addr=$("#" + (useIds ? ids.addr:"addr")).val();
 	//ie
@@ -596,7 +591,6 @@ function clearAddressForm(){
 	$("[name=addr],[name=addr2],[name=addrNick],[name=zip],[name=phone],[name=city]").val("");	
 }
 function emptyLine(addrLine,addrID){
-	console.log(addrID,addrLine);
 	if(addrLine==""){
 		$("#"+addrID).addClass("redBrdr");
 		return true;
@@ -624,12 +618,12 @@ function selectAddress(slide){
 	}
 }
 function logIn(theDiv){
-	$(theDiv).append($(loader).clone());
+	showLoader();
 	var PW=document.getElementById('pWordLogIn').value;
 	var email=document.getElementById('emailLogIn').value;
 	var userAndPW="Email="+email+"&Password="+PW;
 	$.post(host+"Login.php",userAndPW,function(data){
-		loader=$("#loader").remove();
+		hideLoader();
 		if(!isNaN(data.substr(0,1))){
 			$("#badLogin").remove();
 			switch(parseInt(data)){
@@ -651,7 +645,7 @@ function logIn(theDiv){
 			}
 		}
 	}).error(function(){
-		loader=$("#loader").remove();
+		hideLoader();
 		$("#pWordLogin").parent("div").after("<div id='badLogin' class='cRed'>Invalid email or password</div>");
 	});
 }
@@ -661,9 +655,9 @@ function createAccount(theDiv){
 	var fName=document.getElementById('fName').value;
 	var lName=document.getElementById('lName').value;
 	var info="Email="+email+"&Password="+PW+"&fName="+fName+"&lName="+lName;
-	$(theDiv).append($(loader).clone());
+	showLoader();
 	$.post(host+"CreateAccount.php",info,function(data){
-		loader=$("#loader").remove();
+		hideLoader();
 		if(!isNaN(data)){
 			loggedIn=1;
 			$("#orderText,#createText").toggle();
@@ -711,9 +705,9 @@ function addCard(){
 		return false;	
 	}
 	$("#noCards").remove();
-	$("#addCardButton").append($(loader).clone());
+	showLoader();
 	$.post(host+"Card.php",cardData,function(data){
-		$("#loader").remove();
+		hideLoader();
 		//needs to be updated to show error without wrapper.
 		switch(data){
 			case "":switch(cardReturnTo){
@@ -778,7 +772,14 @@ function showUserInfo(data){
 	//add once live
 	//pushNotification.register(successHandler, errorHandler,{"senderID":"157047801644","ecb":"onNotificationGCM"});
 }
-
+function showLoader(){
+	var $loadImg=$("#loader>img");
+	$loadImg.css({marginLeft:(window.outerWidth-$loadImg.width())/2,marginTop:(window.outerHeight-$loadImg.height())/2});
+	$("#loader").show();	
+}
+function hideLoader(){
+	$("#loader").hide();
+}
 function switchSlides(newSlide,backButton){
 	$('nav#my-menu').trigger("close.mm");
 	prevSlide=$("section:visible").index();
@@ -797,111 +798,12 @@ function switchSlides(newSlide,backButton){
 function checkCustomScrolling(){
 	var visiSct=$("section:visible");
 	var lastDiv=$("section:visible>div:visible:last");
-	if($(lastDiv).position().top>=$(visiSct).children("header").height() && ($(lastDiv).position().top+$(lastDiv).height())>$(visiSct).children("footer").position().top){
-		if($(visiSct).has(".aSlider").length==0){
-			createCustomScroller(visiSct);
-		}
+	if(visiSct.find(".aSlider").length==0 && $(lastDiv).position().top>=$(visiSct).children("header").height() && ($(lastDiv).position().top+$(lastDiv).height())>$(visiSct).children("footer").position().top){
+		$(visiSct).makeScrollable();
 	}
 	/*else if($(visiSct).has(".aSlider").length!=0){
 		$(visiSct).find(".aSlider").unwrap().unwrap().remove();
 	}*/
-}
-function createCustomScroller(sctnForScroller){
-	$(sctnForScroller).children("div,h2").wrapAll("<div id='custom-scrollbar-wrapper"+scrollBarNmbr+"' class='ovrFlwHide' />").wrapAll("<div id='custom-scrollbar-content"+scrollBarNmbr+"' class='clearFix' />");
-	$("#custom-scrollbar-content"+scrollBarNmbr).append('<div class="h380 aSlider nD"><div class="h380 pntr"><div id="custom-scrollbar-slider'+scrollBarNmbr+'" style="position: relative; top: 3px;" class="ui-draggable"></div></div></div>');
-	customScrolling('custom-scrollbar-wrapper'+scrollBarNmbr,'custom-scrollbar-content'+scrollBarNmbr,'custom-scrollbar-slider'+scrollBarNmbr);
-	scrollBarNmbr++;
-}
-function customScrolling(theContainer,innerContainer,sliderHandle){
-	$("#"+sliderHandle).draggable({scroll:false,axis:"y",containment:"parent",drag:function(e,u){ 
-		$("#"+innerContainer).css("margin-top",(-$("#"+innerContainer).height()*(u.position.top/$(".aSlider:first").height()))+"px");}
-	});
-	$("#"+theContainer).on("touchstart",function(e){
-		initY=e.originalEvent.touches[0].pageY;
-	}).on("touchmove",function(e){
-		e.preventDefault();
-		var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-		//var elm = $(this).offset();
-		var y = touch.pageY;
-		if(lastY!=0 && Math.abs(y-initY)>30){
-			touchStarted=true;
-			scrollDiv(e,(y-lastY),"#"+innerContainer,"#"+sliderHandle,1,$(".aSlider:first").height());
-		}
-		lastY=y;
-	}).on("touchend",function(e){
-		if(touchStarted){
-			e.preventDefault();
-			e.stopPropagation();
-			touchStarted=false;
-		}
-	}).mousewheel(function(e){
-		scrollDiv(e,e.originalEvent.wheelDelta,"#"+innerContainer,"#"+sliderHandle,0,$(".aSlider:first").height());
-	});
-	$("#"+theContainer).on("touchstart",".aSlider",function(e){
-		e.stopPropagation();
-		if(typeof timeoutId!="undefined"){
-			clearInterval(timeoutId);
-		}
-		var touchSpot=e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-	    if (!touchSpot.offsetY) {
-			offY = touchSpot.pageY - $(e.target).offset().top;
-		}
-		else{
-			offY=touchSpot.offsetY;
-		}
-		timeoutId=setInterval("clickScroll("+offY+",'"+innerContainer+"','#"+sliderHandle+"',"+$(".aSlider:first").height()+")",30);
-	});
-	$(document).on("touchend",function(e){
-		if(typeof timeoutId!="undefined"){
-			clearInterval(timeoutId);
-		}
-		$("#"+sliderHandle).stop(true);
-	});
-}
-function scrollDiv(e,upOrDown,innerContainer,sliderHandle,touch,sliderHeight){
-	e.preventDefault();
-	e.stopPropagation();
-	var iContMrgnTop=parseInt($(innerContainer).css("margin-top"),10);
-	var heightAdj=sliderHeight-$("footer:first").height()-20;
-	if(upOrDown<0){
-		if((iContMrgnTop-(heightAdj))>-$(innerContainer).height()){
-			$(innerContainer).css({"margin-top":"-="+(touch ? "15":"30")+"px","padding-bottom":"+="+(touch ? "15":"30")+"px"});
-		}
-	}
-	else{
-		if((iContMrgnTop+(heightAdj))<=(heightAdj-1)){
-			$(innerContainer).css({"margin-top":"+="+(touch ? "15":"30")+"px","padding-bottom":"-="+(touch ? "15":"30")+"px"});
-		}
-	}
-	adjustSlider(iContMrgnTop,innerContainer,sliderHandle,sliderHeight);	
-}
-function clickScroll(theOffset,innerContainer,sliderHandle,sliderHeight){
-	$(sliderHandle).stop(true);
-	var sliderPosition=parseInt($(sliderHandle).css("top"),10);
-	if(theOffset>sliderPosition){
-		if(sliderPosition<sliderHeight && sliderPosition!=theOffset){
-			$(sliderHandle).css("top","+=1");
-			$("#"+innerContainer).css("margin-top",(-($("#"+innerContainer).height()/sliderHeight)*parseInt($(sliderHandle).css("top"),10))+"px");
-		}
-	}
-	else{
-		if(sliderPosition>0 && sliderPosition!=theOffset){
-			$(sliderHandle).css("top","-=1");
-			$("#"+innerContainer).css("margin-top",(-($("#"+innerContainer).height()/sliderHeight)*parseInt($(sliderHandle).css("top"),10))+"px");
-		}
-	}					
-}
-function adjustSlider(iContMrgnTop,innerContainer,sliderHandle,sliderHeight){
-	var slidePixels=-(iContMrgnTop/$(innerContainer).height())*sliderHeight;
-	var handleHt=$(sliderHandle).height();
-	// + or - height of slider 
-	if(slidePixels<handleHt){
-		slidePixels=0;
-	}
-	if(slidePixels>(sliderHeight-handleHt)){
-		slidePixels=(sliderHeight-handleHt);
-	}
-	$(sliderHandle).css("top",slidePixels+"px"); 
 }
 function onMenuKeyDown(){
 	$('nav#my-menu').trigger($('nav#my-menu.mm-opened').length==0 ? "open.mm":"close.mm");

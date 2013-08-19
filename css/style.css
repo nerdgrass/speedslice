@@ -30,6 +30,9 @@ body{
 	/*font-size:1.6rem;*/
 	/*font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;;*/
 }
+footer:empty{
+	display:none;
+}
 /*h1,h2,h3,h4,h5,h6,.h1Style,.center{
 	margin:0;
 }
@@ -143,6 +146,22 @@ section>header+div{
 	background: url(../img/dashed-border.png) repeat-x;
 	height: 1.2rem;
 	border: none;
+}
+#map-canvas{
+	background:url(../img/ajax-loader.gif) no-repeat;
+	background-position:45% 45%;
+}
+#loader{
+	height:100%;
+	width:100%;
+	background:rgba(0,0,0,0.2);
+	display:none;
+	z-index:10000;
+	position:absolute;
+}
+#loader>img{
+	height:4.6rem;
+	width:4.6rem;
 }
 h4.orderOpt,#orderOptions > div:first-child{
 	width:100%;
@@ -556,17 +575,6 @@ input[type=text].w40{
 	width:18%;
 	float:right;
 	margin-right:1.5rem;
-}
-#loader{
-	margin-left:1rem;
-	height: 1.6rem;
-	width: 1.6rem;
-}
-#loader.bigLoader{
-	height:5rem;
-	width:5rem;
-	margin:14.5rem 0 0 15.7rem;
-	position: absolute;
 }
 #addPizza{
 	cursor:pointer;
