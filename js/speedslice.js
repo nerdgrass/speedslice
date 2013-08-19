@@ -150,9 +150,9 @@ function loadInfo(){
 	customScrolling("legalContentWrapper","legalContent","legalSlider");
 	customScrolling("supportContentWrapper","supportContent","supportSlider");
 	checkCustomScrolling();
-	new FastButton(document.getElementById("facebookLink"),function(){
+	/*new FastButton(document.getElementById("facebookLink"),function(){
 		window.plugins.childBrowser.showWebPage("https://www.facebook.com/SpeedSlice");
-	});
+	});*/
 	$("section").on("blur","input",function(){
 		window.scrollTo(0,0);
 	});
