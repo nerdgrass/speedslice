@@ -3662,7 +3662,7 @@ input[type=checkbox].toppingToggle {
 }*/
 #pepperoniToggle+label{
 	background-image:url(../img/toppings/pepperoniIconDark.png);
-	background-position: .3rem .5rem;
+	background-position: .3rem .6rem;
 }
 #pepperoniToggle+label:active,#pepperoniToggle:checked+label{
 	background-image:url(../img/toppings/pepperoniIcon.png); 
@@ -3690,7 +3690,7 @@ input[type=checkbox].toppingToggle {
 }
 #peppersToggle+label{
   background-image:url(../img/toppings/pepperIconDark.png);
-  background-position:.15rem 0.1rem;
+  background-position:.2rem 0.1rem;
 }
 #peppersToggle+label:active,#peppersToggle:checked+label{
   background-image:url(../img/toppings/pepperIcon.png);
@@ -3724,6 +3724,7 @@ input[type=checkbox].toppingToggle {
 }
 /* line 1, ../sass/_locations.scss */
 #map-canvas, #map_canvas {
+	height:0;
   /*height: 35vh;
   width: 100%;*/
 }

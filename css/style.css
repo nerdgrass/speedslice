@@ -110,6 +110,9 @@ section>header+div{
 .fR{
 	float:right;
 }
+.clear{
+	clear:both;
+}
 .mt20{
 	margin-top:2rem;
 }
@@ -210,7 +213,7 @@ h4.orderOpt{
 	box-shadow:.2rem .2rem 1rem #000;
 	cursor:pointer;
 }
-.next:not([name=editClick]):active,.tipSelected{
+.next:active,.tipSelected{
 	box-shadow:.2rem .2rem 1rem #000 inset;
 }
 .bigRed{
@@ -335,24 +338,30 @@ h4.orderOpt{
 	width:60%;
 }
 .editButton{
-	background:url(../img/edit.png);
+	background:url(../img/edit.png) no-repeat;
 	display:inline-block;
 	height:1.8rem;
 	width:1.8rem;
-	margin:.9rem 2rem 0 0;
 	float:right;
 	background-size:cover;
+	border-top:.9rem solid transparent;
+	border-right:2rem solid transparent;
+	border-bottom:.9rem solid transparent;
+	border-left:2rem solid transparent;
+	box-sizing:content-box;
 }
 .goBtn{
 	display:inline-block;
-	height:1.17rem;
+	height:1.3rem;
 	width:1.8rem;
-	background:url(../img/go.png);
+	background:url(../img/go.png) no-repeat;
 	background-size:cover;
 	margin-left:1rem;
 }
 .delLoc{
 	font-weight:bold;
+	text-align:left;
+	margin-left:2rem;
 }
 .aSlider{
 	width: 1rem; 
@@ -391,11 +400,11 @@ p.question{
 input[type=text].w40{
 	width:40%;
 }
-#delOptsSctn>h2{
+#delOptsSctn h2,#editSctn h2{
 	font-size: 3.5rem;
 	margin-bottom: 1.5rem;	
 }
-#delOpts{
+#delOpts,#editLoc{
 	background:#f8f6f3;	
 	border-radius:1rem;
 	padding:0;
@@ -408,20 +417,13 @@ input[type=text].w40{
 	overflow:hidden;
 	height:38rem;
 }
-#deleteAddress{
-	background: rgb(195,40,46);
-	color: rgb(254,249,241);
-	margin-left: 2rem;
-	line-height: 1.7;
-	font-size: 1.4rem;
-	padding: 0 1rem;
-	border-radius: 1rem;
-	cursor:pointer;
-}
 #noRests{
 	width: 100%;
 	color: red;
 	text-align: center;	
+}
+#editLoc>form{
+	padding-top:2rem;
 }
 #deliveryLoc>.infoWrapper>div,.infoWrapper>#someToppings{
 	padding:1rem .5rem;

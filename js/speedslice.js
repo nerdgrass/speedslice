@@ -163,6 +163,7 @@ function loadInfo(){
 	new FastButton(document.getElementsByClassName("home")[0],function(){selectAddress(1); addrRtrnTo="selectPizza";});
 	new FastButton(document.getElementById("gpsButton"),getGpsLocation);
 	new FastButton(document.getElementById("setNewAddress"),setNewAddress);
+	new FastButton(document.getElementById("saveEditLoc"),updateAddress);
 	new FastButton(document.getElementById("orderPizza"),function(){switchSlides(0);});
 	new FastButton(document.getElementById("accountInfo"),function(){
 		if(loggedIn) {
@@ -193,12 +194,16 @@ function loadInfo(){
 	new FastButton(document.getElementById("signIn"),function(){switchSlides(4);});
 	// Clicking location icon takes you to the location page
 	new FastButton(document.getElementById("location"),function(){
-		selectAddress(2); 
 		addrRtrnTo='selectPizza';
+		selectAddress(2);		
 	});
 	new FastButton(document.getElementById("addressTo"),function(){
-		selectAddress(1); 
 		addrRtrnTo='selectPizza';
+		selectAddress();
+	});
+	new FastButton(document.getElementById("addNewLoc"),function(){
+		addrRtrnTo='addresses';
+		selectAddress(2);
 	});
 	new FastButton(document.getElementById("addPizza"),function(){
 		//check if pizza exists already
@@ -281,57 +286,7 @@ function loadInfo(){
 		},150);
 	}).on("touchmove",function(){
 		clearTimeout(orderTimer);
-	});
-	$("#delOpts").on("touchstart",".delLoc",function(){
-		if($(this).hasClass("button")){
-			selectAddress(2);
-			$("#deleteAddress").hide();
-			clearAddressForm();
-		}
-		else{
-			address.addrNick=$(this).text();//ie placeholder
-			$("#addressTo").removeClass("nD").children("span").text(address.addrNick);
-			switch(addrRtrnTo){
-				case "selectPizza":	switchSlides(0);
-				break;
-				case "account": switchSlides(7);
-				break;
-			}
-		}
-	}).on("mousedown",".editButton",function(){
-		$(this).parent().attr("name","editClick");
-	}).on("mouseup",".editButton",function(){
-		$(this).parent().removeAttr("name");
-	}).on("touchstart",".editButton",function(e){
-		e.stopPropagation();
-		switchSlides(2);
-		//code for filling in fields
-		var addrNick=$(this).parent().text().substr(4);
-		$("#addrNick").val(addrNick);
-		var loaderClone=$(loader).clone();
-		$(loaderClone).addClass("bigLoader");
-		var blockChanges="#addr,#addr2,#city,#state,#zip,#phone";
-		$(blockChanges).attr("readonly","1");
-		$("#deliveryLoc>.infoWrapper").css("opacity","0.5").prepend(loaderClone);
-		$.getJSON(host+"DeliveryOpts.php?addrNick="+addrNick,function(data){
-			$("#addr").val(data.addr);
-			$("#addr2").val(data.addr2);
-			$("#city").val(data.city);
-			$("#state").children("option").removeAttr("selected").each(function(index, element) {
-                if($(element).val()==data.state){
-					$(element).attr("selected","selected");	
-				}
-            });
-			$("#zip").val(data.zip);
-			$("#phone").val(data.phone);
-			$("#deleteAddress").show();
-			makeActive("#deliveryLoc>.infoWrapper",blockChanges);
-		}).error(function(){
-			makeActive("#deliveryLoc>.infoWrapper",blockChanges);
-			$("#deleteAddress").show();
-		});
-	});
-	
+	});	
 }
 function pizzaOnOrderHtml(toppingsString){
 	var html=document.createElement("div");
@@ -356,9 +311,59 @@ function makeActive(cntnrStr,rdOnlyStr){
 function getDeliveryOpts(){
 	$.getJSON(host+"DeliveryOpts.php",function(data){
 		if(data!=null){
-			$(".delLoc:gt(2)").remove();
+			$(".delLoc:gt(0)").remove();
 			$.each(data,function(index,value){
-				$("#delOpts").append('<div class="bigRed delLoc">'+value+'<div class="goBtn"></div><div class="editButton"></div></div>');
+				var delLoc=document.createElement("div");
+				delLoc.setAttribute("class","bigRed delLoc");
+				var goBtn=document.createElement("div");
+				goBtn.setAttribute("class","goBtn");
+				var editBtn=document.createElement("div");
+				editBtn.setAttribute("class","editButton");
+				var val=document.createTextNode(value);
+				delLoc.appendChild(val);
+				delLoc.appendChild(goBtn);
+				delLoc.appendChild(editBtn);
+				new FastButton(editBtn,function(){
+					clearAddressForm();
+					//event.stopPropagation();
+					switchSlides(13);
+					//code for filling in fields
+					var addrNick=$(this.element).parent().text();
+					$("#editAddrNick").val(addrNick);
+					var loaderClone=$(loader).clone();
+					$(loaderClone).addClass("bigLoader");
+					var blockChanges="#editAddr,#editAddr2,#editCity,#editState,#editZip,#editPhone";
+					$(blockChanges).attr("readonly","1");
+					$("#deliveryLoc>.infoWrapper").css("opacity","0.5").prepend(loaderClone);
+					$.getJSON(host+"DeliveryOpts.php?addrNick="+addrNick,function(data){
+						$("#editAddr").val(data.addr);
+						$("#editAddr2").val(data.addr2);
+						$("#editCity").val(data.city);
+						$("#editState").children("option").removeAttr("selected").each(function(index, element) {
+							if($(element).val()==data.state){
+								$(element).attr("selected","selected");	
+								return false;
+							}
+						});
+						$("#editZip").val(data.zip);
+						$("#editPhone").val(data.phone);
+						makeActive("#deliveryLoc>.infoWrapper",blockChanges);
+					}).error(function(){
+						makeActive("#deliveryLoc>.infoWrapper",blockChanges);
+					});
+
+				});
+				new FastButton(delLoc,function(){
+					address.addrNick=$(this.element).text();//ie placeholder
+					$("#addressTo").removeClass("nD").children("span").text(address.addrNick);
+					switch(addrRtrnTo){
+						case "selectPizza":	switchSlides(0);
+						break;
+						case "account": switchSlides(7);
+						break;
+					}
+				});
+				$("#delOpts").append(delLoc);
 			});
 			checkCustomScrolling();
 		}
@@ -521,39 +526,54 @@ function orderPizzaPage(curSlide){
 		});	
 	}
 	return true;
-}	
-function setNewAddress(){
-	address.addr=$("#addr").val();
+}
+function updateAddress(){
+	address={};
+	addrRtrnTo="addresses";
+	setNewAddress({	addr:"editAddr",
+					addr2:"editAddr2",
+					city:"editCity",
+					zip:"editZip",
+					state:"editState",
+					phone:"editPhone",
+					addrNick:"editAddrNick"});
+}
+function setNewAddress(ids){
+	var useIds=typeof ids!=="undefined";
+	address.addr=$("#" + (useIds ? ids.addr:"addr")).val();
 	//ie
-	if($("#addr2").val()=="Address Line 2"){
-		$("#addr2").val("");
+	if($("#" + (useIds ? ids.addr2:"addr2")).val()=="Address Line 2"){
+		$("#" + (useIds ? ids.addr2:"addr2")).val("");
 	}
-	address.addr2=$("#addr2").val();
-	address.city=$("#city").val();
-	address.zip=$("#zip").val();
-	address.state=$("#state").val();
-	address.phone=$("#phone").val();
-	address.addrNick=$("#addrNick").val();
+	address.addr2=$("#" + (useIds ? ids.addr2:"addr2")).val();
+	address.city=$("#" + (useIds ? ids.city:"city")).val();
+	address.zip=$("#" + (useIds ? ids.zip:"zip")).val();
+	address.state=$("#" + (useIds ? ids.state:"state")).val();
+	address.phone=$("#" + (useIds ? ids.phone:"phone")).val();
+	address.addrNick=$("#" + (useIds ? ids.addrNick:"addrNick")).val();
 	for(var i in address){
 		if(i!="addr2"){
-			failedCheck=emptyLine(address[i],i);
+			failedCheck=emptyLine(address[i],useIds ? ids[i]:i);
 		}
 		if(failedCheck){
 			return false;
 		}
 	}
 	if(isNaN(address.zip)){
-		$("#zip").addClass("redBrdr");
-		return false;	
+		$("#" + (useIds ? ids.zip:"#zip")).addClass("redBrdr");
+		return false;
 	}
 	switch(addrRtrnTo){
 		case "selectPizza":	switchSlides(0);
-		$("#addressTo>span").text($("#addrNick").val()).removeClass("redBrdr");
+		$("#addressTo>span").text($("#" + (useIds ? ids.nick:"addrNick")).val()).removeClass("redBrdr");
 		break;
 		case "account": switchSlides(7);
 		break;
 		case "card":switchSlides(6);
 		$("#noCards").remove();
+		break;
+		case "addresses":switchSlides(1);
+		addrRtrnTo="selectPizza";
 		break;
 	}
 	if(loggedIn){
@@ -563,9 +583,9 @@ function setNewAddress(){
 	}
 }
 function deleteAddress(){
-	$.post(host+"DeleteAddress.php",{"addrNick":$("#addrNick").val()});
+	$.post(host+"DeleteAddress.php",{addrNick:$("#editAddrNick").val()});
 	$(".delLoc").each(function(index, element) {
-        if($(element).text().substr(4)==$("#addrNick").val()){
+        if($(element).text()==$("#editAddrNick").val()){
 			$(element).remove();	
 		}
     });
@@ -573,9 +593,10 @@ function deleteAddress(){
 	switchSlides(1);
 }
 function clearAddressForm(){
-	$("#addr,#addr2,#addrNick,#zip,#phone,#city").val("");	
+	$("[name=addr],[name=addr2],[name=addrNick],[name=zip],[name=phone],[name=city]").val("");	
 }
 function emptyLine(addrLine,addrID){
+	console.log(addrID,addrLine);
 	if(addrLine==""){
 		$("#"+addrID).addClass("redBrdr");
 		return true;
@@ -587,20 +608,20 @@ function emptyLine(addrLine,addrID){
 }
 function selectAddress(slide){
 	if(typeof slide=="undefined"){
-		if($("#delOpts").children(".delLoc").length==1){
-			switchSlides(2);
+		if($("#delOpts>.delLoc").length==0){
+			slide=2;
 		}
 		else{
-			switchSlides(1);
+			slide=1;
 		}
 	}
-	else{
-		switchSlides(slide);
+	switchSlides(slide);
+	if(slide==2 && $("#map-canvas").height()==0){
+		setTimeout(function(){
+			$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
+			initialize();
+		},100);
 	}
-	setTimeout(function(){
-		$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
-		initialize();
-	},100);
 }
 function logIn(theDiv){
 	$(theDiv).append($(loader).clone());
