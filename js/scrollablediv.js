@@ -78,7 +78,8 @@
 			}
 			else{
 				if((iContMrgnTop+(heightAdj))<=(heightAdj-1)){
-					$(innerContainer).css({"margin-top":"+="+moveDistance,"padding-bottom":"-="+moveDistance});
+					var backToTop=parseInt($(innerContainer).css("margin-top"),10)+moveDistance>0;
+					$(innerContainer).css({"margin-top":(backToTop ? 0:"+="+moveDistance),"padding-bottom":(backToTop ? 0:"-="+moveDistance)});
 				}
 			}
 			adjustSlider(iContMrgnTop,innerContainer,sliderHandle,sliderHeight);	
