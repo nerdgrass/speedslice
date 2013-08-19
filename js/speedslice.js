@@ -790,7 +790,7 @@ function showUserInfo(data){
 }
 function showLoader(){
 	var $loadImg=$("#loader>img");
-	$loadImg.css({left:(window.outerWidth-$loadImg.width())/2,top:(window.outerHeight-$loadImg.height())/2});
+	$loadImg.css({left:(window.innerWidth-$loadImg.width())/2,top:(window.innerHeight-$loadImg.height())/2});
 	$("#loader").show();
 }
 function hideLoader(){
