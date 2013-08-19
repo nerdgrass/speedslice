@@ -355,7 +355,7 @@ function getDeliveryOpts(){
 				});
 				new FastButton(delLoc,function(){
 					address.addrNick=$(this.element).text();//ie placeholder
-					$("#addressTo").removeClass("nD").children("span").text(address.addrNick);
+					$("#addressTo").removeClass("nD redBrdr").children("span").text(address.addrNick);
 					switch(addrRtrnTo){
 						case "selectPizza":	switchSlides(0);
 						break;
@@ -510,7 +510,7 @@ function orderPizzaPage(curSlide){
 			hideLoader();
 			if(typeof data.error=="undefined"){				
 				$.each(data,function(index,value){
-					$("#orderOptions").append("<div><h4 class='orderOpt' data-order='"+value.Tray_Order+"' data-restID='"+value.RestaurantID+"'>"+value.Rest_Name+"<span class='fR pl10'>$"+value.Total_Price+"</span></h4></div>");
+					$("#orderOptions").append("<div><h4 class='orderOpt small-10 small-centered columns' data-order='"+value.Tray_Order+"' data-restID='"+value.RestaurantID+"'>"+value.Rest_Name+"<span class='fR pl10'>$"+value.Total_Price+"</span></h4><hr class='checkeredHr'></div>");
 				});
 				$("#couponCodeDiv").show();
 				checkCustomScrolling();

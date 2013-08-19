@@ -163,9 +163,6 @@ section>header+div{
 	height:4.6rem;
 	width:4.6rem;
 }
-h4.orderOpt,#orderOptions > div:first-child{
-	width:100%;
-}
 h4.orderOpt{
 	cursor:pointer;
 }
@@ -416,11 +413,11 @@ p.question{
 input[type=text].w40{
 	width:40%;
 }
-#delOptsSctn h2,#editSctn h2{
+#delOptsSctn h2,#editSctn h2,#pickSpot h2{
 	font-size: 3.5rem;
 	margin-bottom: 1.5rem;	
 }
-#delOpts,#editLoc{
+#delOpts,#editLoc,#orderOptions{
 	background:#f8f6f3;	
 	border-radius:1rem;
 	padding:0;
@@ -458,10 +455,6 @@ input[type=text].w40{
 	width:32rem;
 	height:56.9rem;
 	overflow:hidden;
-}
-
-#orderOptions,.w94{
-	width:94%;
 }
 #orderOptions{
 	line-height:2;
@@ -660,6 +653,19 @@ header>h1{
 #addressTo{
 	margin-bottom:.7rem;
 	width:100%;
+}
+#couponCodeDiv{
+	padding-top:2rem;
+}
+#couponCodeDiv>h4{
+	line-height:1;
+	float:left;
+	width:33%;
+	font-weight: normal;
+	margin-top: -.3rem;
+}
+#couponCode{
+	width:65%;	
 }
 .swipeText{
 	vertical-align: text-bottom;
