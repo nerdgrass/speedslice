@@ -85,6 +85,7 @@ scrollBarNmbr=0;
 touchStarted=false;
 var pushNotification;
 window.onerror = function(msg, url, linenumber) {
+	hideLoader();
     alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
     return true;
 }
@@ -133,7 +134,7 @@ function loadInfo(){
 		loggedIn=(data==1 ? true:false);
 		//setTimeout("navigator.splashscreen.hide()",1000);
 		if(loggedIn){
-			$("#orderText,#createText").toggle();
+			$("#orderText,#createText").toggleClass("nD");
 			getDeliveryOpts();
 			getCardInfo();
 			getUserInfo();
@@ -144,7 +145,9 @@ function loadInfo(){
 				$("#addressTo>span").text(address.addrNick);
 			}
 		}
-	});	
+	});
+	var sliderHeight=window.innerHeight-$("section:visible").find("header").outerHeight(true)-$("section:visible").find("footer").outerHeight(true);
+	$(".aSlider,.aSlider>div:first").css("height",sliderHeight);
 	$.customScrolling("abtContentWrapper","abtContent","aboutSlider");
 	$.customScrolling("legalContentWrapper","legalContent","legalSlider");
 	$.customScrolling("supportContentWrapper","supportContent","supportSlider");
@@ -469,7 +472,7 @@ function orderPizzaPage(curSlide){
 		$("#addressTo").addClass("redBrdr");
 		return false;	
 	}
-	if($("input[name^=q]").length==0){
+	if($("#pizzasOnOrder .pizzaOnOrder").length==0){
 		navigator.notification.alert("Please add at least 1 pizza to order.",function(){},"No pizza added","Okay");
 		$("#addressTo").after("<div class='cRed' id='noPizzas'>Please add at least 1 pizza to order</div>");	
 		return false;
@@ -496,9 +499,10 @@ function orderPizzaPage(curSlide){
 		}
 		$(".orderOpt").parent("div").remove();
 		showLoader();
-		pizzasString="";
-		$("[name^=q]").each(function(index, element) {
-            pizzasString+=$(element).attr("name").substr(1)+"q"+$(element).val()+",";
+		var pizzasString="";
+		$("#pizzasOnOrder .pizzaOnOrder").each(function(index, element) {
+			var tops=$(element).children(".orderToppings").text().replace(", ",":")+":";
+            pizzasString+=tops+"q"+parseInt($(element).children(".quantity").text(),10)+",";
         });
 		pizzasString=pizzasString.substr(0,(pizzasString.length-1));
 		localStorage.setItem("LastAddress",address.addrNick);
@@ -614,6 +618,7 @@ function selectAddress(slide){
 		setTimeout(function(){
 			$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
 			initialize();
+			checkCustomScrolling();
 		},100);
 	}
 }
@@ -631,7 +636,7 @@ function logIn(theDiv){
 				break;
 				default: 
 				loggedIn=1;
-				$("#orderText,#createText").toggle();
+				$("#orderText,#createText").toggleClass("nD");
 				getDeliveryOpts();
 				getCardInfo();
 				showUserInfo(data);
@@ -660,7 +665,7 @@ function createAccount(theDiv){
 		hideLoader();
 		if(!isNaN(data)){
 			loggedIn=1;
-			$("#orderText,#createText").toggle();
+			$("#orderText,#createText").toggleClass("nD");
 			$("#emailAdd").removeClass("redBrdr");
 			var dVal=$("#addressTo>span").text();
 			if(dVal.length==0 || dVal=="ADDRESS"){
