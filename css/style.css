@@ -136,6 +136,11 @@ section>header+div{
 	margin-left: 1rem;
 /*	font-family:Arial, Helvetica, sans-serif;*/
 }
+.checkeredHr{
+	background: url(../img/dashed-border.png) repeat-x;
+	height: 1.2rem;
+	border: none;
+}
 h4.orderOpt,#orderOptions > div:first-child{
 	width:100%;
 }
@@ -211,7 +216,7 @@ h4.orderOpt{
 .bigRed{
 	font-size:2.4rem;
 	text-align:center;
-	color:rgb(195,40,46);
+	color:#a33f2d;
 	line-height:1.5;
 }
 .redBrdr{
@@ -330,24 +335,24 @@ h4.orderOpt{
 	width:60%;
 }
 .editButton{
-	background: #7d81be;
-	background: -moz-linear-gradient(top, #7d81be 0%, #c5e9f2 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7d81be), color-stop(100%,#c5e9f2));
-	background: -webkit-linear-gradient(top, #7d81be 0%,#c5e9f2 100%);
-	background: -o-linear-gradient(top, #7d81be 0%,#c5e9f2 100%);
-	background: -ms-linear-gradient(top, #7d81be 0%,#c5e9f2 100%);
-	background: linear-gradient(to bottom, #7d81be 0%,#c5e9f2 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d81be', endColorstr='#c5e9f2',GradientType=0 );
-	line-height:1.2;
-	border-radius:1rem/.5rem;
-	color: white;
-	font-size: 1.4rem;
-	padding: .1rem .5rem;
-	font-weight: bold;
-	position:absolute;
-	right:2rem;
-	margin-top:.9rem;
-	z-index:1000;
+	background:url(../img/edit.png);
+	display:inline-block;
+	height:1.8rem;
+	width:1.8rem;
+	margin:.9rem 2rem 0 0;
+	float:right;
+	background-size:cover;
+}
+.goBtn{
+	display:inline-block;
+	height:1.17rem;
+	width:1.8rem;
+	background:url(../img/go.png);
+	background-size:cover;
+	margin-left:1rem;
+}
+.delLoc{
+	font-weight:bold;
 }
 .aSlider{
 	width: 1rem; 
@@ -385,6 +390,19 @@ p.question{
 }
 input[type=text].w40{
 	width:40%;
+}
+#delOptsSctn>h2{
+	font-size: 3.5rem;
+	margin-bottom: 1.5rem;	
+}
+#delOpts{
+	background:#f8f6f3;	
+	border-radius:1rem;
+	padding:0;
+	border:1px solid #dccbb3;
+}
+#delOpts .button{
+	margin-top:2rem;	
 }
 #abtContentWrapper,#legalContentWrapper,#supportContentWrapper{
 	overflow:hidden;

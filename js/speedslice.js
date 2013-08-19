@@ -283,9 +283,8 @@ function loadInfo(){
 		clearTimeout(orderTimer);
 	});
 	$("#delOpts").on("touchstart",".delLoc",function(){
-		if($(this).index()==2){return false;}//hr
-		if($(this).index()==0){
-			switchSlides(2);	
+		if($(this).hasClass("button")){
+			selectAddress(2);
 			$("#deleteAddress").hide();
 			clearAddressForm();
 		}
@@ -359,7 +358,7 @@ function getDeliveryOpts(){
 		if(data!=null){
 			$(".delLoc:gt(2)").remove();
 			$.each(data,function(index,value){
-				$("#delOpts").append('<div class="next bigRed delLoc"><div class="editButton">EDIT</div>'+value+'</div>');
+				$("#delOpts").append('<div class="bigRed delLoc">'+value+'<div class="goBtn"></div><div class="editButton"></div></div>');
 			});
 			checkCustomScrolling();
 		}
