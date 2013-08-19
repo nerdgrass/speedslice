@@ -789,8 +789,8 @@ function showUserInfo(data){
 }
 function showLoader(){
 	var $loadImg=$("#loader>img");
-	$loadImg.css({marginLeft:(window.outerWidth-$loadImg.width())/2,marginTop:(window.outerHeight-$loadImg.height())/2});
-	$("#loader").show();	
+	$loadImg.css({left:(window.outerWidth-$loadImg.width())/2,top:(window.outerHeight-$loadImg.height())/2});
+	$("#loader").show();
 }
 function hideLoader(){
 	$("#loader").hide();
