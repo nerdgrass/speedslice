@@ -401,8 +401,16 @@ function addTopping(theID){
 function completeSignout(indexSel){
 	if(indexSel==2){
 		$.post(host+"Logout.php",function(){
-			navigator.app.exitApp();	
+			if(device.platform=="Android"){
+				navigator.app.exitApp();
+			}
+			else{
+				switchSlides(1);
+				$("#signIn").show();
+				$("#signOut").hide();
+			}
 		});
+		
 	}
 }
 function finalOrderConfirmation(indexSel){
