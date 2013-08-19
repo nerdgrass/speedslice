@@ -90,7 +90,14 @@ window.onerror = function(msg, url, linenumber) {
     return true;
 }
 function onLoad() {
-	document.addEventListener("deviceready", onDeviceReady, false);
+	
+	if('deviceready' in document){
+		alert(true);
+		document.addEventListener("deviceready", onDeviceReady, false);
+	}
+	else{
+		loadInfo();
+	}
 }
 function onDeviceReady() {
 	checkConnection();
@@ -143,13 +150,8 @@ function loadInfo(){
 	customScrolling("legalContentWrapper","legalContent","legalSlider");
 	customScrolling("supportContentWrapper","supportContent","supportSlider");
 	checkCustomScrolling();
-	$("#facebookLink").on("touchstart",function(e){
-		e.preventDefault();
-		webpageTimer=setTimeout(function(){window.plugins.childBrowser.showWebPage("https://www.facebook.com/SpeedSlice");},150);
-	}).on("touchmove",function(){
-		clearTimeout(webpageTimer);
-	}).on("click",function(e){
-		e.preventDefault();
+	new FastButton(document.getElementById("facebookLink"),function(){
+		window.plugins.childBrowser.showWebPage("https://www.facebook.com/SpeedSlice");
 	});
 	$("section").on("blur","input",function(){
 		window.scrollTo(0,0);
@@ -281,6 +283,7 @@ function loadInfo(){
 		clearTimeout(orderTimer);
 	});
 	$("#delOpts").on("touchstart",".delLoc",function(){
+		if($(this).index()==2){return false;}//hr
 		if($(this).index()==0){
 			switchSlides(2);	
 			$("#deleteAddress").hide();
