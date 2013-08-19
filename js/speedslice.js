@@ -275,20 +275,6 @@ function loadInfo(){
 				'Cancel,Confirm'
 			);
 	});
-	$("#orderOptions").on("touchstart",".orderOpt",function(){
-		theSelection=this;
-		orderTimer=setTimeout(function(){	
-			var restAndPrice=$(theSelection).text().split("$");
-			navigator.notification.confirm(
-				restAndPrice[0]+" $"+restAndPrice[1],
-				finalOrderConfirmation,
-				'Press "Confirm" to finalize your order',
-				'Cancel,Confirm'
-			);
-		},150);
-	}).on("touchmove",function(){
-		clearTimeout(orderTimer);
-	});	
 }
 function pizzaOnOrderHtml(toppingsString){
 	var html=document.createElement("div");
@@ -304,6 +290,21 @@ function pizzaOnOrderHtml(toppingsString){
 	html.insertBefore(quant,toppings);
 	html.insertBefore(text,toppings);
 	return html;
+}
+function activateOrderOptions(){
+	var orderOpts=document.getElementsByClassName("orderOpt");
+	for(var i=0; i<orderOpts.length; i++){
+		new FastButton(orderOpts[i],function(){
+			theSelection=this;
+			var restAndPrice=$(theSelection).text().split("$");
+			navigator.notification.confirm(
+				restAndPrice[0]+" $"+restAndPrice[1],
+				finalOrderConfirmation,
+				'Press "Confirm" to finalize your order',
+				'Cancel,Confirm'
+			);	
+		});	
+	}		
 }
 function makeActive(cntnrStr,rdOnlyStr){
 	$(rdOnlyStr).removeAttr("readonly");
@@ -512,6 +513,7 @@ function orderPizzaPage(curSlide){
 				$.each(data,function(index,value){
 					$("#orderOptions").append("<div><h4 class='orderOpt small-10 small-centered columns' data-order='"+value.Tray_Order+"' data-restID='"+value.RestaurantID+"'>"+value.Rest_Name+"<span class='fR pl10'>$"+value.Total_Price+"</span></h4><hr class='checkeredHr'></div>");
 				});
+				activateOrderOptions();
 				$("#couponCodeDiv").show();
 				checkCustomScrolling();
 			}
