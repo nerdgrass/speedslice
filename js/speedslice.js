@@ -289,7 +289,7 @@ function loadInfo(){
 			clearAddressForm();
 		}
 		else{
-			address.addrNick=$(this).text().substr(4);//ie placeholder
+			address.addrNick=$(this).text();//ie placeholder
 			$("#addressTo").removeClass("nD").children("span").text(address.addrNick);
 			switch(addrRtrnTo){
 				case "selectPizza":	switchSlides(0);
