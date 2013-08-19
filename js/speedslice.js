@@ -91,13 +91,13 @@ window.onerror = function(msg, url, linenumber) {
 }
 function onLoad() {
 	
-	if('deviceready' in document){
-		alert(true);
+	//if('deviceready' in document){
+		//alert(true);
 		document.addEventListener("deviceready", onDeviceReady, false);
-	}
+	/*}
 	else{
 		loadInfo();
-	}
+	}*/
 }
 function onDeviceReady() {
 	checkConnection();
