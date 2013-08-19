@@ -147,7 +147,7 @@ function loadInfo(){
 		}
 	});
 	var sliderHeight=window.innerHeight-$("section:visible").find("header").outerHeight(true)-$("section:visible").find("footer").outerHeight(true);
-	$(".aSlider,.aSlider>div:first").css("height",sliderHeight);
+	$(".aSlider,.aSlider>div:first,#abtContentWrapper,#legalContentWrapper,#supportContentWrapper").css("height",sliderHeight);
 	$.customScrolling("abtContentWrapper","abtContent","aboutSlider");
 	$.customScrolling("legalContentWrapper","legalContent","legalSlider");
 	$.customScrolling("supportContentWrapper","supportContent","supportSlider");
