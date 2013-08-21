@@ -52,7 +52,7 @@ function getGpsLocation(){
 	function getGeonamesData(res){
 		$.get("http://api.geonames.org/extendedFindNearby?lat="+res.coords.latitude+"&lng="+res.coords.longitude+"&username=piecewise",function(data){			
 			hideLoader();
-			$("#addr1").val($(data).find("streetNumber").text()+" "+$(data).find("street").text());
+			$("#addr").val($(data).find("streetNumber").text()+" "+$(data).find("street").text());
 			$("#city").val($(data).find("placename").text());
 			$("#state").children("option").removeAttr("selected");
 			$("#state").children("[value="+$(data).find("adminCode1").text()+"]").attr("selected","selected");
