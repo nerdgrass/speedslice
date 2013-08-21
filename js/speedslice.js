@@ -146,8 +146,12 @@ function loadInfo(){
 			}
 		}
 	});
-	var sliderHeight=window.innerHeight-$("section:visible").find("header").outerHeight(true)-$("section:visible").find("footer").outerHeight(true);
-	$(".aSlider,.aSlider>div:first,#abtContentWrapper,#legalContentWrapper,#supportContentWrapper").css("height",sliderHeight);
+	var headerHeight=$("section:visible").find("header");
+	var footerHeight=$("section:visible").find("footer").outerHeight(true);
+	var sliderHeight=window.innerHeight-headerHeight.outerHeight(true)-footerHeight-25;//25 adjusts 
+	$(".infoWrapper").css("height",sliderHeight);
+	sliderHeight=sliderHeight-headerHeight.outerHeight();//approximating for height of Terms/Privacy bigred header divs
+	$(".aSlider,.aSlider>div:first").css("height",sliderHeight);
 	$.customScrolling("abtContentWrapper","abtContent","aboutSlider");
 	$.customScrolling("legalContentWrapper","legalContent","legalSlider");
 	$.customScrolling("supportContentWrapper","supportContent","supportSlider");

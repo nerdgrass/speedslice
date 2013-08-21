@@ -431,7 +431,6 @@ input[type=text].w40{
 }
 #abtContentWrapper,#legalContentWrapper,#supportContentWrapper{
 	overflow:hidden;
-	height:34rem;
 }
 #noRests{
 	width: 100%;

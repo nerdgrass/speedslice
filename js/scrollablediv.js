@@ -9,7 +9,7 @@
 			}
 		});
 		function createCustomScroller(sctnForScroller){
-			var sliderHeight=window.innerHeight-$(sctnForScroller).find("header").outerHeight(true)-$(sctnForScroller).find("footer").outerHeight(true);
+			var sliderHeight=window.innerHeight-$(sctnForScroller).find("header").outerHeight(true)*2-$(sctnForScroller).find("footer").outerHeight(true)-20;
 			var sliderHeightStyle="style='height:"+sliderHeight+"px'";
 			$(sctnForScroller).children(":not(header)").wrapAll("<div id='custom-scrollbar-wrapper"+scrollBarNmbr+"' class='ovrFlwHide' />").wrapAll("<div id='custom-scrollbar-content"+scrollBarNmbr+"' class='clearFix' />");
 			
@@ -56,7 +56,9 @@
 			else{
 				offY=touchSpot.offsetY;
 			}
-			timeoutId=setInterval("clickScroll("+offY+",'"+innerContainer+"','#"+sliderHandle+"',"+$(".aSlider:first").height()+")",30);
+			timeoutId=setInterval(function(){
+				clickScroll(offY,innerContainer,'#'+sliderHandle,$(".aSlider:first").height());
+			},30);
 		});
 		$(document).on("touchend",function(e){
 			if(typeof timeoutId!="undefined"){

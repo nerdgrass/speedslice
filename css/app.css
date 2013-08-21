@@ -3571,7 +3571,7 @@ html.mm-no-overflowscrolling.mm-right .mm-menu {
 }
 
 /* line 20, ../sass/_pizzaBuilder.scss */
-.pizzaCircle, #toppingPepperoni, #toppingSausage, #toppingPeppers, #toppingOnions, #toppingMushrooms, #toppingOlives {
+.pizzaCircle,#pizzaBG, #toppingPepperoni, #toppingSausage, #toppingPeppers, #toppingOnions, #toppingMushrooms, #toppingOlives {
   position: absolute;
   width: 16rem;
   height: 16rem;
