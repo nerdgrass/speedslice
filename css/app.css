@@ -3544,7 +3544,7 @@ html.mm-no-overflowscrolling.mm-right .mm-menu {
 
 /* line 1, ../sass/_pizzaBuilder.scss */
 .row.pizzaBuilder {
-  margin-bottom: 13.75em;
+  margin-bottom: 10.75em;
 }
 
 /* Pizza Circle */
@@ -3552,7 +3552,8 @@ html.mm-no-overflowscrolling.mm-right .mm-menu {
 .pizzaCircle {
   border: 1rem solid #8a360f;
   color: white;
-  z-index: 100;
+  z-index: 10;
+  background: #efc657;
 }
 
 /* line 12, ../sass/_pizzaBuilder.scss */
@@ -3571,7 +3572,7 @@ html.mm-no-overflowscrolling.mm-right .mm-menu {
 }
 
 /* line 20, ../sass/_pizzaBuilder.scss */
-.pizzaCircle, #pizzaBG, #toppingPepperoni, #toppingSausage, #toppingPeppers, #toppingOnions, #toppingMushrooms, #toppingOlives {
+.pizzaCircle, #toppingPepperoni, #toppingSausage, #toppingPeppers, #toppingOnions, #toppingMushrooms, #toppingOlives {
   position: absolute;
   width: 16rem;
   height: 16rem;
@@ -3579,42 +3580,38 @@ html.mm-no-overflowscrolling.mm-right .mm-menu {
   left: 50%;
   margin-left: -8rem;
 }
-
+#toppingOlives {
+  background: url("../img/toppings/olives.png") no-repeat;
+  z-index: 18;
+}
 /* line 28, ../sass/_pizzaBuilder.scss */
 #toppingPepperoni {
   background: url("../img/toppings/pepperoni.png") no-repeat;
-  z-index: 10;
+  z-index: 20;
 }
 
 /* line 32, ../sass/_pizzaBuilder.scss */
 #toppingSausage {
   background: url("../img/toppings/sausage.png") no-repeat;
-  z-index: 7;
+  z-index: 17;
 }
 
 /* line 36, ../sass/_pizzaBuilder.scss */
 #toppingPeppers {
   background: url("../img/toppings/peppers.png") no-repeat;
-  z-index: 4;
+  z-index: 14;
 }
 
 /* line 40, ../sass/_pizzaBuilder.scss */
 #toppingOnions {
   background: url("../img/toppings/onions.png") no-repeat;
-  z-index: 5;
+  z-index: 15;
 }
 
 /* line 44, ../sass/_pizzaBuilder.scss */
 #toppingMushrooms {
   background: url("../img/toppings/mushrooms.png") no-repeat;
-  z-index: 6;
-}
-
-/* line 48, ../sass/_pizzaBuilder.scss */
-#pizzaBG {
-  background: #efc657;
-  color: white;
-  z-index: 1;
+  z-index: 16;
 }
 
 /* Topping Toggles */
@@ -3665,7 +3662,7 @@ input[type=checkbox].toppingToggle {
 	background-position: .3rem .6rem;
 }
 #pepperoniToggle+label:active,#pepperoniToggle:checked+label{
-	background-image:url(../img/toppings/pepperoniIcon.png); 
+	background-image:url(../img/toppings/pepperoniIcon.png);
 }
 #onionsToggle+label{
   background-image:url(../img/toppings/onionIconDark.png);
@@ -3755,4 +3752,7 @@ ul.locList {
 ul.locList > li {
   font-size: 1.4rem;
   line-height: 1.7rem;
+}
+.row.pizzaBuilder>.small-8{
+	margin-top:-3rem;
 }
