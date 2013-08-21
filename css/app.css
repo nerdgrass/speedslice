@@ -3552,8 +3552,7 @@ html.mm-no-overflowscrolling.mm-right .mm-menu {
 .pizzaCircle {
   border: 1rem solid #8a360f;
   color: white;
-  z-index: 10;
-  background: #efc657;
+  z-index: 100;
 }
 
 /* line 12, ../sass/_pizzaBuilder.scss */
@@ -3580,38 +3579,42 @@ html.mm-no-overflowscrolling.mm-right .mm-menu {
   left: 50%;
   margin-left: -8rem;
 }
-#toppingOlives {
-  background: url("../img/toppings/olives.png") no-repeat;
-  z-index: 18;
-}
+
 /* line 28, ../sass/_pizzaBuilder.scss */
 #toppingPepperoni {
   background: url("../img/toppings/pepperoni.png") no-repeat;
-  z-index: 20;
+  z-index: 10;
 }
 
 /* line 32, ../sass/_pizzaBuilder.scss */
 #toppingSausage {
   background: url("../img/toppings/sausage.png") no-repeat;
-  z-index: 17;
+  z-index: 7;
 }
 
 /* line 36, ../sass/_pizzaBuilder.scss */
 #toppingPeppers {
   background: url("../img/toppings/peppers.png") no-repeat;
-  z-index: 14;
+  z-index: 4;
 }
 
 /* line 40, ../sass/_pizzaBuilder.scss */
 #toppingOnions {
   background: url("../img/toppings/onions.png") no-repeat;
-  z-index: 15;
+  z-index: 5;
 }
 
 /* line 44, ../sass/_pizzaBuilder.scss */
 #toppingMushrooms {
   background: url("../img/toppings/mushrooms.png") no-repeat;
-  z-index: 16;
+  z-index: 6;
+}
+
+/* line 48, ../sass/_pizzaBuilder.scss */
+#pizzaBG {
+  background: #efc657;
+  color: white;
+  z-index: 1;
 }
 
 /* Topping Toggles */
