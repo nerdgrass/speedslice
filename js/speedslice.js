@@ -33,7 +33,7 @@ FastButton.prototype.onClick = function(event) {
   event.stopPropagation();
   this.reset();
   this.handler(event);
-
+$("section").prepend("e"+this.startY+"e");
   if (event.type == 'touchend') {
     clickbuster.preventGhostClick(this.startX, this.startY);
   }
@@ -633,6 +633,7 @@ function selectAddress(slide){
 	if(slide==2 && $("#map-canvas").height()==0){
 		setTimeout(function(){
 			var oldY=clickbuster.coordinates[clickbuster.coordinates.length-1];
+			$("section").prepend(oldY+"br"+oldY+window.innerHeight/3+"<br>");
 			clickbuster.coordinates[clickbuster.coordinates.length-1]=oldY+window.innerHeight/3;
 			$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
 			initialize();
