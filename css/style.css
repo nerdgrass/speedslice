@@ -672,8 +672,8 @@ header>h1{
 .swipeText{
 	vertical-align: text-bottom;
 	float: right;
-	font-size: .8rem;
-	line-height: 1.6rem;
+	font-size: .8em;
+	line-height: 1.6em;
 }
 hr{
 	clear:both;
@@ -719,4 +719,7 @@ hr{
 	width:100%;
 	z-index:10000;
 	display:none;
+}
+#orderSummary{
+	font-size:120%;
 }
