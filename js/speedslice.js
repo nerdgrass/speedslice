@@ -52,6 +52,10 @@ clickbuster.pop = function() {
   clickbuster.coordinates.splice(0, 2);
 };
 clickbuster.onClick = function(event) {
+  event.stopPropagation();
+  event.preventDefault();
+  return false;
+  //stuff above only for mobile not web
   for (var i = 0; i < clickbuster.coordinates.length; i += 2) {
     var x = clickbuster.coordinates[i];
     var y = clickbuster.coordinates[i + 1];
