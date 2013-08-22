@@ -58,6 +58,9 @@ clickbuster.onClick = function(event) {
     if (Math.abs(event.clientX - x) < 25 && Math.abs(event.clientY - y) < 25) {
       event.stopPropagation();
       event.preventDefault();
+	  if(event.type=="mousedown"){
+		  event.target.blur();
+	  }
     }
   }
 };
