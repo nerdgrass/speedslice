@@ -130,7 +130,7 @@ function loadInfo(){
 		e.stopPropagation();
 		e.preventDefault();
 	},true);
-	document.getElementById("mousedown").addEventListener("click",function(e){
+	document.getElementById("ss-blocker").addEventListener("mousedown",function(e){
 		e.stopPropagation();
 		e.preventDefault();
 	},true);

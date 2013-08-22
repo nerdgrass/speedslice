@@ -719,4 +719,5 @@ hr{
 	width:100%;
 	background:green;
 	z-index:10000;
+	display:none;
 }
