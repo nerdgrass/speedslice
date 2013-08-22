@@ -826,7 +826,7 @@ function switchSlides(newSlide,backButton){
 	$("section").hide().eq(newSlide).show();
 	setTimeout(function(){
 		$("#ss-blocker").hide();
-	},400);
+	},1000);
 	window.scrollTo(0,0);
 	//iphone only
 	checkCustomScrolling();
