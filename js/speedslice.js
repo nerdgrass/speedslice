@@ -185,6 +185,31 @@ function loadInfo(){
 	new FastButton(document.getElementById("setNewAddress"),setNewAddress);
 	new FastButton(document.getElementById("saveEditLoc"),updateAddress);
 	new FastButton(document.getElementById("orderPizza"),function(){switchSlides(0);});
+	new FastButton(document.getElementById("changePass"),function(){
+		showLoader();
+		var oldPw=$("#oldPw").val();
+		var newPw=$("#newPw").val();
+		var email=$("#yourEmail").val();
+		if(!emptyLine(old) && !emptyLine(newPw) && !emptyLine(email)){
+			$.post(host+"ChangePassword.php",{oldPw:oldPw,newPw:newPw,email:email},function(data){
+				try{
+					data=JSON.parse(data);
+					if(typeof data.error!="undefined"){
+						$("#changePassError").text(data.error).show();	
+						$("#changePassSuccess").hide();
+					}
+					else{
+						$("#changePassSuccess").text(data.success).show();
+						$("#changePassError").hide();
+					}
+				}
+				catch(err){
+					
+				}
+			});
+		}
+		
+	});
 	new FastButton(document.getElementById("accountInfo"),function(){
 		if(loggedIn) {
 			switchSlides(7);
@@ -622,13 +647,13 @@ function deleteAddress(){
 function clearAddressForm(){
 	$("[name=addr],[name=addr2],[name=addrNick],[name=zip],[name=phone],[name=city]").val("");	
 }
-function emptyLine(addrLine,addrID){
-	if(addrLine==""){
-		$("#"+addrID).addClass("redBrdr");
+function emptyLine(line,id){
+	if(line==""){
+		$("#"+id).addClass("redBrdr");
 		return true;
 	}
 	else{
-		$("#"+addrID).removeClass("redBrdr");
+		$("#"+id).removeClass("redBrdr");
 		return false;
 	}
 }

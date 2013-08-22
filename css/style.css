@@ -147,6 +147,12 @@ section>header+div{
 	height: 1.2rem;
 	border: none;
 }
+.redText{
+	color:red;
+}
+.greenText{
+	color:green;
+}
 #map-canvas{
 	background:url(../img/ajax-loader.gif) no-repeat;
 	background-position:45% 45%;

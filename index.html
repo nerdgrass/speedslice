@@ -441,11 +441,11 @@
                             <form>
                                 <div class="small-12 columns">
                                     <label class="cardLabel">Name</label>
-                                    <input class="cardInput" type="text" placeholder="Your Full Name" value="Alex Boerstler">
+                                    <input class="cardInput" type="text" id="nameChange">
                                 </div>
                                 <div class="small-12 columns">
                                     <label class="cardLabel">Email Address</label>
-                                    <input class="cardInput" type="text" placeholder="Your Email Address" value="arboestler@gmail.com">
+                                    <input class="cardInput" type="text" id="yourEmail">
                                 </div>
                             </form>
                         </div>
@@ -462,12 +462,15 @@
                             <form>
                                 <div class="small-12 columns">
                                     <label class="cardLabel">Old Password</label>
-                                    <input class="cardInput" type="password" value="test password">
+                                    <input class="cardInput" type="password" id="oldPw">
                                 </div>
                                 <div class="small-12 columns">
                                     <label class="cardLabel">New Password</label>
-                                    <input class="cardInput" type="password" value="test password">
+                                    <input class="cardInput" type="password" id="newPw">
                                 </div>
+                                <div id="changePassError" class="redText"></div>
+                                <div id="changePassSuccess" class="greenText"></div>
+                                <div id="changePass" class="large button expand small-8 small-centered columns">Change Password</div>
                             </form>
                         </div>
                     </div>
