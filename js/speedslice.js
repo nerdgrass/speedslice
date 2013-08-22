@@ -106,18 +106,18 @@ function onDeviceReady() {
 	document.addEventListener("offline", checkConnection, false);
 	pushNotification = window.plugins.pushNotification;
 }
-function checkConnection(){  
-	var networkState = navigator.network.connection.type;//needs to be navigator.connection if phonegap updated.
-	if(networkState==Connection.NONE){
-		navigator.notification.alert("SpeedSlice requires an active internet connection.",function(){
-			setTimeout(checkConnection,1000);
-		},"SpeedSlice","Okay");
-	}
-	else{
-		if(typeof loggedIn=="undefined"){
-			loadInfo();
+function checkConnection(){
+	setTimeout(function(){
+		var networkState = navigator.network.connection.type;//needs to be navigator.connection if phonegap updated.
+		if(networkState==Connection.NONE){
+			navigator.notification.alert("SpeedSlice requires an active internet connection.",checkConnection,"SpeedSlice","Okay");
 		}
-	}
+		else{
+			if(typeof loggedIn=="undefined"){
+				loadInfo();
+			}
+		}
+	},1000);
 }
 function loadInfo(){
 	$(window).on("resize",function(){
@@ -167,6 +167,7 @@ function loadInfo(){
 		new FastButton(mmBtns[i],function(){$("nav#my-menu").trigger("open.mm");});
 	}
 	new FastButton(document.getElementById("createAccount"),createAccount);
+	new FastButton(document.getElementById("findRestaurantsForOrder"),orderPizzaPage);
 	new FastButton(document.getElementsByClassName("home")[0],function(){selectAddress(1); addrRtrnTo="selectPizza";});
 	new FastButton(document.getElementById("gpsButton"),getGpsLocation);
 	new FastButton(document.getElementById("setNewAddress"),setNewAddress);
@@ -630,11 +631,15 @@ function selectAddress(slide){
 	}
 	switchSlides(slide);
 	if(slide==2 && $("#map-canvas").height()==0){
+		$("#mm-blocker").show();
 		setTimeout(function(){
 			$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
 			initialize();
 			checkCustomScrolling();
 		},100);
+		setTimeout(function(){
+			$("#mm-blocker").hide();
+		},350);
 	}
 }
 function logIn(){
@@ -858,4 +863,3 @@ function errorHandler (error) {
 		break;
 	}
 }
-(function(a){a.fn.mousewheel=function(a){return this[a?"on":"trigger"]("wheel",a)},a.event.special.wheel={setup:function(){a.event.add(this,b,c,{})},teardown:function(){a.event.remove(this,b,c)}};var b=a.browser.mozilla?"DOMMouseScroll"+(a.browser.version<"1.9"?" mousemove":""):"mousewheel";function c(b){switch(b.type){case"mousemove":return a.extend(b.data,{clientX:b.clientX,clientY:b.clientY,pageX:b.pageX,pageY:b.pageY});case"DOMMouseScroll":a.extend(b,b.data),b.delta=-b.detail/3;break;case"mousewheel":b.delta=b.wheelDelta/120}b.type="wheel";return a.event.handle.call(this,b,b.delta)}})(jQuery);

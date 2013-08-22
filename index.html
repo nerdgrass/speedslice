@@ -183,7 +183,7 @@
                 </div>
             </div>
             <footer>
-            	<div class="pntr h1Style" onClick="orderPizzaPage()"><span id="orderText" class="nD">order</span><span id="createText">Pick your Restaurant</span> <span class="rightArrow">&gt;&gt;</span></div>
+            	<div class="pntr h1Style" id="findRestaurantsForOrder"><span id="orderText" class="nD">order</span><span id="createText">Pick your Restaurant</span> <span class="rightArrow">&gt;&gt;</span></div>
             </footer>
         </section>
 
@@ -371,29 +371,29 @@
                             <form>
                                 <div class="small-12 columns">
                                     <label class="cardLabel">Card Number</label>
-                                    <input class="cardInput" type="number" placeholder="XXXXXXXXXXXXXXXX">
+                                    <input class="cardInput" type="number" id="cNum">
                                 </div>
                                 <div class="small-12 columns">
                                     <label class="cardLabel">Expiration Date</label>
                                     <div class="row">
                                         <div class="small-5 columns">
-                                            <input class="cardInput" type="number" placeholder="00" name="expDateMonth">
+                                            <input class="cardInput" type="number" name="expMo">
                                         </div>
                                         <div class="small-2 columns">
                                             <span id="expDateSlash">/</span>
                                         </div>
                                         <div class="small-5 columns">
-                                            <input class="cardInput" type="number" placeholder="20XX" name="expDateYear">
+                                            <input class="cardInput" type="number" name="expYr">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="small-6 columns">
                                     <label class="cardLabel">Security Code</label>
-                                    <input class="cardInput" type="number" placeholder="XXX" name="CVV2">
+                                    <input class="cardInput" type="number" placeholder="XXX" name="csc" id="csc">
                                 </div>
                                 <div class="small-6 columns">
                                     <label class="cardLabel">Zip Code</label>
-                                    <input class="cardInput" type="number" placeholder="XXXXX" name="CVV2">
+                                    <input class="cardInput" type="number" name="cardZip" id="cardZip">
                                 </div>
                             </form>
                         </div>
