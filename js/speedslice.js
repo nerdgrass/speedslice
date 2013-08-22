@@ -631,15 +631,13 @@ function selectAddress(slide){
 	}
 	switchSlides(slide);
 	if(slide==2 && $("#map-canvas").height()==0){
-		$("#mm-blocker").show();
 		setTimeout(function(){
+			var oldY=clickbuster.coordinates[clickbuster.coordinates.length-1];
+			clickbuster.coordinates[clickbuster.coordinates.length-1]=oldY+window.innerHeight/3;
 			$("#map-canvas").css({width:$("section:visible").width(),height:window.innerHeight/3});
 			initialize();
 			checkCustomScrolling();
 		},100);
-		setTimeout(function(){
-			$("#mm-blocker").hide();
-		},350);
 	}
 }
 function logIn(){
