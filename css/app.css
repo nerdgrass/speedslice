@@ -2697,7 +2697,7 @@ p {
 /* line 54, ../sass/_global.scss */
 .card {
   background: #f8f6f3;
-  padding: .5rem;
+  padding:0;
   -webkit-border-radius: 1rem;
   -moz-border-radius: 1rem;
   border-radius: 1rem;
