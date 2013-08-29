@@ -406,10 +406,9 @@ function getDeliveryOpts(){
 					address.addrNick=$(this.element).text();//ie placeholder
 					$("#addressTo").removeClass("nD redBrdr").children("span").text(address.addrNick);
 					switch(addrRtrnTo){
-						case "selectPizza":	switchSlides(0);
-						break;
 						case "account": switchSlides(7);
 						break;
+						default:switchSlides(0);
 					}
 				});
 				$("#delOpts").append(delLoc);
