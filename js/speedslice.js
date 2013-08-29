@@ -611,7 +611,6 @@ function deleteAddress(){
     });
 	clearAddressForm();
 	switchSlides(1);
-	
 }
 function clearAddressForm(){
 	$("[name=addr],[name=addr2],[name=addrNick],[name=zip],[name=phone],[name=city]").val("");	
