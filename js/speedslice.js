@@ -205,6 +205,7 @@ function loadInfo(){
 		var email=$("#yourEmail").val();
 		if(!emptyLine(oldPw) && !emptyLine(newPw) && !emptyLine(email)){
 			$.post(host+"ChangePassword.php",{oldPw:oldPw,newPw:newPw,email:email},function(data){
+				hideLoader();
 				try{
 					data=JSON.parse(data);
 					if(typeof data.error!="undefined"){
@@ -219,6 +220,10 @@ function loadInfo(){
 				catch(err){
 					
 				}
+			}).error(function(){
+				$("#changePassError").text("Error occurred. Please check fields.").show();	
+				$("#changePassSuccess").hide();
+				hideLoader();
 			});
 		}
 		
