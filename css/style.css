@@ -669,6 +669,10 @@ header>h1{
 	margin-bottom:.7rem;
 	width:100%;
 }
+#createAccount{
+	margin: 1rem auto;
+	display: block;
+}
 #couponCodeDiv{
 	padding-top:2rem;
 }
