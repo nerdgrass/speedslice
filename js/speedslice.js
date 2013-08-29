@@ -178,6 +178,10 @@ function loadInfo(){
 	for(var i=0; i<mmBtns.length; i++){
 		new FastButton(mmBtns[i],function(){$("nav#my-menu").trigger("open.mm");});
 	}
+	var backButtons=document.getElementsByClassName("back");
+	for(var i=0; i<backButtons.length; i++){
+		new FastButton(backButtons[i],onBackButton);
+	}
 	new FastButton(document.getElementById("createAccount"),createAccount);
 	new FastButton(document.getElementById("findRestaurantsForOrder"),orderPizzaPage);
 	new FastButton(document.getElementsByClassName("home")[0],function(){selectAddress(1); addrRtrnTo="selectPizza";});
@@ -774,7 +778,7 @@ function addCard(){
 				case "account": switchSlides(7);
 				break;
 				case "order": orderPizzaPage();
-				break;	
+				break;
 			}
 			break;
 			case "address": addrRtrnTo="card";

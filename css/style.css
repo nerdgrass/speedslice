@@ -383,6 +383,13 @@ h4.orderOpt{
 	background-size:cover;
 	margin-left:1rem;
 }
+.rotate180{
+	-webkit-transform:rotate(180deg);	
+}
+.back{
+	margin:1rem 0 0 3rem;
+	position: absolute;
+}
 .delLoc{
 	font-weight:bold;
 	text-align:left;
@@ -566,14 +573,6 @@ input[type=text].w40{
 #h3Ord + div{
 	width:15%;
 }*/
-#expMo{
-	width:15%;
-}
-#expYr{
-	width:18%;
-	float:right;
-	margin-right:1.5rem;
-}
 #addPizza{
 	cursor:pointer;
 }
