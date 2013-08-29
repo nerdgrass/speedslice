@@ -595,7 +595,15 @@ function setNewAddress(e,ids){
 	}
 }
 function deleteAddress(){
-	$.post(host+"DeleteAddress.php",{addrNick:$("#editAddrNick").val()});
+	var nick=$("#editAddrNick").val();
+	if(localStorage.getItem("LastAddress")==nick){
+		localStorage.removeItem("LastAddress");	
+	}
+	if($("#addressTo>span").text()==nick){
+		$("#addressTo>span").text("No location selected");
+		address.addrNick="";
+	}
+	$.post(host+"DeleteAddress.php",{addrNick:nick});
 	$(".delLoc").each(function(index, element) {
         if($(element).text()==$("#editAddrNick").val()){
 			$(element).remove();	
@@ -603,6 +611,7 @@ function deleteAddress(){
     });
 	clearAddressForm();
 	switchSlides(1);
+	
 }
 function clearAddressForm(){
 	$("[name=addr],[name=addr2],[name=addrNick],[name=zip],[name=phone],[name=city]").val("");	
