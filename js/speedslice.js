@@ -228,9 +228,10 @@ function loadInfo(){
 			switchSlides(4);
 		}
 	});
-
+	new FastButton(document.getElementById("deleteLocation"),deleteAddress);
 	new FastButton(document.getElementById("addresses"),function(){ //Addresses
 		if(loggedIn){
+			addrRtrnTo="selectPizza";
 			switchSlides(1);
 		}
 		else {
@@ -377,6 +378,7 @@ function getDeliveryOpts(){
 					clearAddressForm();
 					//event.stopPropagation();
 					switchSlides(13);
+					addrRtrnTo="addresses";
 					//code for filling in fields
 					var addrNick=$(this.element).parent().text();
 					$("#editAddrNick").val(addrNick);
@@ -399,7 +401,6 @@ function getDeliveryOpts(){
 					}).error(function(){
 						makeActive("#deliveryLoc>.infoWrapper",blockChanges);
 					});
-
 				});
 				new FastButton(delLoc,function(){
 					address.addrNick=$(this.element).text();//ie placeholder
@@ -422,28 +423,6 @@ function orderError(theError){
 	$("#orderOptions>.bigRed:first").after("<div id='orderErrorOccurred'><span class='cRed'>"+(typeof theError!="undefined" ? theError:"Order failed. Please try again later.")+"</span></div>");
 	hideLoader();
 	$("#pickSpot").css("opacity",1);
-}
-function addTopping(theID){
-	switch(theID.substr(0,2)){
-		case "pe":
-			toppingsOnOff("pe","Pepperoni",theID,2);
-		break;
-		case "sa":
-			toppingsOnOff("sa","Sausage",theID,3);
-		break;
-		case "p3":
-			toppingsOnOff("p3","Peppers",theID,4);
-		break;
-		case "ol":
-			toppingsOnOff("ol","Olives",theID,5);
-		break;
-		case "on":
-			toppingsOnOff("on","Onion",theID,6);
-		break;
-		case "mu":
-			toppingsOnOff("mu","Mushroom",theID,7);
-		break;
-	}
 }
 function completeSignout(indexSel){
 	if(indexSel==2){
@@ -502,19 +481,6 @@ function finalOrderConfirmation(indexSel){
 		});
 	}
 }
-function toppingsOnOff(theSmallID,topping,theID,topID){
-	if($("#"+theSmallID).length==0){
-		$("#someToppings").append("<li id='"+theSmallID+"' data-topping='"+topID+"'>"+topping+"</li>");
-		$("#"+theID).addClass(theSmallID+"Select");
-	}
-	else{
-		if(theSmallID=="ch"){
-			return;
-		}
-		$("#"+theSmallID).remove();
-		$("#"+theID).removeClass(theSmallID+"Select");
-	}
-}
 function orderPizzaPage(curSlide){
 	$("#orderErrorOccurred").remove();
 	$("#noRests").parent().remove();
@@ -538,21 +504,11 @@ function orderPizzaPage(curSlide){
 	}
 	else{
 		if($("#expYr").val()==""){
-			if(typeof curSlide!="undefined"){
-				switchSlides(5);	
-			}
-			else{
-				switchSlides(5);
-			}
+			switchSlides(5);
 			cardReturnTo="order";
 			return false;	
-		}
-		if($("#cardInfo").css("display")!="none"){
-			switchSlides(6);
-		}
-		else{
-			switchSlides(6);
-		}
+		}		
+		switchSlides(6);
 		$(".orderOpt").parent("div").remove();
 		showLoader();
 		var pizzasString="";
@@ -821,11 +777,10 @@ function getUserInfo(){
 	});
 }
 function showUserInfo(data){
-	$("#yourEmail").empty().prepend(data.substring(1,data.indexOf(",")));
-	$("#nameChange").prepend(data.substring(data.indexOf("/")+1,data.indexOf("["))).prepend(data.substring(data.indexOf(",")+1,data.indexOf("/"))+" ");	
-	$("#welcome").html("Welcome, "+data.substring(data.indexOf(",")+1,data.indexOf("/")));
+	$("#yourEmail").val(data.substring(1,data.indexOf(",")));
+	$("#nameChange").val(data.substring(data.indexOf(",")+1,data.indexOf("/")) +" "+ data.substring(data.indexOf("/")+1,data.indexOf("[")));	
 	//C=cash 1=15% 2=20%
-	switch(data.substr(data.indexOf("[")+1,1)){		
+	switch(data.substr(data.indexOf("[")+1,1)){	
 		case "1": $(".tip:eq(0)").addClass("tipSelected");
 		break;
 		case "2": $(".tip:eq(1)").addClass("tipSelected");

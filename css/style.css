@@ -418,13 +418,24 @@ p.question{
 	cursor:move;
 	top:0;
 }
-.backslash{
-	font-size: 2.5rem;
-	line-height: 1.1;
-	margin-left:1%;
+#expDateSlash{
+	font-size: 4rem;
+	line-height: 3rem;
+	margin-left: .5rem;
 }
 .tinytxt{
 	font-size:1rem;
+}
+.yellow-button{
+	margin-top: 1rem;
+	text-align: center;
+	padding: 1rem 0;
+	background: #efc657;
+	color: #a33f2d;
+	font-size: 1.5rem;
+	font-weight: bold;
+	border-radius: .5rem;
+	border: .1rem solid #EFC634;
 }
 input[type=text].w40{
 	width:40%;
@@ -579,10 +590,6 @@ input[type=text].w40{
 #firstName,#lastName{
 	width:100%;
 }
-#yourEmail{
-	width:90%;
-	position:absolute;
-}
 /*android*/
 #menuOptions{
 	position: absolute;
@@ -656,6 +663,7 @@ header>h1{
 }
 #orderSummary>h3{
 	float:left;
+	margin-bottom:.5rem;
 }
 #addressTo{
 	margin-bottom:.7rem;
@@ -677,8 +685,8 @@ header>h1{
 .swipeText{
 	vertical-align: text-bottom;
 	float: right;
-	font-size: .8em;
-	line-height: 1.6em;
+	font-size: 1rem;
+	line-height: 2.1rem;
 }
 hr{
 	clear:both;
