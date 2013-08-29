@@ -86,6 +86,7 @@ initY=0;
 lastSlides=new Array();
 scrollBarNmbr=0;
 touchStarted=false;
+noAddrText="No location selected";
 var pushNotification;
 window.onerror = function(msg, url, linenumber) {
 	hideLoader();
@@ -184,7 +185,15 @@ function loadInfo(){
 	}
 	new FastButton(document.getElementById("createAccount"),createAccount);
 	new FastButton(document.getElementById("findRestaurantsForOrder"),orderPizzaPage);
-	new FastButton(document.getElementsByClassName("home")[0],function(){selectAddress(1); addrRtrnTo="selectPizza";});
+	new FastButton(document.getElementsByClassName("home")[0],function(){
+		if(loggedIn){
+			addrRtrnTo="selectPizza";
+			switchSlides(1);
+		}
+		else {
+			switchSlides(4);
+		}
+	});
 	new FastButton(document.getElementById("gpsButton"),getGpsLocation);
 	new FastButton(document.getElementById("setNewAddress"),setNewAddress);
 	new FastButton(document.getElementById("saveEditLoc"),updateAddress);
@@ -194,7 +203,7 @@ function loadInfo(){
 		var oldPw=$("#oldPw").val();
 		var newPw=$("#newPw").val();
 		var email=$("#yourEmail").val();
-		if(!emptyLine(old) && !emptyLine(newPw) && !emptyLine(email)){
+		if(!emptyLine(oldPw) && !emptyLine(newPw) && !emptyLine(email)){
 			$.post(host+"ChangePassword.php",{oldPw:oldPw,newPw:newPw,email:email},function(data){
 				try{
 					data=JSON.parse(data);
@@ -576,7 +585,8 @@ function setNewAddress(e,ids){
 	}
 	switch(addrRtrnTo){
 		case "selectPizza":	switchSlides(0);
-		$("#addressTo>span").text($("#" + (useIds ? ids.nick:"addrNick")).val()).removeClass("redBrdr");
+		$("#addressTo>span").text($("#" + (useIds ? ids.nick:"addrNick")).val());
+		$("#addressTo").removeClass("redBrdr");
 		break;
 		case "account": switchSlides(7);
 		break;
@@ -599,7 +609,7 @@ function deleteAddress(){
 		localStorage.removeItem("LastAddress");	
 	}
 	if($("#addressTo>span").text()==nick){
-		$("#addressTo>span").text("No location selected");
+		$("#addressTo>span").text(noAddrText);
 		address.addrNick="";
 	}
 	$.post(host+"DeleteAddress.php",{addrNick:nick});
@@ -690,7 +700,7 @@ function createAccount(){
 			$("#orderText,#createText").toggleClass("nD");
 			$("#emailAdd").removeClass("redBrdr");
 			var dVal=$("#addressTo>span").text();
-			if(dVal.length==0 || dVal=="ADDRESS"){
+			if(dVal.length==0 || dVal==noAddrText){
 				switchSlides(0);
 			}
 			else{//should be tested
