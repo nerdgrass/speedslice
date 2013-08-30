@@ -498,7 +498,7 @@ function finalOrderConfirmation(indexSel){
 function showOrderText(){
 	$("#orderText,#createText").toggleClass("nD");
 	if(localStorage.getItem("LastAddress")==null){
-		$("#orderText").text("Select Location");	
+		$("#orderText").text("Select Location");
 	}
 }
 function orderPizzaPage(curSlide){
@@ -513,7 +513,7 @@ function orderPizzaPage(curSlide){
 	else{
 		//navigator.notification.alert("Please select or create a new delivery address.",function(){},"No location set","Okay");
 		$("#addressTo").addClass("redBrdr");
-		if($("#orderText").text()=="Select Location"){
+		if($("#orderText").text()=="Select Location" || $("#createText:visible").length!=0){
 			addrRtrnTo='selectPizza';
 			selectAddress();
 		}
@@ -528,7 +528,7 @@ function orderPizzaPage(curSlide){
 		return false;
 	}
 	if(!loggedIn){
-		switchSlides(3);	
+		switchSlides(3);
 	}
 	else{
 		if($("#expYr").val()==""){
