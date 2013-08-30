@@ -147,7 +147,7 @@ function loadInfo(){
 		loggedIn=(data==1 ? true:false);
 		//setTimeout("navigator.splashscreen.hide()",1000);
 		if(loggedIn){
-			$("#orderText,#createText").toggleClass("nD");
+			showOrderText()
 			getDeliveryOpts();
 			getCardInfo();
 			getUserInfo();
@@ -419,6 +419,7 @@ function getDeliveryOpts(){
 				new FastButton(delLoc,function(){
 					address.addrNick=$(this.element).text();//ie placeholder
 					$("#addressTo").removeClass("nD redBrdr").children("span").text(address.addrNick);
+					$("#orderText").text("order");
 					switch(addrRtrnTo){
 						case "account": switchSlides(7);
 						break;
@@ -494,17 +495,31 @@ function finalOrderConfirmation(indexSel){
 		});
 	}
 }
+function showOrderText(){
+	$("#orderText,#createText").toggleClass("nD");
+	if(localStorage.getItem("LastAddress")==null){
+		$("#orderText").text("Select Location");	
+	}
+}
 function orderPizzaPage(curSlide){
 	$("#orderErrorOccurred").remove();
 	$("#noRests").parent().remove();
 	$("#noPizzas").remove();
 	//ie
-	if(address.addrNick!="" && address.addrNick!="ADDRESS"){
-		$("#addressTo").removeClass("redBrdr");	
+	if(address.addrNick!="" && address.addrNick!=noAddrText){
+		$("#addressTo").removeClass("redBrdr");
+		$("#orderText").text("order");	
 	}
 	else{
-		navigator.notification.alert("Please select or create a new delivery address.",function(){},"No location set","Okay");
+		//navigator.notification.alert("Please select or create a new delivery address.",function(){},"No location set","Okay");
 		$("#addressTo").addClass("redBrdr");
+		if($("#orderText").text()=="Select Location"){
+			addrRtrnTo='selectPizza';
+			selectAddress();
+		}
+		else{
+			$("#orderText").text("Select Location");
+		}
 		return false;	
 	}
 	if($("#pizzasOnOrder .pizzaOnOrder").length==0){
@@ -592,6 +607,7 @@ function setNewAddress(e,ids){
 		case "selectPizza":	switchSlides(0);
 		$("#addressTo>span").text($("#" + (useIds ? ids.nick:"addrNick")).val());
 		$("#addressTo").removeClass("redBrdr");
+		$("#orderText").text("order");
 		break;
 		case "account": switchSlides(7);
 		break;
@@ -673,7 +689,7 @@ function logIn(){
 				break;
 				default: 
 				loggedIn=1;
-				$("#orderText,#createText").toggleClass("nD");
+				showOrderText();
 				getDeliveryOpts();
 				getCardInfo();
 				showUserInfo(data);
@@ -702,7 +718,7 @@ function createAccount(){
 		hideLoader();
 		if(!isNaN(data)){
 			loggedIn=1;
-			$("#orderText,#createText").toggleClass("nD");
+			showOrderText();
 			$("#emailAdd").removeClass("redBrdr");
 			var dVal=$("#addressTo>span").text();
 			if(dVal.length==0 || dVal==noAddrText){
