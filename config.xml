@@ -18,7 +18,7 @@
 	<preference name="phonegap-version" value="2.2.0" />
 	<feature name="http://api.phonegap.com/1.0/geolocation"/>
 	<gap:splash src="splash.png" />
-	<icon src="images/icon57.png" gap:role="default" />
+	<icon src="img/icon57.png" gap:role="default" />
 	<preference name="splash-screen-duration" value="4000" />
     
 	<gap:plugin name="com.phonegap.plugins.childbrowser" />
