@@ -17,8 +17,8 @@
 	</author>
 	<preference name="phonegap-version" value="2.2.0" />
 	<feature name="http://api.phonegap.com/1.0/geolocation"/>
-	<icon src="images/App_Icon.png" gap:role="default" />
-	<gap:splash src="images/splash.png" />
+	<gap:splash src="splash.png" />
+	<icon src="images/icon57.png" gap:role="default" />
 	<preference name="splash-screen-duration" value="4000" />
     
 	<gap:plugin name="com.phonegap.plugins.childbrowser" />
@@ -27,4 +27,7 @@
 	<preference name="webviewbounce" value="false" />	
 	<preference name="show-splash-screen-spinner" value="false" />
 	<preference name="target-device" value="handset" />
+	<gap:splash src="splash/ios/Default.png" width="320" height="480" />
+	<gap:splash src="splash/ios/Default_at_2x.png" width="640" height="960" />
+	<gap:splash src="splash/ios/Default_iphone5.png" width="640" height="1136" />
 </widget>
