@@ -447,7 +447,7 @@ function completeSignout(indexSel){
 			else{
 				switchSlides(1);
 				$("#signIn").show();
-				$("#signOut").hide();
+				$("#signOut").addClass("nD");
 			}
 		});
 		
@@ -501,7 +501,7 @@ function showOrderText(){
 		$("#orderText").text("Select Location");
 	}
 }
-function orderPizzaPage(curSlide){
+function orderPizzaPage(){
 	$("#orderErrorOccurred").remove();
 	$("#noRests").parent().remove();
 	$("#noPizzas").remove();
@@ -695,11 +695,8 @@ function logIn(){
 				showUserInfo(data);
 				$("#signIn").hide();
 				$("#signOut").removeClass("nD");
-				if(!orderPizzaPage(4)){
+				if(!orderPizzaPage()){
 					switchSlides(0);
-				}
-				else{
-					switchSlides(7);
 				}
 				break;
 			}
