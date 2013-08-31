@@ -285,7 +285,7 @@
                                 </select>
                             </div>
                             <div class="small-7 small-offset-1 columns">
-                              <input id="zip" name="zip" type="text" placeholder="ZIP Code" pattern="[0-9]*">
+                              <input id="zip" name="zip" type="tel" placeholder="ZIP Code" pattern="[0-9]*">
                             </div>
                             <div class="small-12 clear">
                               <input id="phone" name="phone" type="tel" placeholder="Phone Number">
@@ -769,7 +769,7 @@ SpeedSlice reserves the right, in its sole discretion, to revise and amend the A
 	var toppingsToToggle=["pepperoni","sausage","peppers","onions","mushrooms","olives"];
 	toppingsToToggle.forEach(function(ele){
 		new FastButton(document.getElementById(ele+"Toggle"),function(){
-			eleUc=ucFirst(ele);
+			var eleUc=ucFirst(ele);
 			$('#topping'+eleUc+',.ordSum'+eleUc).toggleClass("nD");
 		});
 	});
