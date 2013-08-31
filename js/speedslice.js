@@ -445,7 +445,7 @@ function completeSignout(indexSel){
 				navigator.app.exitApp();
 			}
 			else{
-				switchSlides(1);
+				switchSlides(0);
 				$("#signIn").show();
 				$("#signOut").addClass("nD");
 			}
