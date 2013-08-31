@@ -434,7 +434,7 @@ function getDeliveryOpts(){
 }
 function orderError(theError){
 	$("#orderErrorOccurred").remove();
-	$("#orderOptions>.bigRed:first").after("<div id='orderErrorOccurred'><span class='cRed'>"+(typeof theError!="undefined" ? theError:"Order failed. Please try again later.")+"</span></div>");
+	$("#orderOptions").prepend("<div id='orderErrorOccurred'><span class='cRed'>"+(typeof theError!="undefined" ? theError:"Order failed. Please try again later.")+"</span></div>");
 	hideLoader();
 	$("#pickSpot").css("opacity",1);
 }
