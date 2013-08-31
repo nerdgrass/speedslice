@@ -693,6 +693,8 @@ function logIn(){
 				getDeliveryOpts();
 				getCardInfo();
 				showUserInfo(data);
+				$("#signIn").hide();
+				$("#signOut").removeClass("nD");
 				if(!orderPizzaPage(4)){
 					switchSlides(0);
 				}
