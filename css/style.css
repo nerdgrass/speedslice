@@ -685,6 +685,10 @@ header>h1{
 #couponCode{
 	width:65%;	
 }
+#orderErrorOccurred{
+	text-align:center;
+	font-size:1.5rem;
+}
 .swipeText{
 	vertical-align: text-bottom;
 	float: right;
