@@ -768,6 +768,7 @@ function addCard(){
 	$.post(host+"Card.php",cardData,function(data){
 		hideLoader();
 		//needs to be updated to show error without wrapper.
+		var errorLoc=$("#cardInfo form");
 		switch(data){
 			case "":switch(cardReturnTo){
 				case "account": switchSlides(7);
@@ -777,15 +778,15 @@ function addCard(){
 			}
 			break;
 			case "address": addrRtrnTo="card";
-				$("#cardInfo>.infoWrapper:first>div:last").after("<div class='cRed' id='noCards'>Please make sure one of your addresses matches your <span onclick=\"switchSlides(3); clearAddressForm();\" class='u pntr'>billing address.</span></div>");
+				$(errorLoc).after("<div class='cRed' id='noCards'>Please make sure one of your addresses matches your <span onclick=\"switchSlides(3); clearAddressForm();\" class='u pntr'>billing address.</span></div>");
 			break;
 			default: 
-				var errorLoc=$("#cardInfo .infoWrapper:first>div:last");
+				
 				if(data.indexOf("OrdrinException")!=-1){
-					$(errorLoc).after("<div class='cRed' id='noCards'>Error: Please re-enter card information and try again.</div>");
+					$(errorLoc).append("<div class='cRed' id='noCards'>Error: Please re-enter card information and try again.</div>");
 				}
 				else{
-					$(errorLoc).after("<div class='cRed' id='noCards'>Error: "+data+"</div>");
+					$(errorLoc).append("<div class='cRed' id='noCards'>Error: "+data+"</div>");
 				}
 			break;
 		}
