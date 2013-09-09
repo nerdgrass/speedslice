@@ -689,6 +689,9 @@ header>h1{
 	text-align:center;
 	font-size:1.5rem;
 }
+#noCards{
+	font-size:2rem;	
+}
 .swipeText{
 	vertical-align: text-bottom;
 	float: right;
