@@ -598,6 +598,7 @@ function setNewAddress(e,ids){
 			failedCheck=emptyLine(address[i],useIds ? ids[i]:i);
 		}
 		if(failedCheck){
+			$("#locations>div").css("margin-top","-=50");
 			return false;
 		}
 	}
