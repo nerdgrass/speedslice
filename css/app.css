@@ -3617,7 +3617,10 @@ html.mm-no-overflowscrolling.mm-right .mm-menu {
   color: white;
   z-index: 1;
 }
-
+#toppingOlives {
+  background: url("../img/toppings/olives.png") no-repeat;
+  z-index: 11;
+}
 /* Topping Toggles */
 /* line 56, ../sass/_pizzaBuilder.scss */
 input[type=checkbox].toppingToggle {

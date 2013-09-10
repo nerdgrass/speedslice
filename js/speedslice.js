@@ -602,7 +602,7 @@ function setNewAddress(e,ids){
 		}
 		if(failedCheck){
 			if($("#locations .aSlider").length!==0){
-				$("#locations>div").css("margin-top","-=50");
+				$("#locations>div>div").css("margin-top","-=50");
 			}
 			return false;
 		}
