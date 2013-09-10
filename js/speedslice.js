@@ -169,9 +169,12 @@ function loadInfo(){
 	$.customScrolling("legalContentWrapper","legalContent","legalSlider");
 	$.customScrolling("supportContentWrapper","supportContent","supportSlider");
 	checkCustomScrolling();
-	/*new FastButton(document.getElementById("facebookLink"),function(){
+	new FastButton(document.getElementById("facebookLink"),function(){
 		window.plugins.childBrowser.showWebPage("https://www.facebook.com/SpeedSlice");
-	});*/
+	});
+	new FastButton(document.getElementById("twitterLink"),function(){
+		window.plugins.childBrowser.showWebPage("https://twitter.com/SpeedSliceApp");
+	});
 	$("section").on("blur","input",function(){
 		window.scrollTo(0,0);
 	});
