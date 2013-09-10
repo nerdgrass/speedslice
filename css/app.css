@@ -2653,14 +2653,12 @@ section *{
 section h2,.infoWrapper{
 	position:relative;
 }
-header+*{
-	padding-top:2rem;
-}
 /* line 12, ../sass/_global.scss */
 header {
   position: relative;
   z-index: 100;
   background: #a33f2d;
+  margin-bottom:2rem;
 }
 
 /* line 18, ../sass/_global.scss */
