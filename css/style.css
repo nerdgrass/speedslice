@@ -384,10 +384,13 @@ h4.orderOpt{
 	margin-left:1rem;
 }
 .rotate180{
-	-webkit-transform:rotate(180deg);	
+	-webkit-transform:rotate(180deg);
+	transform:rotate(180deg);	
 }
 .back{
-	margin: 1rem 0 0 -3rem;
+	margin: .5rem 0 0 1rem;
+	height:2.3rem;
+	width:3rem;
 	position: absolute;
 }
 .delLoc{
