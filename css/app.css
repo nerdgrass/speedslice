@@ -2639,6 +2639,7 @@ section {
   clear: both;
 }
 section>div{
+	height:100%;
 	background-color:rgba(236,224,217,.7);
 }
 header+*{
@@ -3575,15 +3576,6 @@ html.mm-no-overflowscrolling.mm-right .mm-menu {
   text-transform: uppercase;
 }
 
-/* line 20, ../sass/_pizzaBuilder.scss */
-.pizzaCircle,#pizzaBG, #toppingPepperoni, #toppingSausage, #toppingPeppers, #toppingOnions, #toppingMushrooms, #toppingOlives {
-  position: absolute;
-  width: 16rem;
-  height: 16rem;
-  border-radius: 16rem;
-  left: 50%;
-  margin-left: -8rem;
-}
 
 /* line 28, ../sass/_pizzaBuilder.scss */
 #toppingPepperoni {
@@ -3614,17 +3606,26 @@ html.mm-no-overflowscrolling.mm-right .mm-menu {
   background: url("../img/toppings/mushrooms.png") no-repeat;
   z-index: 6;
 }
-
+#toppingOlives {
+  background: url("../img/toppings/olives.png") no-repeat;
+  z-index: 11;
+}
+.pizzaCircle,#pizzaBG, #toppingPepperoni, #toppingSausage, #toppingPeppers, #toppingOnions, #toppingMushrooms, #toppingOlives {
+  position: absolute;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 16rem;
+  left: 50%;
+  margin-left: -8rem;
+  background-size:cover;
+}
 /* line 48, ../sass/_pizzaBuilder.scss */
 #pizzaBG {
   background: #efc657;
   color: white;
   z-index: 1;
 }
-#toppingOlives {
-  background: url("../img/toppings/olives.png") no-repeat;
-  z-index: 11;
-}
+
 /* Topping Toggles */
 /* line 56, ../sass/_pizzaBuilder.scss */
 input[type=checkbox].toppingToggle {
