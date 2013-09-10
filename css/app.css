@@ -2638,9 +2638,17 @@ section {
   position: relative;
   clear: both;
 }
-section>div{
+section:after{
+	top:0;
+	left:0;
+	position:absolute;
 	height:100%;
+	width:100%;
+	content:"";
 	background-color:rgba(236,224,217,.7);
+}
+section *{
+	z-index:1;
 }
 header+*{
 	padding-top:2rem;
@@ -3736,20 +3744,6 @@ input[type=checkbox].toppingToggle {
 	height:0;
   /*height: 35vh;
   width: 100%;*/
-}
-
-@media print {
-  /* line 7, ../sass/_locations.scss */
-  html, body {
-    height: auto;
-    width: auto;
-  }
-
-  /* line 12, ../sass/_locations.scss */
-  #map-canvas, #map_canvas {
-   /* height: 30vh;
-    width: 100%;*/
-  }
 }
 /* line 17, ../sass/_locations.scss */
 ul.locList {
