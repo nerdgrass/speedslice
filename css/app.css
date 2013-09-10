@@ -2631,14 +2631,16 @@ form.custom .custom.disabled {
 
 /* line 2, ../sass/_global.scss */
 section {
-  background: #ece3d6;
+  background: url(../img/white_carbonfiber.png);/*#ece3d6;*/
   width: 100%;
   min-height: 56.9rem;
   height: 56.9rem;
   position: relative;
   clear: both;
 }
-
+section>header,section>div,section>footer{
+	background-color:rgba(236,224,217,.7);	
+}
 /* line 12, ../sass/_global.scss */
 header {
   position: relative;
