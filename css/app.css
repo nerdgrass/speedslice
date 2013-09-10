@@ -2638,15 +2638,17 @@ section {
   position: relative;
   clear: both;
 }
-section>header,section>div,section>footer{
-	background-color:rgba(236,224,217,.7);	
+section>div{
+	background-color:rgba(236,224,217,.7);
+}
+header+*{
+	padding-top:2rem;
 }
 /* line 12, ../sass/_global.scss */
 header {
   position: relative;
   z-index: 100;
   background: #a33f2d;
-  margin-bottom: 1em;
 }
 
 /* line 18, ../sass/_global.scss */
