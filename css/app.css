@@ -2649,6 +2649,8 @@ section:after{
 }
 section *{
 	z-index:1;
+}
+section h2,.infoWrapper{
 	position:relative;
 }
 header+*{
