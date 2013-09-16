@@ -895,12 +895,13 @@ function successHandler (result) {
    
 }
 function errorHandler (error) {
-alert(error);
+navigator.notification.alert(error);
 }
 function tokenHandler (result) {
     // Your iOS push server needs to know the token before it can push to this device
     // here is where you might want to send it the token for later use.
     alert('device token = '+result)
+    $.post(host+"notifications/HandleRegisterDevice.php",{Device:capitaliseFirst(device.platform),DeviceID:result},function(data){alert(data);});
 }
 function onNotificationAPN(e) {
 	if (e.alert) {
@@ -916,12 +917,15 @@ function onNotificationAPN(e) {
 		pushNotification.setApplicationIconBadgeNumber(successHandler, e.badge);
 	}*/
 }
+function capitaliseFirst(string){
+	return string.charAt(0).toUpperCase() + string.slice(1);
+}
  function onNotificationGCM(e) {
 	 alert("some sort of success");
 	switch(e.event){
 		case 'registered':
 		if (e.regid.length>0){
-			$.post(host+"notifications/HandleRegisterDevice.php",{Device:device.platform,DeviceID:e.regid});
+			$.post(host+"notifications/HandleRegisterDevice.php",{Device:capitaliseFirst(device.platform),DeviceID:e.regid});
 		}
 		break;
 		
