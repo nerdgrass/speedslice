@@ -444,7 +444,7 @@ function orderError(theError){
 function completeSignout(indexSel){
 	if(indexSel==2){
 		$.post(host+"Logout.php",function(){
-			if(device.platform=="Android"){
+			if(device.platform == 'android' || device.platform == 'Android'){
 				navigator.app.exitApp();
 			}
 			else{
@@ -838,6 +838,7 @@ function showUserInfo(data){
 	if (device.platform == 'android' || device.platform == 'Android') {
 		pushNotification.register(successHandler, errorHandler,{"senderID":"157047801644","ecb":"onNotificationGCM"});
 	} else {
+		alert("bob");
 		pushNotification.register(tokenHandler, errorHandler, {"badge":"true", "sound":"true", "alert":"true", "ecb":"onNotificationAPN"});
 	}
 	
@@ -894,7 +895,7 @@ function successHandler (result) {
    
 }
 function errorHandler (error) {
-
+alert(error);
 }
 function tokenHandler (result) {
     // Your iOS push server needs to know the token before it can push to this device
