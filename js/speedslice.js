@@ -835,7 +835,12 @@ function showUserInfo(data){
 		break;
 	}
 	//add once live
-	pushNotification.register(successHandler, errorHandler,{"senderID":"157047801644","ecb":"onNotificationGCM"});
+	if (device.platform == 'android' || device.platform == 'Android') {
+		pushNotification.register(successHandler, errorHandler,{"senderID":"157047801644","ecb":"onNotificationGCM"});
+	} else {
+		pushNotification.register(tokenHandler, errorHandler, {"badge":"true", "sound":"true", "alert":"true", "ecb":"onNotificationAPN"});
+	}
+	
 }
 function showLoader(){
 	var $loadImg=$("#loader>img");
@@ -890,6 +895,25 @@ function successHandler (result) {
 }
 function errorHandler (error) {
 
+}
+function tokenHandler (result) {
+    // Your iOS push server needs to know the token before it can push to this device
+    // here is where you might want to send it the token for later use.
+    alert('device token = '+result)
+}
+function onNotificationAPN(e) {
+	if (e.alert) {
+		 navigator.notification.alert(e.alert);
+	}
+		
+	/*if (e.sound) {
+		var snd = new Media(e.sound);
+		snd.play();
+	}
+	
+	if (e.badge) {
+		pushNotification.setApplicationIconBadgeNumber(successHandler, e.badge);
+	}*/
 }
  function onNotificationGCM(e) {
 	 alert("some sort of success");
