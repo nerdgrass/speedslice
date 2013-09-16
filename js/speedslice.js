@@ -835,7 +835,7 @@ function showUserInfo(data){
 		break;
 	}
 	//add once live
-	//pushNotification.register(successHandler, errorHandler,{"senderID":"157047801644","ecb":"onNotificationGCM"});
+	pushNotification.register(successHandler, errorHandler,{"senderID":"157047801644","ecb":"onNotificationGCM"});
 }
 function showLoader(){
 	var $loadImg=$("#loader>img");
@@ -892,10 +892,11 @@ function errorHandler (error) {
 
 }
  function onNotificationGCM(e) {
+	 alert("some sort of success");
 	switch(e.event){
 		case 'registered':
 		if (e.regid.length>0){
-			$.post(host+"notifications/HandleRegisterDevice.php",{Device:"Android",DeviceID:e.regid});
+			$.post(host+"notifications/HandleRegisterDevice.php",{Device:device.platform,DeviceID:e.regid});
 		}
 		break;
 		
