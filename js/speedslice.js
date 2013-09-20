@@ -478,10 +478,10 @@ function finalOrderConfirmation(indexSel){
 					$("#successID").text(data.cs_order_id);
 					if(typeof data.discAmt!="undefined"){
 						$("#discAmt").text(data.discAmt);
-						$("#discAmtWrapper").show();	
+						$("#discAmtWrapper").removeClass("nD");	
 					}
 					else{
-						$("#discAmtWrapper").hide();
+						$("#discAmtWrapper").addClass("nD");
 					}
 				}
 				else{
