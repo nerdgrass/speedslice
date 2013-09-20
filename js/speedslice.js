@@ -819,7 +819,7 @@ function getUserInfo(){
 		showUserInfo(data);
 	});
 }
-function showUserInfo(data){console.log(data.first_name,data,data["first_name"],data.TipAmount);
+function showUserInfo(data){
 	$("#yourEmail").val(data.email);
 	$("#nameChange").val(data.first_name +" "+ data.last_name);	
 	//C=cash 1=15% 2=20%
