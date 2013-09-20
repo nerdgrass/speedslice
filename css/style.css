@@ -746,3 +746,6 @@ hr{
 	z-index:10000;
 	display:none;
 }
+#addCardButton,.tip{
+	position:relative;
+}
