@@ -749,3 +749,7 @@ hr{
 #addCardButton,.tip{
 	position:relative;
 }
+#first-time{
+	text-align: center;
+	font-weight: bold;
+}

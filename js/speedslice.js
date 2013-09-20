@@ -832,7 +832,8 @@ function showUserInfo(data){
 		break;
 	}
 	if(data.IsFirstTime==true && $("#first-time").length==0){
-		$("#couponCodeDiv").contents().hide().prepend("<div id='first-time'>A discount of 10% will be applied to your first order</div>");
+		$("#couponCodeDiv").contents().hide()
+		$("#couponCodeDiv").prepend("<div id='first-time'>A discount of 10% will be applied to your first order</div>");
 	}
 	if (device.platform == 'android' || device.platform == 'Android') {
 		pushNotification.register(successHandler, errorHandler,{"senderID":"157047801644","ecb":"onNotificationGCM"});
