@@ -815,11 +815,11 @@ function viewAddresses(){
 	selectAddress();	
 }
 function getUserInfo(){
-	$.get(host+"CheckAccount.php",function(data){
+	$.getJSON(host+"CheckAccount.php",function(data){
 		showUserInfo(data);
 	});
 }
-function showUserInfo(data){
+function showUserInfo(data){console.log(data.first_name,data,data["first_name"],data.TipAmount);
 	$("#yourEmail").val(data.email);
 	$("#nameChange").val(data.first_name +" "+ data.last_name);	
 	//C=cash 1=15% 2=20%
