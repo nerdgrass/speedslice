@@ -111,17 +111,13 @@ function onDeviceReady() {
 	pushNotification = window.plugins.pushNotification;
 }
 function checkConnection(){
-	setTimeout(function(){
-		var networkState = navigator.network.connection.type;//needs to be navigator.connection if phonegap updated.
-		if(networkState==Connection.NONE){
-			navigator.notification.alert("SpeedSlice requires an active internet connection.",checkConnection,"SpeedSlice","Okay");
-		}
-		else{
-			if(typeof loggedIn=="undefined"){
-				loadInfo();
-			}
-		}
-	},1000);
+	var networkState = navigator.network.connection.type;//needs to be navigator.connection if phonegap updated.
+	if(networkState==Connection.NONE){
+		navigator.notification.alert("SpeedSlice requires an active internet connection.",checkConnection,"SpeedSlice","Okay");
+	}
+	else if(typeof loggedIn=="undefined"){
+		loadInfo();
+	}
 }
 function loadInfo(){
 	$(window).on("resize",function(){
@@ -690,24 +686,23 @@ function logIn(){
 	var userAndPW="Email="+email+"&Password="+PW;
 	$.post(host+"Login.php",userAndPW,function(data){
 		hideLoader();
-		if(!isNaN(data.substr(0,1))){
-			$("#badLogin").remove();
-			switch(parseInt(data)){
-				case 401:$("#pWordLogIn").parent("div").after("<div id='badLogin' class='cRed'>Invalid email or password</div>");
-				break;
-				default: 
-				loggedIn=1;
-				showOrderText();
-				getDeliveryOpts();
-				getCardInfo();
-				showUserInfo(data);
-				$("#signIn").hide();
-				$("#signOut").removeClass("nD");
-				if(!orderPizzaPage()){
-					switchSlides(0);
-				}
-				break;
+		$("#badLogin").remove();
+		switch(parseInt(data)){
+			case 401:$("#pWordLogIn").parent("div").after("<div id='badLogin' class='cRed'>Invalid email or password</div>");
+			break;
+			default: 
+			data=$.parseJSON(data);
+			loggedIn=1;
+			showOrderText();
+			getDeliveryOpts();
+			getCardInfo();
+			showUserInfo(data);
+			$("#signIn").hide();
+			$("#signOut").removeClass("nD");
+			if(!orderPizzaPage()){
+				switchSlides(0);
 			}
+			break;
 		}
 	}).error(function(){
 		hideLoader();
@@ -723,9 +718,11 @@ function createAccount(){
 	showLoader();
 	$.post(host+"CreateAccount.php",info,function(data){
 		hideLoader();
-		if(!isNaN(data)){
+		try{
+			data=$.parseJSON(data);
 			loggedIn=1;
 			showOrderText();
+			showUserInfo(data);
 			$("#emailAdd").removeClass("redBrdr");
 			var dVal=$("#addressTo>span").text();
 			if(dVal.length==0 || dVal==noAddrText){
@@ -740,7 +737,7 @@ function createAccount(){
 				getDeliveryOpts();
 			}
 		}
-		else{
+		catch(err){
 			$("#"+data).addClass("redBrdr");
 		}
 	});			
@@ -823,25 +820,28 @@ function getUserInfo(){
 	});
 }
 function showUserInfo(data){
-	$("#yourEmail").val(data.substring(1,data.indexOf(",")));
-	$("#nameChange").val(data.substring(data.indexOf(",")+1,data.indexOf("/")) +" "+ data.substring(data.indexOf("/")+1,data.indexOf("[")));	
+	$("#yourEmail").val(data.email);
+	$("#nameChange").val(data.first_name +" "+ data.last_name);	
 	//C=cash 1=15% 2=20%
-	switch(data.substr(data.indexOf("[")+1,1)){	
-		case "1": $(".tip:eq(0)").addClass("tipSelected");
+	switch(data.TipAmount){	
+		case "15%": $(".tip:eq(0)").addClass("tipSelected");
 		break;
-		case "2": $(".tip:eq(1)").addClass("tipSelected");
+		case "20%": $(".tip:eq(1)").addClass("tipSelected");
 		break;
-		case "C": $(".tip:eq(2)").addClass("tipSelected");
+		case "Cash": $(".tip:eq(2)").addClass("tipSelected");
 		break;
 	}
-	//add once live
+	if(data.IsFirstTime==true && $("#first-time").length==0){
+		$("#couponCodeDiv").contents().hide().prepend("<div id='first-time'>A discount of 10% will be applied to your first order</div>");
+	}
 	if (device.platform == 'android' || device.platform == 'Android') {
 		pushNotification.register(successHandler, errorHandler,{"senderID":"157047801644","ecb":"onNotificationGCM"});
-	} else {
-		alert("bob");
+	} /*
+	iOS push
+	else {
 		pushNotification.register(tokenHandler, errorHandler, {"badge":"true", "sound":"true", "alert":"true", "ecb":"onNotificationAPN"});
 	}
-	
+	*/
 }
 function showLoader(){
 	var $loadImg=$("#loader>img");
@@ -895,13 +895,13 @@ function successHandler (result) {
    
 }
 function errorHandler (error) {
-navigator.notification.alert(error);
+//navigator.notification.alert(error);
 }
 function tokenHandler (result) {
     // Your iOS push server needs to know the token before it can push to this device
     // here is where you might want to send it the token for later use.
-    alert('device token = '+result)
-    $.post(host+"notifications/HandleRegisterDevice.php",{Device:capitaliseFirst(device.platform),DeviceID:result},function(data){alert(data);});
+   // alert('device token = '+result)
+    //$.post(host+"notifications/HandleRegisterDevice.php",{Device:capitaliseFirst(device.platform),DeviceID:result},function(data){alert(data);});
 }
 function onNotificationAPN(e) {
 	if (e.alert) {
@@ -921,7 +921,6 @@ function capitaliseFirst(string){
 	return string.charAt(0).toUpperCase() + string.slice(1);
 }
  function onNotificationGCM(e) {
-	 alert("some sort of success");
 	switch(e.event){
 		case 'registered':
 		if (e.regid.length>0){

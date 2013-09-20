@@ -3577,7 +3577,8 @@ html.mm-no-overflowscrolling.mm-right .mm-menu {
 	margin-top: 30%;
 	margin-left:1rem;
 	width:90%;
-	font-size:2.3rem;	
+	font-size:2.3rem;
+	font-weight:bold;
 }
 
 /* line 17, ../sass/_pizzaBuilder.scss */
