@@ -448,7 +448,7 @@ function completeSignout(indexSel){
 				loggedIn=0;
 				$("#addressTo>span").text(noAddrText);
 				switchSlides(0);
-				$("#signIn,#createText").show();
+				$("#signIn,#createText").show().removeClass("nD");
 				$("#signOut,#orderText").addClass("nD");
 			}
 		});
