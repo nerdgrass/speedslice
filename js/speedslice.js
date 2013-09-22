@@ -450,6 +450,16 @@ function completeSignout(indexSel){
 				switchSlides(0);
 				$("#signIn,#createText").show().removeClass("nD");
 				$("#signOut,#orderText").addClass("nD");
+				address=new Object();
+				address.addrNick="";
+				address.addr="";
+				address.addr2="";
+				address.city="";
+				address.zip="";
+				address.phone="";
+				address.state="";
+				clearAddressForm();
+				$(".delLoc.bigRed").remove();
 			}
 		});
 		
