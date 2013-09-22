@@ -90,7 +90,8 @@ noAddrText="No location selected";
 var pushNotification;
 window.onerror = function(msg, url, linenumber) {
 	hideLoader();
-    alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
+    //alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
+	$.post(host+"errors.php",{error:msg,url:url,line:linenumber});
     return true;
 }
 function onLoad() {
