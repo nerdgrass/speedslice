@@ -440,7 +440,7 @@ function orderError(theError){
 }
 function completeSignout(indexSel){
 	if(indexSel==2){
-		$.post(host+"Logout.php",function(){
+		$.get(host+"Logout.php",function(){
 			if(device.platform == 'android' || device.platform == 'Android'){
 				navigator.app.exitApp();
 			}
@@ -448,8 +448,8 @@ function completeSignout(indexSel){
 				loggedIn=0;
 				$("#addressTo>span").text(noAddrText);
 				switchSlides(0);
-				$("#signIn").show();
-				$("#signOut").addClass("nD");
+				$("#signIn,#createText").show();
+				$("#signOut,#orderText").addClass("nD");
 			}
 		});
 		
