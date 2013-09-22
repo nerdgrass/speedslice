@@ -460,6 +460,9 @@ function completeSignout(indexSel){
 				address.state="";
 				clearAddressForm();
 				$(".delLoc.bigRed").remove();
+				$("#cardInfo form input").each(function(index, element) {
+                    $(element).val("");
+                });
 			}
 		});
 		
